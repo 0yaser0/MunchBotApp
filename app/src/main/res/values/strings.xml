@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Munch Bot</string>
+    <string name="welcome_to_">Welcome to MunchBot!</string>
+    <string name="meet_munchb">Meet MUNCHBOT, the smart device that automatically feeds your pet and tracks their eating habits. Say goodbye to worries about feeding times with this innovative solution.</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="munchbot">M u n c h B o t</string>
+    <string name="made_by">Made By YASER</string>
+</resources>

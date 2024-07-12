@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="welcome_to_">
+        <item name="android:textSize">48px</item>
+        <item name="android:textColor">#0491E9</item>
+    </style>
+    <style name="meet_munchb">
+        <item name="android:textSize">40px</item>
+        <item name="android:textColor">#CC6C6868</item>
+    </style>
+    <style name="skip">
+        <item name="android:textSize">48px</item>
+        <item name="android:textColor">#990491E9</item>
+    </style>
+
+    <style name="next">
+        <item name="android:textSize">48px</item>
+        <item name="android:textColor">#990491E9</item>
+    </style>
+</resources>
