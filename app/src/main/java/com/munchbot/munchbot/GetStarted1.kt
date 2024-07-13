@@ -1,21 +1,20 @@
 package com.munchbot.munchbot
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
-import android.animation.AnimatorSet
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsetsController
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 
-class MainActivity : ComponentActivity() {
+
+class GetStarted1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.get_started_1)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
@@ -31,25 +30,16 @@ class MainActivity : ComponentActivity() {
 
         val jumpingImage = findViewById<ImageView>(R.id.jumpingImage)
         startJumpingAnimation(jumpingImage)
+
+        val next: TextView = findViewById(R.id.next)
+        next.setOnClickListener{
+            val intent = Intent(this, GetStarted2::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
     }
-
     private fun startJumpingAnimation(imageView: ImageView) {
-        val jumpUp = ObjectAnimator.ofFloat(imageView, "translationY", 0f, -50f)
-        jumpUp.duration = 1000
-
-        val jumpDown = ObjectAnimator.ofFloat(imageView, "translationY", -50f, 0f)
-        jumpDown.duration = 1000
-
-        val animatorSet = AnimatorSet()
-        animatorSet.playSequentially(jumpUp, jumpDown)
-        animatorSet.startDelay = 10
-        animatorSet.start()
-
-        animatorSet.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                // Restart the animation when it ends
-                animatorSet.start()
-            }
-        })
+        AnimationUtils.startJumpingAnimation(imageView, -50f, 1000, 20)
     }
 }

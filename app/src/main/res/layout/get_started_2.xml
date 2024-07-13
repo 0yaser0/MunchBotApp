@@ -1,24 +1,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".GetStarted1">
 
-    <ImageView
-        android:layout_width="756px"
-        android:layout_height="272px"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/vectors_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350px">
 
-    <ImageView
-        android:id="@+id/jumpingImage"
-        android:layout_width="700px"
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="756px"
+            android:layout_height="350px"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/vectors_bar"
+            tools:ignore="PxUsage" />
+
+        <ImageButton
+            android:id="@+id/arrow_back"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="35dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/arrow_back" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="650px"
-        android:layout_gravity="center"
-        android:src="@drawable/feed"
-        tools:ignore="PxUsage" />
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_gst2"
+            android:layout_width="700px"
+            android:layout_height="650px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/play_with_pet"
+            tools:ignore="PxUsage" />
+
+        <ImageView
+            android:id="@+id/play_pet_jump"
+            android:layout_width="37dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="238dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="169dp"
+            android:src="@drawable/play_pet_jump" />
+
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/welcome_to_"
@@ -27,10 +73,11 @@
         android:fontFamily="@font/poppins_bold"
         android:gravity="center_horizontal|center_vertical|center"
         android:lineHeight="72sp"
-        android:text="@string/welcome_to_"
+        android:text="@string/take_care_of_your_pet"
         android:textAppearance="@style/welcome_to_"
         android:textColor="#0491E9"
-        android:textSize="48px" />
+        android:textSize="48px"
+        tools:ignore="PxUsage" />
 
     <TextView
         android:id="@+id/meet_munchb"
@@ -41,11 +88,12 @@
         android:fontFamily="@font/roboto"
         android:gravity="center_horizontal|center_vertical|center"
         android:lineSpacingExtra="12px"
-        android:text="@string/meet_munchb"
+        android:text="@string/our_app_helps_you_manage_your_pet_s_health_from_vaccinations_and_medications_to_vet_visits_and_more_ensuring_your_furry_friend_is_always_in_the_best_shape"
         android:textAppearance="@style/meet_munchb"
         android:textColor="#CC6C6868"
         android:textSize="32px"
-        android:translationY="-6.25px" />
+        android:translationY="-6.25px"
+        tools:ignore="PxUsage" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,21 +107,24 @@
             android:layout_height="27px"
             android:layout_marginLeft="328px"
             android:layout_marginTop="80px"
-            android:src="@drawable/circle_clean" />
+            android:src="@drawable/circle_blur"
+            tools:ignore="PxUsage" />
 
         <ImageView
             android:id="@+id/circle_b1"
             android:layout_width="27px"
             android:layout_height="27px"
             android:layout_marginTop="80px"
-            android:src="@drawable/circle_blur" />
+            android:src="@drawable/circle_clean"
+            tools:ignore="PxUsage" />
 
         <ImageView
             android:id="@+id/circle_b2"
             android:layout_width="27px"
             android:layout_height="27px"
             android:layout_marginTop="80px"
-            android:src="@drawable/circle_blur" />
+            android:src="@drawable/circle_blur"
+            tools:ignore="PxUsage" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,12 +132,14 @@
         android:layout_height="41dp"
         android:orientation="horizontal">
 
-        <TextView
+        <Button
             android:id="@+id/skip"
             android:layout_width="153px"
             android:layout_height="56px"
             android:layout_marginStart="15px"
+            android:layout_marginTop="20px"
             android:layout_marginBottom="100px"
+            android:background="#00FFFFFF"
             android:fontFamily="@font/roboto"
             android:gravity="center_horizontal|center_vertical"
             android:lineHeight="56px"
@@ -96,12 +149,14 @@
             android:textSize="48px"
             tools:ignore="PxUsage" />
 
-        <TextView
+        <Button
             android:id="@+id/next"
             android:layout_width="153px"
             android:layout_height="56px"
             android:layout_marginStart="380px"
+            android:layout_marginTop="20px"
             android:layout_marginBottom="100px"
+            android:background="#00FFFFFF"
             android:fontFamily="@font/roboto"
             android:gravity="center_horizontal|center_vertical"
             android:lineHeight="56px"
@@ -111,4 +166,6 @@
             android:textSize="48px"
             tools:ignore="PxUsage" />
     </LinearLayout>
+
+
 </LinearLayout>
