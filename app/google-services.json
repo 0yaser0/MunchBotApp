@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "541849763828",
+    "project_id": "munchbot-2004",
+    "storage_bucket": "munchbot-2004.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541849763828:android:7b05152a6f6dc5502343a1",
+        "android_client_info": {
+          "package_name": "com.munchbot.munchbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWwaslCpeNfmSHlhgzOhRrNS9lvS-ZJzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
