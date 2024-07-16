@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsetsController
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
-import com.munchbot.munchbot.databinding.GetStarted3Binding
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
@@ -21,13 +23,9 @@ class GetStarted3 : AppCompatActivity() {
     private var endX: Float = 0f
     private var endY: Float = 0f
 
-    private lateinit var binding: GetStarted3Binding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = GetStarted3Binding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.get_started_3)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
@@ -41,12 +39,14 @@ class GetStarted3 : AppCompatActivity() {
         }
         window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_color)
 
-        binding.arrowBack.setOnClickListener {
+        val back: ImageButton = findViewById(R.id.arrow_back)
+        back.setOnClickListener {
             val intent = Intent(this, GetStarted2::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
-        binding.btnGetstarted.setOnClickListener {
+        val getStarted = findViewById<Button>(R.id.btn_getstarted)
+        getStarted.setOnClickListener {
             val intent = Intent(this, GetStarted3::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -69,11 +69,7 @@ class GetStarted3 : AppCompatActivity() {
                         if (isSwipeRight(startX, endX)) {
                             animateCircles()
                             val intent = Intent(this@GetStarted3, GetStarted2::class.java)
-                            val options = ActivityOptions.makeCustomAnimation(
-                                this@GetStarted3,
-                                R.anim.slide_in_left,
-                                R.anim.slide_out_right
-                            )
+                            val options = ActivityOptions.makeCustomAnimation(this@GetStarted3, R.anim.slide_in_left, R.anim.slide_out_right)
                             startActivity(intent, options.toBundle())
                         } else if (isSwipeLeft(startX, endX)) {
                             println()
@@ -102,26 +98,26 @@ class GetStarted3 : AppCompatActivity() {
     }
 
     private fun animateCircles() {
+        val circleClean = findViewById<ImageView>(R.id.circle_clean)
+        val circleB1 = findViewById<ImageView>(R.id.circle_b1)
+        val circleB2 = findViewById<ImageView>(R.id.circle_b2)
 
-        ViewCompat.animate(binding.circleClean).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleClean.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleClean).translationX(+100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleClean.translationX = 0f
+            }
+        }).start()
 
-        ViewCompat.animate(binding.circleB1).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleB1.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleB1).translationX(+100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleB1.translationX = 0f
+            }
+        }).start()
 
-        ViewCompat.animate(binding.circleB2).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleB2.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleB2).translationX(+100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleB2.translationX = 0f
+            }
+        }).start()
     }
 }

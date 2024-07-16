@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsetsController
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
-import com.munchbot.munchbot.databinding.GetStarted2Binding
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
@@ -20,13 +22,9 @@ class GetStarted2 : ComponentActivity() {
     private var startY: Float = 0f
     private var endX: Float = 0f
     private var endY: Float = 0f
-    private lateinit var binding: GetStarted2Binding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = GetStarted2Binding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.get_started_2)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
@@ -40,22 +38,25 @@ class GetStarted2 : ComponentActivity() {
         }
         window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_color)
 
+        val jumpingImage = findViewById<ImageView>(R.id.play_pet_jump)
+        AnimationUtils.startJumpingAnimation(jumpingImage, -60f, 1000, 20)
 
-        AnimationUtils.startJumpingAnimation(binding.playPetJump, -60f, 1000, 20)
-
-        binding.next.setOnClickListener {
+        val next: TextView = findViewById(R.id.next)
+        next.setOnClickListener {
             val intent = Intent(this, GetStarted3::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-        binding.skip.setOnClickListener {
+        val skip: TextView = findViewById(R.id.skip)
+        skip.setOnClickListener {
             val intent = Intent(this, GetStarted3::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-        binding.arrowBack.setOnClickListener {
+        val back: ImageButton = findViewById(R.id.arrow_back)
+        back.setOnClickListener {
             val intent = Intent(this, GetStarted1::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
@@ -117,26 +118,26 @@ class GetStarted2 : ComponentActivity() {
         return deltaX < 10 && deltaY < 10
     }
     private fun animateCircles() {
+        val circleClean = findViewById<ImageView>(R.id.circle_clean)
+        val circleB1 = findViewById<ImageView>(R.id.circle_b1)
+        val circleB2 = findViewById<ImageView>(R.id.circle_b2)
 
-        ViewCompat.animate(binding.circleClean).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleClean.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleClean).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleClean.translationX = 0f
+            }
+        }).start()
 
-        ViewCompat.animate(binding.circleB1).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleB1.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleB1).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleB1.translationX = 0f
+            }
+        }).start()
 
-        ViewCompat.animate(binding.circleB2).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleB2.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleB2).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleB2.translationX = 0f
+            }
+        }).start()
     }
 }

@@ -8,11 +8,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsetsController
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
-import com.munchbot.munchbot.databinding.GetStarted1Binding
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
@@ -22,13 +22,9 @@ class GetStarted1 : ComponentActivity() {
     private var endX: Float = 0f
     private var endY: Float = 0f
 
-    private lateinit var binding: GetStarted1Binding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = GetStarted1Binding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.get_started_1)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
@@ -38,20 +34,21 @@ class GetStarted1 : ComponentActivity() {
             )
         } else {
             @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
         window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_color)
 
+        val jumpingImage = findViewById<ImageView>(R.id.jumpingImage)
+        startJumpingAnimation(jumpingImage)
 
-        startJumpingAnimation(binding.jumpingImage)
-
-        binding.next.setOnClickListener {
+        val next: TextView = findViewById(R.id.next)
+        next.setOnClickListener{
             val intent = Intent(this, GetStarted2::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
-        binding.skip.setOnClickListener {
+        val skip: TextView = findViewById(R.id.skip)
+        skip.setOnClickListener{
             val intent = Intent(this, GetStarted3::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -74,9 +71,7 @@ class GetStarted1 : ComponentActivity() {
                         if (isSwipeLeft(startX, endX)) {
                             animateCircles()
                             val intent = Intent(this@GetStarted1, GetStarted2::class.java)
-                            val options = ActivityOptions.makeCustomAnimation(
-                                this@GetStarted1, R.anim.slide_in_right, R.anim.slide_out_left
-                            )
+                            val options = ActivityOptions.makeCustomAnimation(this@GetStarted1, R.anim.slide_in_right, R.anim.slide_out_left)
                             startActivity(intent, options.toBundle())
                         } else if (isClick(startX, endX, startY, endY)) {
                             v?.performClick()
@@ -93,27 +88,27 @@ class GetStarted1 : ComponentActivity() {
     }
 
     private fun animateCircles() {
+        val circleClean = findViewById<ImageView>(R.id.circle_clean)
+        val circleB1 = findViewById<ImageView>(R.id.circle_b1)
+        val circleB2 = findViewById<ImageView>(R.id.circle_b2)
 
-        ViewCompat.animate(binding.circleClean).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleClean.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleClean).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleClean.translationX = 0f
+            }
+        }).start()
 
-        ViewCompat.animate(binding.circleB1).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleB1.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleB1).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleB1.translationX = 0f
+            }
+        }).start()
 
-        ViewCompat.animate(binding.circleB2).translationX(-100f).setDuration(50)
-            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                override fun onAnimationEnd(view: View) {
-                    binding.circleB2.translationX = 0f
-                }
-            }).start()
+        ViewCompat.animate(circleB2).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+            override fun onAnimationEnd(view: View) {
+                circleB2.translationX = 0f
+            }
+        }).start()
     }
 
     private fun isSwipeLeft(startX: Float, endX: Float): Boolean {
