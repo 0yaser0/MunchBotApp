@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GetStarted1">
+    tools:context=".GetStarted2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +35,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="650px"
-        android:gravity="center">
+        android:gravity="center"
+        tools:ignore="PxUsage">
 
         <ImageView
             android:id="@+id/img_gst2"
@@ -102,16 +103,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/circle_clean"
+            android:id="@+id/circle_b1"
             android:layout_width="27px"
             android:layout_height="27px"
-            android:layout_marginLeft="328px"
+            android:layout_marginStart="328px"
             android:layout_marginTop="80px"
             android:src="@drawable/circle_blur"
             tools:ignore="PxUsage" />
 
         <ImageView
-            android:id="@+id/circle_b1"
+            android:id="@+id/circle_clean"
             android:layout_width="27px"
             android:layout_height="27px"
             android:layout_marginTop="80px"

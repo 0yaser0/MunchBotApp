@@ -30,8 +30,6 @@
         android:lineHeight="72sp"
         android:text="@string/welcome_to_"
         android:textAppearance="@style/welcome_to_"
-        android:textColor="#0491E9"
-        android:textSize="48px"
         tools:ignore="PxUsage" />
 
     <TextView

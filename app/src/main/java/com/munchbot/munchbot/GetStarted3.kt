@@ -7,16 +7,17 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsetsController
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
-class GetStarted1 : ComponentActivity() {
+class GetStarted3 : AppCompatActivity() {
     private var startX: Float = 0f
     private var startY: Float = 0f
     private var endX: Float = 0f
@@ -24,7 +25,7 @@ class GetStarted1 : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.get_started_1)
+        setContentView(R.layout.get_started_3)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
@@ -38,17 +39,14 @@ class GetStarted1 : ComponentActivity() {
         }
         window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_color)
 
-        val jumpingImage = findViewById<ImageView>(R.id.jumpingImage)
-        startJumpingAnimation(jumpingImage)
-
-        val next: TextView = findViewById(R.id.next)
-        next.setOnClickListener{
+        val back: ImageButton = findViewById(R.id.arrow_back)
+        back.setOnClickListener {
             val intent = Intent(this, GetStarted2::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
-        val skip: TextView = findViewById(R.id.skip)
-        skip.setOnClickListener{
+        val getStarted = findViewById<Button>(R.id.btn_getstarted)
+        getStarted.setOnClickListener {
             val intent = Intent(this, GetStarted3::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -68,11 +66,13 @@ class GetStarted1 : ComponentActivity() {
                         endX = event.x
                         endY = event.y
 
-                        if (isSwipeLeft(startX, endX)) {
+                        if (isSwipeRight(startX, endX)) {
                             animateCircles()
-                            val intent = Intent(this@GetStarted1, GetStarted2::class.java)
-                            val options = ActivityOptions.makeCustomAnimation(this@GetStarted1, R.anim.slide_in_right, R.anim.slide_out_left)
+                            val intent = Intent(this@GetStarted3, GetStarted2::class.java)
+                            val options = ActivityOptions.makeCustomAnimation(this@GetStarted3, R.anim.slide_in_left, R.anim.slide_out_right)
                             startActivity(intent, options.toBundle())
+                        } else if (isSwipeLeft(startX, endX)) {
+                            println()
                         } else if (isClick(startX, endX, startY, endY)) {
                             v?.performClick()
                         }
@@ -83,8 +83,18 @@ class GetStarted1 : ComponentActivity() {
         })
     }
 
-    private fun startJumpingAnimation(imageView: ImageView) {
-        AnimationUtils.startJumpingAnimation(imageView, -50f, 1000, 20)
+    private fun isSwipeLeft(startX: Float, endX: Float): Boolean {
+        return endX < startX - 100
+    }
+
+    private fun isSwipeRight(startX: Float, endX: Float): Boolean {
+        return endX > startX + 100
+    }
+
+    private fun isClick(startX: Float, endX: Float, startY: Float, endY: Float): Boolean {
+        val deltaX = abs(endX - startX)
+        val deltaY = abs(endY - startY)
+        return deltaX < 10 && deltaY < 10
     }
 
     private fun animateCircles() {
@@ -92,32 +102,22 @@ class GetStarted1 : ComponentActivity() {
         val circleB1 = findViewById<ImageView>(R.id.circle_b1)
         val circleB2 = findViewById<ImageView>(R.id.circle_b2)
 
-        ViewCompat.animate(circleClean).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+        ViewCompat.animate(circleClean).translationX(+100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
             override fun onAnimationEnd(view: View) {
                 circleClean.translationX = 0f
             }
         }).start()
 
-        ViewCompat.animate(circleB1).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+        ViewCompat.animate(circleB1).translationX(+100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
             override fun onAnimationEnd(view: View) {
                 circleB1.translationX = 0f
             }
         }).start()
 
-        ViewCompat.animate(circleB2).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
+        ViewCompat.animate(circleB2).translationX(+100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
             override fun onAnimationEnd(view: View) {
                 circleB2.translationX = 0f
             }
         }).start()
-    }
-
-    private fun isSwipeLeft(startX: Float, endX: Float): Boolean {
-        return endX < startX - 100
-    }
-
-    private fun isClick(startX: Float, endX: Float, startY: Float, endY: Float): Boolean {
-        val deltaX = abs(endX - startX)
-        val deltaY = abs(endY - startY)
-        return deltaX < 10 && deltaY < 10
     }
 }
