@@ -1,1 +1,21 @@
 coroutine = asynchronous
+
+Our MVVM of auth :
+
+├── java
+│   ├── com.munchbot.munchbot (Main package)
+│   │   ├── ui
+│   │   │   ├── auth (New package for authentication views)
+│   │   │   │   ├── LoginActivity.kt (New Activity for login)
+│   │   │   │   ├── SignUpActivity.kt (New Activity for sign-up)
+│   │   │   │   └── AuthViewModel.kt (New ViewModel to handle authentication logic)
+│   │   ├── data
+│   │   │   ├── model
+│   │   │   │   └── User.kt (New data class for User)
+│   │   │   ├── repository
+│   │   │   │   └── UserRepository.kt (New Repository for user data)
+│   │   │   └── remote
+│   │   │       └── FirebaseDataSource.kt (New Data Source for Firebase operations)
+│   │   └── utils
+│   │       └── Resource.kt (New utility class for handling data state)
+└───└───────────────────────────────────────────────────────────────────────────────

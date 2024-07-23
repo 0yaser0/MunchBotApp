@@ -1,4 +1,4 @@
-package com.munchbot.munchbot
+package com.munchbot.munchbot.Utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

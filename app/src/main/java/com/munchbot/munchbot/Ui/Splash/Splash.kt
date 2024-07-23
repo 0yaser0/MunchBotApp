@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.ui.theme
+package com.munchbot.munchbot.Ui.Splash
 
 import android.content.Intent
 import android.os.Build
