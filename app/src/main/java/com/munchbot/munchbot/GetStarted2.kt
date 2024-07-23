@@ -14,6 +14,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
+import com.munchbot.munchbot.Utils.AnimationUtils
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")

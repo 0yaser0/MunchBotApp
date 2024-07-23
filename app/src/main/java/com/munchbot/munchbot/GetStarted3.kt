@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
+import com.munchbot.munchbot.Ui.Auth.Login
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
@@ -47,7 +48,7 @@ class GetStarted3 : AppCompatActivity() {
         }
         val getStarted = findViewById<Button>(R.id.btn_getstarted)
         getStarted.setOnClickListener {
-            val intent = Intent(this, GetStarted3::class.java)
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
