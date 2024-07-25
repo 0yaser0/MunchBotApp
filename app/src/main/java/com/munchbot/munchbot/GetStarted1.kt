@@ -8,11 +8,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsetsController
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
+import com.example.utils.StatusBarUtils
+import com.munchbot.munchbot.databinding.GetStarted1Binding
 import com.munchbot.munchbot.Utils.AnimationUtils
 import kotlin.math.abs
 
@@ -23,36 +24,26 @@ class GetStarted1 : ComponentActivity() {
     private var endX: Float = 0f
     private var endY: Float = 0f
 
+    private lateinit var binding: GetStarted1Binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.get_started_1)
+        binding = GetStarted1Binding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.setSystemBarsAppearance(
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-            )
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
-        window.statusBarColor = ContextCompat.getColor(this, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(window, R.color.status_bar_color)
 
-        val jumpingImage = findViewById<ImageView>(R.id.jumpingImage)
-        startJumpingAnimation(jumpingImage)
+        startJumpingAnimation(binding.jumpingImage)
 
-        val next: TextView = findViewById(R.id.next)
-        next.setOnClickListener{
+        binding.next.setOnClickListener {
             val intent = Intent(this, GetStarted2::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
-        val skip: TextView = findViewById(R.id.skip)
-        skip.setOnClickListener{
+        binding.skip.setOnClickListener {
             val intent = Intent(this, GetStarted3::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
 
         findViewById<View>(android.R.id.content).setOnTouchListener(object : View.OnTouchListener {
@@ -72,7 +63,7 @@ class GetStarted1 : ComponentActivity() {
                         if (isSwipeLeft(startX, endX)) {
                             animateCircles()
                             val intent = Intent(this@GetStarted1, GetStarted2::class.java)
-                            val options = ActivityOptions.makeCustomAnimation(this@GetStarted1, R.anim.slide_in_right, R.anim.slide_out_left)
+                            val options = ActivityOptions.makeCustomAnimation(this@GetStarted1, R.animator.slide_in_right, R.animator.slide_out_left)
                             startActivity(intent, options.toBundle())
                         } else if (isClick(startX, endX, startY, endY)) {
                             v?.performClick()
@@ -89,9 +80,9 @@ class GetStarted1 : ComponentActivity() {
     }
 
     private fun animateCircles() {
-        val circleClean = findViewById<ImageView>(R.id.circle_clean)
-        val circleB1 = findViewById<ImageView>(R.id.circle_b1)
-        val circleB2 = findViewById<ImageView>(R.id.circle_b2)
+        val circleClean = binding.circleClean
+        val circleB1 = binding.circleB1
+        val circleB2 = binding.circleB2
 
         ViewCompat.animate(circleClean).translationX(-100f).setDuration(50).setListener(object : ViewPropertyAnimatorListenerAdapter() {
             override fun onAnimationEnd(view: View) {

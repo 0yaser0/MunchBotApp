@@ -14,5 +14,15 @@
     <string name="get_started">Get Started</string>
     <string name="already_hav">Already have an account? <b><u>Login</u></b></string>
     <string name="doesn_t_hav">Doesn’t have an account? <b><u>Signup</u></b></string>
+    <string name="waves">waves</string>
+    <string name="login_dog">login_dog</string>
+    <string name="speech_munchbot_login">Speech_munchbot_login</string>
+    <string name="welcome">Welcome</string>
+    <string name="back">Back!</string>
+    <string name="continue_yo">Continue your MunchBot journey with us</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="i_forgot_pa">I Forgot Password ?</string>
+    <string name="log_in">Log in</string>
 
 </resources>

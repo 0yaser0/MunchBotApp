@@ -16,6 +16,12 @@
         <activity
             android:name=".GetStarted2"
             android:exported="false" />
+        <activity
+            android:name=".Ui.Auth.SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".Ui.Auth.Login"
+            android:exported="false" />
           <activity
               android:name=".Ui.Splash.Splash"
             android:exported="true"

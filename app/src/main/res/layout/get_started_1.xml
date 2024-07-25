@@ -60,7 +60,7 @@
             android:layout_height="27px"
             android:layout_marginLeft="328px"
             android:layout_marginTop="80px"
-            android:src="@drawable/circle_clean"
+            android:src="@drawable/ic_circle_clean"
             tools:ignore="PxUsage" />
 
         <ImageView
@@ -68,7 +68,7 @@
             android:layout_width="27px"
             android:layout_height="27px"
             android:layout_marginTop="80px"
-            android:src="@drawable/circle_blur"
+            android:src="@drawable/ic_circle_blur"
             tools:ignore="PxUsage" />
 
         <ImageView
@@ -76,7 +76,7 @@
             android:layout_width="27px"
             android:layout_height="27px"
             android:layout_marginTop="80px"
-            android:src="@drawable/circle_blur"
+            android:src="@drawable/ic_circle_blur"
             tools:ignore="PxUsage" />
     </LinearLayout>
 
