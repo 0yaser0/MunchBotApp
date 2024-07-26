@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "541849763828",
+    "firebase_url": "https://munchbot-2004-default-rtdb.firebaseio.com",
     "project_id": "munchbot-2004",
     "storage_bucket": "munchbot-2004.appspot.com"
   },

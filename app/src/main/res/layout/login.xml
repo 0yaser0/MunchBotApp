@@ -85,6 +85,7 @@
         app:hintAnimationEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:layout_marginHorizontal="30px"
