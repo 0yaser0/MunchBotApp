@@ -2,18 +2,16 @@ package com.munchbot.munchbot
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter
 import com.example.utils.StatusBarUtils
-import com.munchbot.munchbot.Ui.Auth.Login
+import com.munchbot.munchbot.ui.auth.Login
 import com.munchbot.munchbot.databinding.GetStarted3Binding
+import com.munchbot.munchbot.ui.auth.SignUp
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
@@ -40,6 +38,12 @@ class GetStarted3 : AppCompatActivity() {
 
         binding.btnGetstarted.setOnClickListener {
             val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
+        }
+
+        binding.doesnTHav.setOnClickListener {
+            val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
             overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }

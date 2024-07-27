@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.Ui.Splash
+package com.munchbot.munchbot.ui.Splash
 
 import androidx.compose.ui.graphics.Color
 

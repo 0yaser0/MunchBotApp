@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:importantForAccessibility="no"
     android:orientation="vertical"
-    tools:context=".Ui.Auth.Login"
+    tools:context=".ui.auth.Login"
     tools:ignore="PxUsage"
     android:focusable="true"
     android:focusableInTouchMode="true">

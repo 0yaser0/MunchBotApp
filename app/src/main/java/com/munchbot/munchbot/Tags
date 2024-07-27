@@ -19,3 +19,20 @@ Our MVVM of auth :
 │   │   └── utils
 │   │       └── Resource.kt (New utility class for handling data state)
 └───└───────────────────────────────────────────────────────────────────────────────
+
+
+all function used for the Authentication :
+- checkCurrentUser()
+- getUserProfile()
+- getProviderData()
+- updateProfile()
+- updateEmail()
+- updatePassword()
+- sendEmailVerification()
+- sendPasswordReset()
+- signOut()
+- updateUI()
+- createAccount()
+- signIn()
+- getIdToken()
+- reauthenticate()

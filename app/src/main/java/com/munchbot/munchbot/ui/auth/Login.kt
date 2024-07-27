@@ -1,6 +1,7 @@
-package com.munchbot.munchbot.Ui.Auth
+package com.munchbot.munchbot.ui.auth
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.MotionEvent
@@ -32,7 +33,14 @@ class Login : AppCompatActivity() {
         binding.logIn.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            authViewModel.signIn(email, password)
+            authViewModel.logIn(email, password)
+        }
+
+        binding.doesnTHav.setOnClickListener {
+            val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
 
         authViewModel.user.observe(this, Observer { user ->
