@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="100px"
             android:layout_marginHorizontal="30px"
-            android:drawableStart="@drawable/ic_password"
+            android:drawableStart="@drawable/ic_icon_password"
             android:drawablePadding="30px"
             android:fontFamily="@font/roboto"
             android:inputType="textPassword"
@@ -158,4 +158,16 @@
         android:text="@string/doesn_t_hav"
         android:textAppearance="@style/doesn_t_hav"
         tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:id="@+id/loader_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <include layout="@layout/loader" />
+
+    </LinearLayout>
+
 </LinearLayout>

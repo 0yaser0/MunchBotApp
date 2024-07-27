@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseUser
 
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+
 class AuthViewModel : ViewModel() {
 
     private val auth: FirebaseAuth by lazy {
@@ -20,11 +22,18 @@ class AuthViewModel : ViewModel() {
     private val _authError = MutableLiveData<String?>()
     val authError: LiveData<String?> get() = _authError
 
+
     fun logIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _user.value = auth.currentUser
+                    val user = auth.currentUser
+                    if (user != null && user.isEmailVerified) {
+                        _user.value = user
+                    } else {
+                        _authError.value = "Please verify your email address."
+                        auth.signOut()
+                    }
                 } else {
                     try {
                         throw task.exception!!
@@ -38,17 +47,30 @@ class AuthViewModel : ViewModel() {
                 }
             }
     }
+
+
     fun createAccount(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _user.value = auth.currentUser
-                    sendEmailVerification()
+                    val user = auth.currentUser
+                    if (user != null && !user.isEmailVerified) {
+                        sendEmailVerification()
+                        _authError.value = "Please verify your email address."
+                    }
+                    _user.value = user
                 } else {
-                    _authError.value = task.exception?.message
+                    try {
+                        throw task.exception!!
+                    } catch (e: FirebaseAuthUserCollisionException) {
+                        _authError.value = "The email address is already in use by another account."
+                    } catch (e: Exception) {
+                        _authError.value = task.exception?.message
+                    }
                 }
             }
     }
+
 
     fun sendEmailVerification() {
         val user = auth.currentUser

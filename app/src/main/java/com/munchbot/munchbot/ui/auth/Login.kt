@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.utils.StatusBarUtils
 import com.google.android.material.textfield.TextInputEditText
 import com.munchbot.munchbot.R
@@ -18,6 +18,7 @@ import com.munchbot.munchbot.databinding.LoginBinding
 
 class Login : AppCompatActivity() {
     private lateinit var binding: LoginBinding
+    private lateinit var viewModel: AuthViewModel
     private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,28 +34,31 @@ class Login : AppCompatActivity() {
         binding.logIn.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
+            binding.loaderLayout.visibility = View.VISIBLE
             authViewModel.logIn(email, password)
         }
 
         binding.doesnTHav.setOnClickListener {
+            binding.loaderLayout.visibility = View.GONE
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
             @Suppress("DEPRECATION")
             overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
 
-        authViewModel.user.observe(this, Observer { user ->
+        authViewModel.user.observe(this) { user ->
             if (user != null) {
-                // Navigate to the next screen or update UI
+                binding.loaderLayout.visibility = View.GONE
                 Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
 
-        authViewModel.authError.observe(this, Observer { error ->
+        authViewModel.authError.observe(this) { error ->
             error?.let {
+                binding.loaderLayout.visibility = View.GONE
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 
     private fun passwordVisibility() {
@@ -93,3 +97,4 @@ class Login : AppCompatActivity() {
         }
     }
 }
+

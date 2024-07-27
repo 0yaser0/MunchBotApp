@@ -1,13 +1,15 @@
 package com.munchbot.munchbot.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.databinding.SignUpBinding
 
+@Suppress("DEPRECATION")
 class SignUp : AppCompatActivity() {
     private lateinit var binding: SignUpBinding
     private val authViewModel: AuthViewModel by viewModels()
@@ -26,24 +28,31 @@ class SignUp : AppCompatActivity() {
             if (validateInput(email, password, confirmPassword, termsAccepted)) {
                 authViewModel.createAccount(email, password)
             }
+            binding.loaderLayout.visibility = View.VISIBLE
         }
 
-        authViewModel.user.observe(this, Observer { user ->
-            if (user != null) {
-                // Navigate to the next screen or update UI
-                Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show()
-                authViewModel.sendEmailVerification()
-            }
-        })
-
-        authViewModel.authError.observe(this, Observer { error ->
+        authViewModel.authError.observe(this) { error ->
             error?.let {
-                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                binding.loaderLayout.visibility = View.GONE
+                if (it == "The email address is already in use by another account.") {
+                    Toast.makeText(this, "$it Please try logging in.", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, Login::class.java)
+                    startActivity(intent)
+                    @Suppress("DEPRECATION")
+                    overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
+                } else {
+                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                }
             }
-        })
+        }
     }
 
-    private fun validateInput(email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Boolean {
+    private fun validateInput(
+        email: String,
+        password: String,
+        confirmPassword: String,
+        termsAccepted: Boolean
+    ): Boolean {
         var isValid = true
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -53,7 +62,8 @@ class SignUp : AppCompatActivity() {
 
         val passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
         if (!password.matches(passwordPattern.toRegex())) {
-            binding.passwordEditText.error = "Password must be at least 8 characters long and contain letters and numbers"
+            binding.passwordEditText.error =
+                "Password must be at least 8 characters long and contain letters and numbers"
             isValid = false
         }
 
@@ -63,10 +73,10 @@ class SignUp : AppCompatActivity() {
         }
 
         if (!termsAccepted) {
-
             @Suppress("DEPRECATION")
             binding.termsCheckBox.setTextColor(resources.getColor(R.color.red))
-            Toast.makeText(this, "You must accept the terms and conditions", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "You must accept the terms and conditions", Toast.LENGTH_LONG)
+                .show()
             isValid = false
         }
 

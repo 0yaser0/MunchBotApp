@@ -11,11 +11,11 @@
         android:id="@+id/signUpTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp"
         android:text="Sign Up"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp" />
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -60,15 +60,26 @@
         android:id="@+id/termsCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I agree to the terms and conditions"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="16dp"
+        android:text="I agree to the terms and conditions" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
         android:backgroundTint="@color/status_bar_color"
+        android:text="Sign Up"
         android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:id="@+id/loader_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <include layout="@layout/loader" />
+
+    </LinearLayout>
 
 </LinearLayout>

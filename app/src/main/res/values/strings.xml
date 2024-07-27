@@ -24,5 +24,6 @@
     <string name="password">Password</string>
     <string name="i_forgot_pa">I Forgot Password ?</string>
     <string name="log_in">Log in</string>
+    <string name="please_wait">Please wait …</string>
 
 </resources>
