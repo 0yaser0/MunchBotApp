@@ -1,17 +1,17 @@
 package com.munchbot.munchbot.ui.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-
+@Suppress("DEPRECATION")
 class AuthViewModel : ViewModel() {
-
     private val auth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
     }
@@ -22,6 +22,11 @@ class AuthViewModel : ViewModel() {
     private val _authError = MutableLiveData<String?>()
     val authError: LiveData<String?> get() = _authError
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> get() = _toastMessage
+
+    private val _navigateToLogin = MutableLiveData<Boolean>()
+    val navigateToLogin: LiveData<Boolean> get() = _navigateToLogin
 
     fun logIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -38,9 +43,9 @@ class AuthViewModel : ViewModel() {
                     try {
                         throw task.exception!!
                     } catch (e: FirebaseAuthInvalidUserException) {
-                        _authError.value = "Invalid email."
+                        _authError.value = "Invalid email Or password."
                     } catch (e: FirebaseAuthInvalidCredentialsException) {
-                        _authError.value = "Invalid password."
+                        _authError.value = "Invalid email Or password."
                     } catch (e: Exception) {
                         _authError.value = "Login failed. Please try again."
                     }
@@ -48,36 +53,52 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-
-    fun createAccount(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password)
+    fun signUp(email: String, password: String) {
+        auth.fetchSignInMethodsForEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    if (user != null && !user.isEmailVerified) {
-                        sendEmailVerification()
-                        _authError.value = "Please verify your email address."
+                    val signInMethods = task.result?.signInMethods
+                    if (signInMethods.isNullOrEmpty()) {
+                        auth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener { createTask ->
+                                if (createTask.isSuccessful) {
+                                    auth.currentUser?.sendEmailVerification()
+                                        ?.addOnCompleteListener { verifyTask ->
+                                            if (verifyTask.isSuccessful) {
+                                                _toastMessage.value = "Verification email sent. Please check your inbox."
+                                                _navigateToLogin.value = true
+                                            } else {
+                                                _toastMessage.value = "Failed to send verification email."
+                                                Log.e("SignUp", "Verification email failed: ${verifyTask.exception?.message}")
+                                            }
+                                        }
+                                } else {
+                                    val exception = createTask.exception
+                                    if (exception is FirebaseAuthUserCollisionException) {
+                                        _toastMessage.value = "Email already registered. Please try another email."
+                                    } else {
+                                        _toastMessage.value = "Failed to create account: ${exception?.message}"
+                                        Log.e("SignUp", "Account creation failed: ${exception?.message}")
+                                    }
+                                }
+                            }
+                    } else {
+                        auth.currentUser?.reload()?.addOnCompleteListener { reloadTask ->
+                            if (reloadTask.isSuccessful) {
+                                if (auth.currentUser?.isEmailVerified == true) {
+                                    _toastMessage.value = "Email already registered. Redirecting to login page."
+                                    _navigateToLogin.value = true
+                                } else {
+                                    _toastMessage.value = "Email already registered, but not verified. Please verify your email before logging in."
+                                }
+                            } else {
+                                Log.e("SignUp", "Failed to reload user: ${reloadTask.exception?.message}")
+                            }
+                        }
                     }
-                    _user.value = user
                 } else {
-                    try {
-                        throw task.exception!!
-                    } catch (e: FirebaseAuthUserCollisionException) {
-                        _authError.value = "The email address is already in use by another account."
-                    } catch (e: Exception) {
-                        _authError.value = task.exception?.message
-                    }
-                }
-            }
-    }
-
-
-    fun sendEmailVerification() {
-        val user = auth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    _authError.value = task.exception?.message
+                    _toastMessage.value = "Failed to check email."
+                    Log.e("SignUp", "Email check failed: ${task.exception?.message}")
                 }
             }
     }

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.databinding.SignUpBinding
 
-@Suppress("DEPRECATION")
 class SignUp : AppCompatActivity() {
     private lateinit var binding: SignUpBinding
     private val authViewModel: AuthViewModel by viewModels()
@@ -26,28 +25,40 @@ class SignUp : AppCompatActivity() {
             val termsAccepted = binding.termsCheckBox.isChecked
 
             if (validateInput(email, password, confirmPassword, termsAccepted)) {
-                authViewModel.createAccount(email, password)
+                authViewModel.signUp(email, password)
             }
             binding.loaderLayout.visibility = View.VISIBLE
+        }
+
+        authViewModel.toastMessage.observe(this) { message ->
+            message?.let {
+                binding.loaderLayout.visibility = View.GONE
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        }
+
+        authViewModel.navigateToLogin.observe(this) { navigate ->
+            if (navigate) {
+                redirectToLoginPage()
+            }
         }
 
         authViewModel.authError.observe(this) { error ->
             error?.let {
                 binding.loaderLayout.visibility = View.GONE
-                if (it == "The email address is already in use by another account.") {
-                    Toast.makeText(this, "$it Please try logging in.", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, Login::class.java)
-                    startActivity(intent)
-                    @Suppress("DEPRECATION")
-                    overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
-                } else {
-                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                }
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun validateInput(
+    private fun redirectToLoginPage() {
+        val intent = Intent(this, Login::class.java)
+        startActivity(intent)
+        @Suppress("DEPRECATION")
+        overridePendingTransition(R.animator.slide_in_left, R.animator.slide_out_right)
+    }
+
+private fun validateInput(
         email: String,
         password: String,
         confirmPassword: String,

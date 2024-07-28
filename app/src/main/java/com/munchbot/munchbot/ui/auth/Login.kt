@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.utils.StatusBarUtils
 import com.google.android.material.textfield.TextInputEditText
 import com.munchbot.munchbot.R
@@ -18,7 +17,6 @@ import com.munchbot.munchbot.databinding.LoginBinding
 
 class Login : AppCompatActivity() {
     private lateinit var binding: LoginBinding
-    private lateinit var viewModel: AuthViewModel
     private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
