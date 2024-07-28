@@ -1,173 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:importantForAccessibility="no"
-    android:orientation="vertical"
-    tools:context=".ui.auth.Login"
-    tools:ignore="PxUsage"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
-
-
-    <ImageView
-        android:id="@+id/myImageView"
-        android:layout_width="756px"
-        android:layout_height="300px"
-        android:background="@drawable/vectors_bar"
-        android:contentDescription="@string/waves"
-        tools:ignore="PxUsage" />
-
-    <RelativeLayout
-        android:layout_width="700px"
-        android:layout_height="635px"
-        android:layout_gravity="center_horizontal">
-
-        <ImageView
-            android:id="@+id/login_dog"
-            android:layout_width="700px"
-            android:layout_height="635px"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/login_dog"
-            android:src="@drawable/login_dog"
-            tools:ignore="PxUsage" />
-
-
-    </RelativeLayout>
+    tools:ignore="PxUsage" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70px"
-        android:gravity="top"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="no"
+        android:orientation="vertical"
+        tools:context=".ui.auth.Login"
+        tools:ignore="PxUsage,UselessParent">
+
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="756px"
+            android:layout_height="300px"
+            android:background="@drawable/vectors_bar"
+            android:contentDescription="@string/waves" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="635px"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/login_dog"
+                android:layout_width="700px"
+                android:layout_height="635px"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/login_dog"
+                android:src="@drawable/login_dog" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70px"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="240px"
+                android:layout_height="72px"
+                android:layout_marginStart="30px"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start|center"
+                android:text="@string/welcome"
+                android:textAppearance="@style/welcome" />
+
+            <TextView
+                android:id="@+id/back"
+                android:layout_width="387px"
+                android:layout_height="72px"
+                android:layout_marginStart="10px"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="start|center"
+                android:text="@string/back"
+                android:textAppearance="@style/back" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/welcome"
-            android:layout_width="240px"
-            android:layout_height="72px"
+            android:id="@+id/continue_yo"
+            android:layout_width="585px"
+            android:layout_height="50px"
             android:layout_marginStart="30px"
-            android:fontFamily="@font/poppins_bold"
-            android:gravity="start|center"
-            android:text="@string/welcome"
-            android:textAppearance="@style/welcome" />
+            android:fontFamily="@font/roboto"
+            android:gravity="top"
+            android:lineSpacingExtra="12px"
+            android:text="@string/continue_yo"
+            android:textAppearance="@style/continue_yo"
+            android:translationY="-6.25px" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center"
+            android:hint="@string/email"
+            app:hintAnimationEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_marginHorizontal="30px"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="30px"
+                android:fontFamily="@font/roboto"
+                android:inputType="textEmailAddress"
+                android:textAppearance="@style/email"
+                tools:ignore="PxUsage,TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:hint="@string/password"
+            app:hintAnimationEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_marginHorizontal="30px"
+                android:drawableStart="@drawable/ic_icon_password"
+                android:drawablePadding="30px"
+                android:fontFamily="@font/roboto"
+                android:inputType="textPassword"
+                android:textAppearance="@style/password"
+                tools:ignore="PxUsage,TouchTargetSizeCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/passwordToggle"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_marginStart="630px"
+            android:layout_marginTop="-80px"
+            android:src="@drawable/ic_dog_eyes_close" />
 
         <TextView
-            android:id="@+id/back"
-            android:layout_width="387px"
-            android:layout_height="72px"
-            android:layout_marginStart="10px"
-            android:fontFamily="@font/poppins_bold"
-            android:gravity="start|center"
-            android:text="@string/back"
-            android:textAppearance="@style/back" />
+            android:id="@+id/i_forgot_pa"
+            android:layout_width="300px"
+            android:layout_height="45px"
+            android:layout_marginStart="35px"
+            android:layout_marginTop="40px"
+            android:fontFamily="@font/roboto"
+            android:gravity="top"
+            android:text="@string/i_forgot_pa"
+            android:textAppearance="@style/i_forgot_pa" />
+
+        <Button
+            android:id="@+id/log_in"
+            android:layout_width="473.3px"
+            android:layout_height="88px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30px"
+            android:background="@drawable/ic_btn_getstarted"
+            android:text="@string/log_in"
+            android:textAppearance="@style/get_started"
+            tools:ignore="PxUsage,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/doesn_t_hav"
+            android:layout_width="375px"
+            android:layout_height="35px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20px"
+            android:gravity="center"
+            android:text="@string/doesn_t_hav"
+            android:textAppearance="@style/doesn_t_hav"
+            tools:ignore="PxUsage" />
+
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/continue_yo"
-        android:layout_width="585px"
-        android:layout_height="50px"
-        android:layout_marginStart="30px"
-        android:fontFamily="@font/roboto"
-        android:gravity="top"
-        android:lineSpacingExtra="12px"
-        android:text="@string/continue_yo"
-        android:textAppearance="@style/continue_yo"
-        android:translationY="-6.25px" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="100px"
-        android:gravity="center"
-        android:hint="@string/email"
-        app:hintAnimationEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:layout_marginHorizontal="30px"
-            android:drawableStart="@drawable/ic_email"
-            android:drawablePadding="30px"
-            android:fontFamily="@font/roboto"
-            android:inputType="textEmailAddress"
-            android:textAppearance="@style/email"
-            tools:ignore="PxUsage" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
-        android:hint="@string/password"
-        app:hintAnimationEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:layout_marginHorizontal="30px"
-            android:drawableStart="@drawable/ic_icon_password"
-            android:drawablePadding="30px"
-            android:fontFamily="@font/roboto"
-            android:inputType="textPassword"
-            android:textAppearance="@style/password"
-            tools:ignore="PxUsage" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/passwordToggle"
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:layout_marginStart="630px"
-        android:layout_marginTop="-80px"
-        android:src="@drawable/ic_dog_eyes_close" />
-
-    <TextView
-        android:id="@+id/i_forgot_pa"
-        android:layout_width="300px"
-        android:layout_height="45px"
-        android:layout_marginTop="40px"
-        android:layout_marginStart="35px"
-        android:fontFamily="@font/roboto"
-        android:gravity="top"
-        android:text="@string/i_forgot_pa"
-        android:textAppearance="@style/i_forgot_pa" />
-
-    <Button
-        android:id="@+id/log_in"
-        android:layout_width="473.3px"
-        android:layout_height="88px"
-        android:layout_marginTop="30px"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/ic_btn_getstarted"
-        android:text="@string/log_in"
-        android:textAppearance="@style/get_started"
-        tools:ignore="PxUsage" />
-
-    <TextView
-        android:id="@+id/doesn_t_hav"
-        android:layout_width="375px"
-        android:layout_height="35px"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20px"
-        android:gravity="center"
-        android:text="@string/doesn_t_hav"
-        android:textAppearance="@style/doesn_t_hav"
-        tools:ignore="PxUsage" />
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/loader_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CB000000"
+        android:gravity="center"
+        android:paddingTop="70px"
         android:visibility="gone">
 
         <include layout="@layout/loader" />
 
-    </LinearLayout>
-
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

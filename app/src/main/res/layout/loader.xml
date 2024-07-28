@@ -8,8 +8,8 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:indeterminateDrawable="@drawable/ic_loader_animation" />
 
     <TextView
