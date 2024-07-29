@@ -25,5 +25,9 @@
     <string name="i_forgot_pa">I Forgot Password ?</string>
     <string name="log_in">Log in</string>
     <string name="please_wait">Please wait …</string>
+    <string name="sign_up"><font color="#0F2032">Sign</font> <font color="#407BFF">Up</font></string>
+    <string name="create_a_ne"> Create a new account to join \nour furry community </string>
+    <string name="i_agree_to_">I agree to terms and conditions</string>
+    <string name="txtContinue">Continue</string>
 
 </resources>

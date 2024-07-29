@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:background="@drawable/x_border"
+    android:layout_gravity="center"
     tools:ignore="PxUsage" >
 
     <LinearLayout
@@ -51,20 +53,18 @@
                 android:layout_width="240px"
                 android:layout_height="72px"
                 android:layout_marginStart="30px"
-                android:fontFamily="@font/poppins_bold"
                 android:gravity="start|center"
                 android:text="@string/welcome"
-                android:textAppearance="@style/welcome" />
+                android:textAppearance="@style/title_48px_darkblue" />
 
             <TextView
                 android:id="@+id/back"
                 android:layout_width="387px"
                 android:layout_height="72px"
                 android:layout_marginStart="10px"
-                android:fontFamily="@font/poppins_bold"
                 android:gravity="start|center"
                 android:text="@string/back"
-                android:textAppearance="@style/back" />
+                android:textAppearance="@style/title_48px_blue" />
 
         </LinearLayout>
 
@@ -73,11 +73,9 @@
             android:layout_width="585px"
             android:layout_height="50px"
             android:layout_marginStart="30px"
-            android:fontFamily="@font/roboto"
             android:gravity="top"
-            android:lineSpacingExtra="12px"
             android:text="@string/continue_yo"
-            android:textAppearance="@style/continue_yo"
+            android:textAppearance="@style/input_32px_gray"
             android:translationY="-6.25px" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -94,9 +92,8 @@
                 android:layout_marginHorizontal="30px"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="30px"
-                android:fontFamily="@font/roboto"
                 android:inputType="textEmailAddress"
-                android:textAppearance="@style/email"
+                android:textAppearance="@style/input_32px_gray"
                 tools:ignore="PxUsage,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,9 +111,8 @@
                 android:layout_marginHorizontal="30px"
                 android:drawableStart="@drawable/ic_icon_password"
                 android:drawablePadding="30px"
-                android:fontFamily="@font/roboto"
                 android:inputType="textPassword"
-                android:textAppearance="@style/password"
+                android:textAppearance="@style/input_32px_gray"
                 tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -138,7 +134,7 @@
             android:fontFamily="@font/roboto"
             android:gravity="top"
             android:text="@string/i_forgot_pa"
-            android:textAppearance="@style/i_forgot_pa" />
+            android:textAppearance="@style/input_32px_gray" />
 
         <Button
             android:id="@+id/log_in"
@@ -148,7 +144,7 @@
             android:layout_marginTop="30px"
             android:background="@drawable/ic_btn_getstarted"
             android:text="@string/log_in"
-            android:textAppearance="@style/get_started"
+            android:textAppearance="@style/btn_36px_white"
             tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
         <TextView

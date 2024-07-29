@@ -2,20 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".GetStarted2">
+    tools:context=".GetStarted"
+    tools:ignore="PxUsage">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350px">
+        android:layout_height="271px">
 
         <ImageView
             android:id="@+id/myImageView"
             android:layout_width="756px"
-            android:layout_height="350px"
-            android:layout_marginTop="20dp"
+            android:layout_height="271px"
+            android:layout_marginTop="15dp"
             android:background="@drawable/vectors_bar"
             tools:ignore="PxUsage" />
 
@@ -26,7 +28,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="9dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
             android:background="#00FFFFFF"
             android:src="@drawable/ic_arrow_back" />
 
@@ -71,28 +73,22 @@
         android:id="@+id/welcome_to_"
         android:layout_width="750px"
         android:layout_height="100px"
-        android:fontFamily="@font/poppins_bold"
         android:gravity="center_horizontal|center_vertical|center"
         android:lineHeight="72sp"
         android:text="@string/take_care_of_your_pet"
-        android:textAppearance="@style/welcome_to_"
-        android:textColor="#0491E9"
-        android:textSize="48px"
+        android:textAppearance="@style/title_48px_blue"
         tools:ignore="PxUsage" />
 
     <TextView
         android:id="@+id/meet_munchb"
         android:layout_width="630px"
-        android:layout_height="200px"
-        android:layout_marginLeft="50px"
+        android:layout_height="230px"
+        android:layout_marginStart="50px"
         android:layout_marginTop="20px"
-        android:fontFamily="@font/roboto"
         android:gravity="center_horizontal|center_vertical|center"
         android:lineSpacingExtra="12px"
         android:text="@string/our_app_helps_you_manage_your_pet_s_health_from_vaccinations_and_medications_to_vet_visits_and_more_ensuring_your_furry_friend_is_always_in_the_best_shape"
-        android:textAppearance="@style/meet_munchb"
-        android:textColor="#CC6C6868"
-        android:textSize="32px"
+        android:textAppearance="@style/para_32px_gray"
         android:translationY="-6.25px"
         tools:ignore="PxUsage" />
 
@@ -100,73 +96,38 @@
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:gravity="top"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/circle_b1"
-            android:layout_width="27px"
-            android:layout_height="27px"
-            android:layout_marginStart="328px"
-            android:layout_marginTop="80px"
-            android:src="@drawable/ic_circle_blur"
-            tools:ignore="PxUsage" />
-
-        <ImageView
-            android:id="@+id/circle_clean"
-            android:layout_width="27px"
-            android:layout_height="27px"
-            android:layout_marginTop="80px"
-            android:src="@drawable/ic_circle_clean"
-            tools:ignore="PxUsage" />
-
-        <ImageView
-            android:id="@+id/circle_b2"
-            android:layout_width="27px"
-            android:layout_height="27px"
-            android:layout_marginTop="80px"
-            android:src="@drawable/ic_circle_blur"
-            tools:ignore="PxUsage" />
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/skip"
             android:layout_width="153px"
-            android:layout_height="56px"
+            android:layout_height="60px"
             android:layout_marginStart="15px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="40px"
             android:layout_marginBottom="100px"
             android:background="#00FFFFFF"
-            android:fontFamily="@font/roboto"
             android:gravity="center_horizontal|center_vertical"
-            android:lineHeight="56px"
             android:text="@string/skip"
-            android:textAppearance="@style/skip"
-            android:textColor="#990491E9"
-            android:textSize="48px"
+            android:textAppearance="@style/move_48px_lightBlue"
             tools:ignore="PxUsage" />
 
         <Button
             android:id="@+id/next"
             android:layout_width="153px"
-            android:layout_height="56px"
+            android:layout_height="60px"
             android:layout_marginStart="380px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="40px"
             android:layout_marginBottom="100px"
             android:background="#00FFFFFF"
-            android:fontFamily="@font/roboto"
             android:gravity="center_horizontal|center_vertical"
-            android:lineHeight="56px"
             android:text="@string/next"
-            android:textAppearance="@style/next"
-            android:textColor="#990491E9"
-            android:textSize="48px"
+            android:textAppearance="@style/move_48px_lightBlue"
             tools:ignore="PxUsage" />
     </LinearLayout>
-
 
 </LinearLayout>

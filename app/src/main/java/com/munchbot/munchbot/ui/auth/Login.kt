@@ -1,18 +1,17 @@
 package com.munchbot.munchbot.ui.auth
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.utils.StatusBarUtils
-import com.google.android.material.textfield.TextInputEditText
+import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.R
+import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.databinding.LoginBinding
 
 class Login : AppCompatActivity() {
@@ -26,8 +25,8 @@ class Login : AppCompatActivity() {
 
         StatusBarUtils.setStatusBarColor(window, R.color.status_bar_color)
 
-        setupUI(binding.root)
-        passwordVisibility()
+        SetupUI.setupUI(binding.root)
+        passwordVisibility(binding.passwordEditText, binding.passwordToggle)
 
         binding.logIn.setOnClickListener {
             val email = binding.emailEditText.text.toString()
@@ -59,10 +58,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun passwordVisibility() {
-        val passwordEditText = binding.passwordEditText
-        val passwordToggle = binding.passwordToggle
-
+    private fun passwordVisibility(passwordEditText: EditText, passwordToggle: ImageView) {
         passwordToggle.setOnClickListener {
             if (passwordEditText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                 passwordEditText.inputType =
@@ -73,25 +69,6 @@ class Login : AppCompatActivity() {
                 passwordToggle.setImageResource(R.drawable.ic_dog_eyes_open)
             }
             passwordEditText.setSelection(passwordEditText.text?.length ?: 0)
-        }
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setupUI(view: View) {
-        if (view !is TextInputEditText) {
-            view.setOnTouchListener { _, event ->
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    currentFocus?.clearFocus()
-                }
-                false
-            }
-        }
-
-        if (view is ViewGroup) {
-            for (i in 0 until view.childCount) {
-                val innerView = view.getChildAt(i)
-                setupUI(innerView)
-            }
         }
     }
 }

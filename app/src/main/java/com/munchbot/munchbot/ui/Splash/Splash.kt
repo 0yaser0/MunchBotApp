@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
-import com.munchbot.munchbot.GetStarted1
+import com.munchbot.munchbot.GetStarted
 import com.munchbot.munchbot.R
 
 class Splash : AppCompatActivity() {
@@ -37,7 +37,7 @@ class Splash : AppCompatActivity() {
             override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                startActivity(Intent(this@Splash, GetStarted1::class.java))
+                startActivity(Intent(this@Splash, GetStarted::class.java))
                 finish()
             }
 

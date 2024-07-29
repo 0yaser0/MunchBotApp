@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation (libs.circleindicator)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
@@ -76,6 +77,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.animation.graphics.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

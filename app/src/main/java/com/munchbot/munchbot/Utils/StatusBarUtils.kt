@@ -1,5 +1,5 @@
-// com.example.utils/StatusBarUtils.kt
-package com.example.utils
+
+package com.munchbot.munchbot.Utils
 
 import android.os.Build
 import android.view.Window
