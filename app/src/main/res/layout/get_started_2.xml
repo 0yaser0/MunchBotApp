@@ -13,13 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="271px">
 
-        <ImageView
-            android:id="@+id/myImageView"
-            android:layout_width="756px"
+        <view
+            android:layout_width="match_parent"
             android:layout_height="271px"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/vectors_bar"
-            tools:ignore="PxUsage" />
+            tools:ignore="PxUsage"
+            class="android.widget.LinearLayout"/>
 
         <ImageButton
             android:id="@+id/arrow_back"
@@ -92,11 +90,10 @@
         android:translationY="-6.25px"
         tools:ignore="PxUsage" />
 
-    <LinearLayout
+    <view
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:gravity="top"
-        android:orientation="horizontal"/>
+        class="android.widget.LinearLayout"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -13,10 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
-import com.munchbot.munchbot.databinding.SignUpBinding
+import com.munchbot.munchbot.databinding.SignUp1Binding
 
 class SignUp : AppCompatActivity() {
-    private lateinit var binding: SignUpBinding
+    private lateinit var binding: SignUp1Binding
     private val authViewModel: AuthViewModel by viewModels()
 
     private val progressStates = arrayOf(0, 50, 90, 100)
@@ -27,15 +27,15 @@ class SignUp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SignUpBinding.inflate(layoutInflater)
+        binding = SignUp1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         updateProgress(progressStates[currentStateIndex])
 
-        binding.updateProgressButton.setOnClickListener {
-            currentStateIndex = (currentStateIndex + 1) % progressStates.size
-            updateProgress(progressStates[currentStateIndex])
-        }
+//        binding.updateProgressButton.setOnClickListener {
+//            currentStateIndex = (currentStateIndex + 1) % progressStates.size
+//            updateProgress(progressStates[currentStateIndex])
+//        }
 
         StatusBarUtils.setStatusBarColor(window, R.color.status_bar_color)
 
@@ -149,6 +149,7 @@ class SignUp : AppCompatActivity() {
         }
 
         if (!termsAccepted) {
+            binding.loaderLayout.visibility = View.GONE
             @Suppress("DEPRECATION")
             binding.termsCheckBox.setTextColor(resources.getColor(R.color.red))
             Toast.makeText(this, "You must accept the terms and conditions", Toast.LENGTH_LONG)

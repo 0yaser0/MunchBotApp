@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.MunchBot" parent="Theme.AppCompat.Light.NoActionBar"/>
+
+    <style name="Theme.MunchBot" parent="Theme.AppCompat.Light.NoActionBar" />
+
     <style name="Theme.MunchBot.Splash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/ic_splash_bg</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MunchBot" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 </resources>

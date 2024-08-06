@@ -32,14 +32,16 @@
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 
-    <style name="doesn_t_hav">
+    <style name="txt_24px_blue">
         <item name="android:textSize">24px</item>
-        <item name="android:textColor">#CC0491E9</item>
+        <item name="android:textColor">#0491E9</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
-    <style name="already_hav">
+    <style name="txt_24px_lightBlue">
         <item name="android:textSize">24px</item>
-        <item name="android:textColor">#CC0491E9</item>
+        <item name="android:textColor">#C8EAFF</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="SignUpTextStyle">

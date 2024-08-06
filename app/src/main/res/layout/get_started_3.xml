@@ -13,13 +13,11 @@
         android:layout_height="271px"
         tools:ignore="PxUsage">
 
-        <ImageView
-            android:id="@+id/myImageView"
-            android:layout_width="756px"
+        <view
+            android:layout_width="match_parent"
             android:layout_height="271px"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/vectors_bar"
-            tools:ignore="PxUsage" />
+            tools:ignore="PxUsage"
+            class="android.widget.LinearLayout"/>
 
         <ImageButton
             android:id="@+id/arrow_back"
@@ -30,7 +28,8 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="25dp"
             android:background="#00FFFFFF"
-            android:src="@drawable/ic_arrow_back" />
+            android:src="@drawable/ic_arrow_back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </RelativeLayout>
 
@@ -67,23 +66,21 @@
         tools:ignore="PxUsage" />
 
 
-    <LinearLayout
+    <view
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:layout_marginTop="-20px"
-        android:gravity="top"
-        android:orientation="horizontal" />
+        class="android.widget.LinearLayout"/>
 
     <Button
         android:id="@+id/btn_getstarted"
         android:layout_width="473.3px"
         android:layout_height="88px"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10px"
         android:background="@drawable/ic_btn_getstarted"
-        android:layout_marginTop="20px"
         android:text="@string/get_started"
         android:textAppearance="@style/btn_36px_white"
-        tools:ignore="PxUsage" />
+        tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/doesn_t_hav"
@@ -93,7 +90,7 @@
         android:layout_marginTop="20px"
         android:gravity="center"
         android:text="@string/doesn_t_hav"
-        android:textAppearance="@style/doesn_t_hav"
+        android:textAppearance="@style/txt_24px_blue"
         tools:ignore="PxUsage" />
 
 </LinearLayout>

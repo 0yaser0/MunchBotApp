@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,20 +16,33 @@
         android:theme="@style/Theme.MunchBot"
         tools:targetApi="31">
         <activity
+            android:name=".ui.fragments.signUp.SignUp1Fragments"
+            android:exported="false" />
+        <activity
+            android:name=".Sign_Up"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fragments.signUp.SignUp1Fragment"
+            android:exported="false"
+            android:theme="@style/Theme.MunchBot" />
+        <activity
+            android:name=".ui.auth.SignUp2"
+            android:exported="false" />
+        <activity
             android:name=".ui.Splash.Splash"
             android:exported="true"
             android:theme="@style/Theme.MunchBot.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".GetStarted"
-            android:exported="true" />
-        <!-- <activity android:name="..GetStarted1Fragment" android:exported="true"/>-->
-        <!--<activity android:name=".GetStarted2Fragment" android:exported="true"/>-->
-        <!--<activity android:name=".GetStarted3Fragment" android:exported="true"/>-->
+            android:exported="true" /> <!-- <activity android:name="..GetStarted1Fragment" android:exported="true"/> -->
+        <!-- <activity android:name=".GetStarted2Fragment" android:exported="true"/> -->
+        <!-- <activity android:name=".GetStarted3Fragment" android:exported="true"/> -->
         <activity
             android:name=".ui.auth.Login"
             android:exported="true" />

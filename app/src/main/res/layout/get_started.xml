@@ -8,6 +8,13 @@
     tools:context=".GetStarted"
     tools:ignore="PxUsage">
 
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="756px"
+        android:layout_height="271px"
+        android:background="@drawable/vectors_bar"
+        tools:ignore="PxUsage" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

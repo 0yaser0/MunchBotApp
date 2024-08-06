@@ -155,7 +155,7 @@
             android:layout_marginTop="20px"
             android:gravity="center"
             android:text="@string/doesn_t_hav"
-            android:textAppearance="@style/doesn_t_hav"
+            android:textAppearance="@style/txt_24px_blue"
             tools:ignore="PxUsage" />
 
 
