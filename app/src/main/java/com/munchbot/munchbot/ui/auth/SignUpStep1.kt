@@ -15,7 +15,7 @@ import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.databinding.SignUp1Binding
 
-class SignUp : AppCompatActivity() {
+class SignUpStep1 : AppCompatActivity() {
     private lateinit var binding: SignUp1Binding
     private val authViewModel: AuthViewModel by viewModels()
 
@@ -53,6 +53,10 @@ class SignUp : AppCompatActivity() {
                 authViewModel.signUp(email, password)
             }
             binding.loaderLayout.visibility = View.VISIBLE
+        }
+        binding.signUp.setOnClickListener {
+            val intent = Intent(this, SignUpStep4::class.java)
+            startActivity(intent)
         }
 
         authViewModel.toastMessage.observe(this) { message ->

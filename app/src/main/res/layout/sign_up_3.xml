@@ -18,130 +18,178 @@
         tools:context=".ui.auth.Login"
         tools:ignore="PxUsage,UselessParent,ContentDescription">
 
-        <ImageView
-            android:id="@+id/myImageView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300px"
-            android:background="@drawable/vectors_bar"
-            android:contentDescription="@string/waves" />
+            android:layout_height="300px">
+
+            <ImageView
+                android:id="@+id/myImageView"
+                android:layout_width="match_parent"
+                android:layout_height="300px"
+                android:background="@drawable/vectors_bar"
+                android:contentDescription="@string/waves" />
+
+            <ImageButton
+                android:id="@+id/arrow_back"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="25dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_arrow_back" />
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350px"
+            android:layout_height="300px"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="325px"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/sign_up"
+                    android:id="@+id/survey_questions"
                     style="@style/SignUpTextStyle"
-                    android:text="@string/sign_up" />
+                    android:layout_width="match_parent"
+                    android:text="@string/survey_questions" />
 
                 <TextView
                     android:id="@+id/create_a_ne"
                     style="@style/CreateANewTextStyle"
-                    android:text="@string/create_a_ne" />
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_marginTop="20px"
+                    android:layout_marginEnd="30px"
+                    android:text="@string/we_will_ask_you_some_questions_for_finding_you_pets_of_your_choice" />
+
+                <TextView
+                    android:id="@+id/pet_choice"
+                    style="@style/SignUpTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0px"
+                    android:textSize="36px"
+                    android:gravity="center"
+                    android:text="@string/pet_choice" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/signUpStep1"
-                android:layout_width="match_parent"
-                android:layout_height="350px"
-                android:background="@drawable/ic_signupstep1"
-                android:contentDescription="@string/waves" />
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100px"
+            android:layout_height="320px"
             android:gravity="center"
-            android:hint="@string/email"
-            app:hintAnimationEnabled="true">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:layout_marginHorizontal="30px"
-                android:drawableStart="@drawable/ic_email"
-                android:drawablePadding="30px"
-                android:inputType="textEmailAddress"
-                android:textAppearance="@style/input_32px_gray"
-                tools:ignore="PxUsage,TouchTargetSizeCheck" />
-        </com.google.android.material.textfield.TextInputLayout>
+            <RelativeLayout
+                android:layout_width="300px"
+                android:layout_height="300px"
+                android:layout_margin="30px">
 
-        <com.google.android.material.textfield.TextInputLayout
+                <ImageView
+                    android:id="@+id/pet_chose_cat"
+                    android:layout_width="300px"
+                    android:layout_height="300px"
+                    android:src="@drawable/pet_chose" />
+
+                <ImageView
+                    android:id="@+id/cat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignStart="@+id/pet_chose_cat"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="15px"
+                    android:src="@drawable/cat" />
+
+                <TextView
+                    android:id="@+id/CatText"
+                    android:layout_width="match_parent"
+                    android:layout_height="40px"
+                    android:gravity="center"
+                    android:layout_alignStart="@+id/pet_chose_cat"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="230px"
+                    android:text="@string/catText"
+                    android:textAppearance="@style/input_32px_gray" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="300px"
+                android:layout_height="300px"
+                android:layout_margin="30px">
+
+                <ImageView
+                    android:id="@+id/pet_chose_dog"
+                    android:layout_width="300px"
+                    android:layout_height="300px"
+                    android:src="@drawable/pet_chose" />
+
+                <ImageView
+                    android:id="@+id/dog"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignStart="@+id/pet_chose_dog"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="40px"
+                    android:src="@drawable/dog" />
+
+                <TextView
+                    android:id="@+id/DogText"
+                    android:layout_width="match_parent"
+                    android:layout_height="40px"
+                    android:gravity="center"
+                    android:layout_alignStart="@+id/pet_chose_dog"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="230px"
+                    android:text="@string/dogText"
+                    android:textAppearance="@style/input_32px_gray" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:hint="@string/password"
-            app:hintAnimationEnabled="true">
+            android:layout_height="130px"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEditText"
+            <TextView
+                android:id="@+id/Other"
+                android:layout_width="400px"
+                android:layout_height="40px"
+                android:layout_marginStart="30px"
+                android:layout_marginTop="10px"
+                android:text="@string/other"
+                android:textAppearance="@style/input_32px_gray" />
+
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="match_parent"
-                android:layout_height="100px"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30px"
-                android:drawableStart="@drawable/ic_icon_password"
-                android:drawablePadding="30px"
-                android:inputType="textPassword"
-                android:textAppearance="@style/input_32px_gray"
-                tools:ignore="PxUsage,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                android:layout_marginTop="20px"
+                android:background="@drawable/x_border"
+                android:entries="@array/spinner_options"
+                tools:ignore="TouchTargetSizeCheck" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/passwordToggle"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:layout_marginStart="630px"
-            android:layout_marginTop="-80px"
-            android:src="@drawable/ic_dog_eyes_close" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:hint="@string/password"
-            app:hintAnimationEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirmPasswordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="100px"
-                android:layout_marginHorizontal="30px"
-                android:drawableStart="@drawable/ic_icon_password"
-                android:drawablePadding="30px"
-                android:inputType="textPassword"
-                android:textAppearance="@style/input_32px_gray"
-                tools:ignore="PxUsage,TouchTargetSizeCheck" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/ConfirmPasswordToggle"
-            android:layout_width="60px"
-            android:layout_height="60px"
-            android:layout_marginStart="630px"
-            android:layout_marginTop="-80px"
-            android:src="@drawable/ic_dog_eyes_close" />
-
-        <CheckBox
-            android:id="@+id/termsCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="25px"
-            android:buttonTint="@color/checkBox"
-            android:fontFamily="@font/roboto"
-            android:gravity="center"
-            android:text="@string/i_agree_to_"
-            android:textAppearance="@style/input_32px_gray"
-            android:textColor="#7F7F7F"
-            tools:ignore="TouchTargetSizeCheck" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -359,9 +407,7 @@
                     tools:ignore="SmallSp" />
 
             </RelativeLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <RelativeLayout

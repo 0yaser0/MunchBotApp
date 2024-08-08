@@ -13,21 +13,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MunchBot"
+        android:theme="@style/Theme.MunchBotLight"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.fragments.signUp.SignUp1Fragments"
-            android:exported="false" />
-        <activity
-            android:name=".Sign_Up"
-            android:exported="false" />
-        <activity
-            android:name=".ui.fragments.signUp.SignUp1Fragment"
-            android:exported="false"
-            android:theme="@style/Theme.MunchBot" />
-        <activity
-            android:name=".ui.auth.SignUp2"
-            android:exported="false" />
         <activity
             android:name=".ui.Splash.Splash"
             android:exported="true"
@@ -40,14 +27,15 @@
         </activity>
         <activity
             android:name=".GetStarted"
-            android:exported="true" /> <!-- <activity android:name="..GetStarted1Fragment" android:exported="true"/> -->
-        <!-- <activity android:name=".GetStarted2Fragment" android:exported="true"/> -->
-        <!-- <activity android:name=".GetStarted3Fragment" android:exported="true"/> -->
+            android:exported="true" />
         <activity
             android:name=".ui.auth.Login"
             android:exported="true" />
         <activity
-            android:name=".ui.auth.SignUp"
+            android:name=".ui.auth.SignUpStep1"
+            android:exported="true" />
+        <activity
+            android:name=".ui.auth.SignUpStep4"
             android:exported="true" />
 
         <meta-data

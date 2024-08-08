@@ -37,7 +37,7 @@ class Login : AppCompatActivity() {
 
         binding.doesnTHav.setOnClickListener {
             binding.loaderLayout.visibility = View.GONE
-            val intent = Intent(this, SignUp::class.java)
+            val intent = Intent(this, SignUpStep1::class.java)
             startActivity(intent)
             @Suppress("DEPRECATION")
             overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)

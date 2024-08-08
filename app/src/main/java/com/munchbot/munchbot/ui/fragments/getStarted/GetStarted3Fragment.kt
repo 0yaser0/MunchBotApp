@@ -11,7 +11,7 @@ import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.GetStarted3Binding
 import com.munchbot.munchbot.ui.auth.Login
-import com.munchbot.munchbot.ui.auth.SignUp
+import com.munchbot.munchbot.ui.auth.SignUpStep1
 
 @Suppress("DEPRECATION")
 class GetStarted3Fragment : Fragment() {
@@ -40,7 +40,7 @@ class GetStarted3Fragment : Fragment() {
         }
 
         binding.doesnTHav.setOnClickListener {
-            startActivity(Intent(requireActivity(), SignUp::class.java))
+            startActivity(Intent(requireActivity(), SignUpStep1::class.java))
             requireActivity().overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
     }

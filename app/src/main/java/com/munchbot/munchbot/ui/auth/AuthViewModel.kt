@@ -69,7 +69,7 @@ class AuthViewModel : ViewModel() {
                                                 _navigateToLogin.value = true
                                             } else {
                                                 _toastMessage.value = "Failed to send verification email."
-                                                Log.e("SignUp", "Verification email failed: ${verifyTask.exception?.message}")
+                                                Log.e("SignUpStep1", "Verification email failed: ${verifyTask.exception?.message}")
                                             }
                                         }
                                 } else {
@@ -78,7 +78,7 @@ class AuthViewModel : ViewModel() {
                                         _toastMessage.value = "Email already registered. Please try another email."
                                     } else {
                                         _toastMessage.value = "Failed to create account: ${exception?.message}"
-                                        Log.e("SignUp", "Account creation failed: ${exception?.message}")
+                                        Log.e("SignUpStep1", "Account creation failed: ${exception?.message}")
                                     }
                                 }
                             }
@@ -92,13 +92,13 @@ class AuthViewModel : ViewModel() {
                                     _toastMessage.value = "Email already registered, but not verified. Please verify your email before logging in."
                                 }
                             } else {
-                                Log.e("SignUp", "Failed to reload user: ${reloadTask.exception?.message}")
+                                Log.e("SignUpStep1", "Failed to reload user: ${reloadTask.exception?.message}")
                             }
                         }
                     }
                 } else {
                     _toastMessage.value = "Failed to check email."
-                    Log.e("SignUp", "Email check failed: ${task.exception?.message}")
+                    Log.e("SignUpStep1", "Email check failed: ${task.exception?.message}")
                 }
             }
     }
