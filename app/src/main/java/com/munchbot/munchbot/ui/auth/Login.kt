@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.R
+import com.munchbot.munchbot.SignUp
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.databinding.LoginBinding
 
@@ -37,7 +38,7 @@ class Login : AppCompatActivity() {
 
         binding.doesnTHav.setOnClickListener {
             binding.loaderLayout.visibility = View.GONE
-            val intent = Intent(this, SignUpStep1::class.java)
+            val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
             @Suppress("DEPRECATION")
             overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)

@@ -68,7 +68,7 @@
 
     <view
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="25dp"
         class="android.widget.LinearLayout"/>
 
     <Button

@@ -8,5 +8,90 @@
     android:layout_gravity="center"
     tools:ignore="PxUsage">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="no"
+        android:orientation="vertical"
+        tools:context=".ui.auth.Login"
+        tools:ignore="PxUsage,UselessParent,ContentDescription">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="271px"
+            tools:ignore="PxUsage">
+
+            <view
+                android:layout_width="match_parent"
+                android:layout_height="271px"
+                tools:ignore="PxUsage"
+                class="android.widget.LinearLayout"/>
+
+            <ImageButton
+                android:id="@+id/arrow_back"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="25dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_arrow_back"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/congratulations"
+                style="@style/SignUpTextStyle"
+                android:layout_marginTop="0px"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/congratulations" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/finishImage"
+            android:layout_width="660px"
+            android:layout_height="515px"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_signupfinish"
+            android:contentDescription="@string/waves" />
+
+        <TextView
+            android:id="@+id/meet_munchb"
+            android:layout_width="630px"
+            android:layout_height="150px"
+            android:layout_marginTop="10px"
+            android:layout_marginStart="50px"
+            android:gravity="center_horizontal|center_vertical|center"
+            android:lineSpacingExtra="12px"
+            android:text="@string/you_have_successfully_completed_all_the_steps_click_on_finish_to_create_your_account_and_start_your_journey_with_us"
+            android:textAppearance="@style/para_32px_gray"
+            android:translationY="-6.25px"
+            tools:ignore="PxUsage" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loader_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CB000000"
+        android:gravity="center"
+        android:paddingTop="70px"
+        android:visibility="gone">
+
+        <include layout="@layout/loader" />
+
+    </RelativeLayout>
 </RelativeLayout>

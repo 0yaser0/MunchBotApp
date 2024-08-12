@@ -1,0 +1,249 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:id="@+id/signUp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".GetStarted"
+    tools:ignore="PxUsage">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="756px"
+        android:layout_height="271px"
+        android:background="@drawable/vectors_bar"
+        tools:ignore="PxUsage" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="540px"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="473.3px"
+            android:layout_height="88px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20px"
+            android:background="@drawable/ic_btn_getstarted"
+            android:gravity="center"
+            android:text="@string/txtContinue"
+            android:textAppearance="@style/btn_36px_white"
+            tools:ignore="PxUsage,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/already_hav"
+            android:layout_width="400px"
+            android:layout_height="35px"
+            android:layout_gravity="center"
+            android:layout_marginTop="30px"
+            android:gravity="center"
+            android:text="@string/already_hav"
+            android:textAppearance="@style/txt_24px_blue" />
+
+        <LinearLayout
+            android:layout_width="500px"
+            android:layout_height="150px"
+            android:layout_gravity="center"
+            android:layout_marginTop="40px"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="150px"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/stepsignupclean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="30px"
+                    android:layout_marginEnd="30px"
+                    android:src="@drawable/ic_stepsignupclean" />
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="38px"
+                    android:layout_alignBottom="@+id/stepsignupclean"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:text="@string/_1"
+                    android:textAppearance="@style/btn_36px_white"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/basic"
+                    android:layout_width="100px"
+                    android:layout_height="38px"
+                    android:layout_below="@+id/stepsignupclean"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/basic"
+                    android:textAppearance="@style/txt_24px_blue" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="150px"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/stepsignupblur1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="30px"
+                    android:layout_marginEnd="30px"
+                    android:src="@drawable/ic_stepsignupblur" />
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="38px"
+                    android:layout_alignBottom="@+id/stepsignupblur1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textAppearance="@style/btn_36px_white"
+                    android:textColor="#C8EAFF"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/profile"
+                    android:layout_width="100px"
+                    android:layout_height="38px"
+                    android:layout_below="@+id/stepsignupblur1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/profile"
+                    android:textAppearance="@style/txt_24px_lightBlue" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="150px"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/stepsignupblur2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="30px"
+                    android:layout_marginEnd="30px"
+                    android:src="@drawable/ic_stepsignupblur" />
+
+                <TextView
+                    android:layout_width="100px"
+                    android:layout_height="38px"
+                    android:layout_alignBottom="@+id/stepsignupblur2"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textAppearance="@style/btn_36px_white"
+                    android:textColor="#C8EAFF"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/questionare"
+                    android:layout_width="100px"
+                    android:layout_height="38px"
+                    android:layout_below="@+id/stepsignupblur2"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/questionare"
+                    android:textAppearance="@style/txt_24px_lightBlue" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            tools:context=".MainActivity">
+
+            <TextView
+                android:id="@+id/progressTextStart"
+                android:layout_width="100px"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="15px"
+                android:text="@string/_0"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="15px"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/progressTextEnd"
+                android:layout_toEndOf="@id/progressTextStart"
+                android:gravity="center"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress_bar" />
+
+            <ImageView
+                android:id="@+id/progressIndicator"
+                android:layout_width="45px"
+                android:layout_height="45px"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="73dp"
+                android:layout_marginBottom="40dp"
+                android:src="@drawable/pet_paw"
+                android:translationX="5dp" />
+
+            <TextView
+                android:id="@+id/progressTextEnd"
+                android:layout_width="100px"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="15px"
+                android:text="@string/_100"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

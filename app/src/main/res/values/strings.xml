@@ -27,7 +27,7 @@
     <string name="please_wait">Please wait …</string>
     <string name="sign_up"><font color="#0F2032">Sign</font> <font color="#407BFF">Up</font></string>
     <string name="survey_questions"><font color="#0F2032">Survey</font> <font color="#407BFF">Questions</font></string>
-   <string name="pet_choice"><font color="#0F2032">Pet</font> <font color="#407BFF">Choice</font></string>
+    <string name="pet_choice"><font color="#0F2032">Pet</font> <font color="#407BFF">Choice</font></string>
     <string name="create_a_ne"> Create a new account to join \nour furry community </string>
     <string name="i_agree_to_">I agree to terms and conditions</string>
     <string name="txtContinue">Continue</string>
@@ -46,5 +46,7 @@
     <string name="catText"><font color="#0F2032"><b>Cat</b></font></string>
     <string name="dogText"><font color="#0F2032"><b>Dog</b></font></string>
     <string name="we_will_ask_you_some_questions_for_finding_you_pets_of_your_choice">We will ask you some questions for finding you pets of your choice</string>
+    <string name="congratulations"><font color="#0F2032">Congratulations !!</font></string>
+    <string name="you_have_successfully_completed_all_the_steps_click_on_finish_to_create_your_account_and_start_your_journey_with_us">You have successfully completed all the steps. Click on <font color="#0F2032"><b>\'Finish\'</b></font> to create your account and start your journey with us.</string>
 
 </resources>

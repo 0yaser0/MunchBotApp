@@ -32,11 +32,8 @@
             android:name=".ui.auth.Login"
             android:exported="true" />
         <activity
-            android:name=".ui.auth.SignUpStep1"
-            android:exported="true" />
-        <activity
-            android:name=".ui.auth.SignUpStep4"
-            android:exported="true" />
+            android:name=".SignUp"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

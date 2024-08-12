@@ -20,14 +20,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300px">
+            android:layout_height="271px"
+            tools:ignore="PxUsage">
 
-            <ImageView
-                android:id="@+id/myImageView"
+            <view
                 android:layout_width="match_parent"
-                android:layout_height="300px"
-                android:background="@drawable/vectors_bar"
-                android:contentDescription="@string/waves" />
+                android:layout_height="271px"
+                tools:ignore="PxUsage"
+                class="android.widget.LinearLayout"/>
 
             <ImageButton
                 android:id="@+id/arrow_back"
@@ -38,14 +38,15 @@
                 android:layout_marginStart="9dp"
                 android:layout_marginTop="25dp"
                 android:background="#00FFFFFF"
-                android:src="@drawable/ic_arrow_back" />
+                android:src="@drawable/ic_arrow_back"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </RelativeLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300px"
+            android:layout_height="210px"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -72,331 +73,178 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="200px"
+            android:layout_height="230px"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/cadre_pic"
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20px"
+                android:src="@drawable/ic_cadre_pic"
+                tools:ignore="DuplicateIds" />
+
+            <ImageView
+                android:id="@+id/camera"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_alignStart="@+id/cadre_pic"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20px"
+
+                android:padding="30px"
+                android:src="@drawable/ic_camera"
+                tools:ignore="DuplicateIds" />
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="320px"
-            android:gravity="center"
+            android:layout_height="330px"
             android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="300px"
-                android:layout_height="300px"
-                android:layout_margin="30px">
-
-                <ImageView
-                    android:id="@+id/pet_chose_cat"
-                    android:layout_width="300px"
-                    android:layout_height="300px"
-                    android:src="@drawable/pet_chose" />
-
-                <ImageView
-                    android:id="@+id/cat"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignStart="@+id/pet_chose_cat"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="15px"
-                    android:src="@drawable/cat" />
-
-                <TextView
-                    android:id="@+id/CatText"
-                    android:layout_width="match_parent"
-                    android:layout_height="40px"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/pet_chose_cat"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="230px"
-                    android:text="@string/catText"
-                    android:textAppearance="@style/input_32px_gray" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="300px"
-                android:layout_height="300px"
-                android:layout_margin="30px">
-
-                <ImageView
-                    android:id="@+id/pet_chose_dog"
-                    android:layout_width="300px"
-                    android:layout_height="300px"
-                    android:src="@drawable/pet_chose" />
-
-                <ImageView
-                    android:id="@+id/dog"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignStart="@+id/pet_chose_dog"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="40px"
-                    android:src="@drawable/dog" />
-
-                <TextView
-                    android:id="@+id/DogText"
-                    android:layout_width="match_parent"
-                    android:layout_height="40px"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/pet_chose_dog"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="230px"
-                    android:text="@string/dogText"
-                    android:textAppearance="@style/input_32px_gray" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="130px"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/Other"
-                android:layout_width="400px"
-                android:layout_height="40px"
-                android:layout_marginStart="30px"
-                android:layout_marginTop="10px"
-                android:text="@string/other"
-                android:textAppearance="@style/input_32px_gray" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30px"
-                android:layout_marginTop="20px"
-                android:background="@drawable/x_border"
-                android:entries="@array/spinner_options"
-                tools:ignore="TouchTargetSizeCheck" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="540px"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/signUpButton"
-                android:layout_width="473.3px"
-                android:layout_height="88px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20px"
-                android:background="@drawable/ic_btn_getstarted"
-                android:gravity="center"
-                android:text="@string/txtContinue"
-                android:textAppearance="@style/btn_36px_white"
-                tools:ignore="PxUsage,TouchTargetSizeCheck" />
-
-            <TextView
-                android:id="@+id/already_hav"
-                android:layout_width="400px"
-                android:layout_height="35px"
-                android:layout_gravity="center"
-                android:layout_marginTop="30px"
-                android:gravity="center"
-                android:text="@string/already_hav"
-                android:textAppearance="@style/txt_24px_blue" />
-
             <LinearLayout
-                android:layout_width="500px"
-                android:layout_height="150px"
-                android:layout_gravity="center"
-                android:layout_marginTop="40px"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:layout_width="360px"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="150px"
-                    android:layout_weight="1">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:gravity="center"
+                    android:hint="Name"
+                    app:hintAnimationEnabled="true">
 
-                    <ImageView
-                        android:id="@+id/stepsignupclean"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="30px"
-                        android:layout_marginEnd="30px"
-                        android:src="@drawable/ic_stepsignupclean" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:layout_marginHorizontal="25px"
+                        android:drawableEnd="@drawable/autograph"
+                        android:drawablePadding="30px"
+                        android:inputType="textEmailAddress"
+                        android:textAppearance="@style/input_32px_gray"
+                        tools:ignore="PxUsage,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="100px"
-                        android:layout_height="38px"
-                        android:layout_alignBottom="@+id/stepsignupclean"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:gravity="center"
-                        android:text="@string/_1"
-                        android:textAppearance="@style/btn_36px_white"
-                        tools:ignore="HardcodedText" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/genderTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_marginVertical="15px"
+                    android:gravity="center"
+                    android:hint="Gender"
+                    app:hintAnimationEnabled="true">
 
-                    <TextView
-                        android:id="@+id/basic"
-                        android:layout_width="100px"
-                        android:layout_height="38px"
-                        android:layout_below="@+id/stepsignupclean"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:text="@string/basic"
-                        android:textAppearance="@style/txt_24px_blue" />
-                </RelativeLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/genderEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:layout_marginHorizontal="25px"
+                        android:drawableEnd="@drawable/gender"
+                        android:drawablePadding="30px"
+                        android:inputType="text"
+                        android:textAppearance="@style/input_32px_gray"
+                        tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="150px"
-                    android:layout_weight="1">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:id="@+id/stepsignupblur1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="30px"
-                        android:layout_marginEnd="30px"
-                        android:src="@drawable/ic_stepsignupblur" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:gravity="center"
+                    android:hint="Weight kg"
+                    app:hintAnimationEnabled="true">
 
-                    <TextView
-                        android:layout_width="100px"
-                        android:layout_height="38px"
-                        android:layout_alignBottom="@+id/stepsignupblur1"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:gravity="center"
-                        android:text="2"
-                        android:textAppearance="@style/btn_36px_white"
-                        android:textColor="#C8EAFF"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:id="@+id/profile"
-                        android:layout_width="100px"
-                        android:layout_height="38px"
-                        android:layout_below="@+id/stepsignupblur1"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:text="@string/profile"
-                        android:textAppearance="@style/txt_24px_lightBlue" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="150px"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:id="@+id/stepsignupblur2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="30px"
-                        android:layout_marginEnd="30px"
-                        android:src="@drawable/ic_stepsignupblur" />
-
-                    <TextView
-                        android:layout_width="100px"
-                        android:layout_height="38px"
-                        android:layout_alignBottom="@+id/stepsignupblur2"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:gravity="center"
-                        android:text="3"
-                        android:textAppearance="@style/btn_36px_white"
-                        android:textColor="#C8EAFF"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:id="@+id/questionare"
-                        android:layout_width="100px"
-                        android:layout_height="38px"
-                        android:layout_below="@+id/stepsignupblur2"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:text="@string/questionare"
-                        android:textAppearance="@style/txt_24px_lightBlue" />
-                </RelativeLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/weightEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:layout_marginHorizontal="25px"
+                        android:drawableEnd="@drawable/weight"
+                        android:drawablePadding="30px"
+                        android:inputType="number"
+                        android:textAppearance="@style/input_32px_gray"
+                        tools:ignore="PxUsage,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150px"
-                tools:context=".MainActivity">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/progressTextStart"
-                    android:layout_width="100px"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
                     android:gravity="center"
-                    android:padding="15px"
-                    android:text="@string/_0"
-                    android:textColor="@android:color/holo_blue_light"
-                    android:textSize="10sp"
-                    tools:ignore="SmallSp" />
+                    android:hint="Breed"
+                    app:hintAnimationEnabled="true">
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="15px"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/progressTextEnd"
-                    android:layout_toEndOf="@id/progressTextStart"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/breedEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:layout_marginHorizontal="25px"
+                        android:drawableEnd="@drawable/breed"
+                        android:drawablePadding="30px"
+                        android:inputType="textEmailAddress"
+                        android:textAppearance="@style/input_32px_gray"
+                        tools:ignore="PxUsage,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_marginVertical="15px"
                     android:gravity="center"
-                    android:max="100"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/progress_bar" />
+                    android:hint="Date of Birthday"
+                    app:hintAnimationEnabled="true">
 
-                <ImageView
-                    android:id="@+id/progressIndicator"
-                    android:layout_width="45px"
-                    android:layout_height="45px"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginBottom="31dp"
-                    android:src="@drawable/pet_paw"
-                    android:translationX="5dp" />
-
-                <TextView
-                    android:id="@+id/progressTextEnd"
-                    android:layout_width="100px"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/calendarEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:layout_marginHorizontal="25px"
+                        android:drawableEnd="@drawable/calendar"
+                        android:drawablePadding="30px"
+                        android:inputType="date"
+                        android:textAppearance="@style/input_32px_gray"
+                        tools:ignore="PxUsage,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
                     android:gravity="center"
-                    android:padding="15px"
-                    android:text="@string/_100"
-                    android:textColor="@android:color/holo_blue_light"
-                    android:textSize="10sp"
-                    tools:ignore="SmallSp" />
+                    android:hint="Height cm"
+                    app:hintAnimationEnabled="true">
 
-            </RelativeLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/heightEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        android:layout_marginHorizontal="25px"
+                        android:drawableEnd="@drawable/type"
+                        android:drawablePadding="30px"
+                        android:inputType="number"
+                        android:textAppearance="@style/input_32px_gray"
+                        tools:ignore="PxUsage,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
