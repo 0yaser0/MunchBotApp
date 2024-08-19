@@ -66,4 +66,10 @@
         <item name="android:textSize">32px</item>
         <item name="android:textColor">#7F7F7F</item>
     </style>
+
+    <style name="munchbotTitleActionBar">
+        <item name="android:textSize">64px</item>
+        <item name="android:fontFamily">@font/dancing_script_bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>

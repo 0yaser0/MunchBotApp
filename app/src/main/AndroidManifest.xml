@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +18,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MunchBotLight"
+
         tools:targetApi="31">
         <activity
-            android:name=".ui.Splash.Splash"
+            android:name=".ui.main_view.Home"
+            android:exported="true" />
+        <activity
+            android:name=".ui.main_view.GetStarted"
+            android:exported="true" />
+        <activity
+            android:name=".ui.main_view.auth.Login"
+            android:exported="true" />
+        <activity
+            android:name=".ui.main_view.auth.SignUp"
+            android:exported="true" />
+        <activity
+            android:name=".Splash.Splash"
             android:exported="true"
             android:theme="@style/Theme.MunchBot.Splash">
             <intent-filter>
@@ -25,15 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GetStarted"
-            android:exported="true" />
-        <activity
-            android:name=".ui.auth.Login"
-            android:exported="true" />
-        <activity
-            android:name=".SignUp"
-            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

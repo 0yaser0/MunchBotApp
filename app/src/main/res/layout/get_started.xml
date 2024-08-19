@@ -5,7 +5,7 @@
     android:layout_height="1612px"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".GetStarted"
+    tools:context=".ui.main_view.GetStarted"
     tools:ignore="PxUsage">
 
     <ImageView

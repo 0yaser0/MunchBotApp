@@ -15,7 +15,7 @@
         android:focusableInTouchMode="true"
         android:importantForAccessibility="no"
         android:orientation="vertical"
-        tools:context=".ui.auth.Login"
+        tools:context=".ui.main_view.auth.Login"
         tools:ignore="PxUsage,UselessParent">
 
 
@@ -94,6 +94,8 @@
                 android:drawablePadding="30px"
                 android:inputType="textEmailAddress"
                 android:textAppearance="@style/input_32px_gray"
+                android:textColorHighlight="#FF0000"
+                android:textColorLink="#03A9F4"
                 tools:ignore="PxUsage,TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 

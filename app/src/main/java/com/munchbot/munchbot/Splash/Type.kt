@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.ui.Splash
+package com.munchbot.munchbot.Splash
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

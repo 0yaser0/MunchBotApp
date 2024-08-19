@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.ui.Splash
+package com.munchbot.munchbot.Splash
 
 import android.content.Intent
 import android.os.Build
@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
-import com.munchbot.munchbot.GetStarted
+import com.munchbot.munchbot.ui.main_view.GetStarted
 import com.munchbot.munchbot.R
 
 class Splash : AppCompatActivity() {

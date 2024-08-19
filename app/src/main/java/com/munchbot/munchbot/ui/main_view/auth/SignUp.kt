@@ -1,11 +1,11 @@
-package com.munchbot.munchbot
+package com.munchbot.munchbot.ui.main_view.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.munchbot.munchbot.Utils.BtnContinueClickListener
-import com.munchbot.munchbot.Utils.SignUpAdapter
 import com.munchbot.munchbot.databinding.SignUpBinding
+import com.munchbot.munchbot.ui.adapters.BtnContinueClickListener
+import com.munchbot.munchbot.ui.adapters.SignUpAdapter
 
 class SignUp : AppCompatActivity() {
     private lateinit var binding: SignUpBinding

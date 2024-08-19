@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.ui.Splash
+package com.munchbot.munchbot.Splash
 
 import android.app.Activity
 import android.os.Build

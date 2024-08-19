@@ -13,14 +13,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.R
-import com.munchbot.munchbot.SignUp
-import com.munchbot.munchbot.Utils.BtnContinueClickListener
 import com.munchbot.munchbot.Utils.SetupUI
+import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.SignUp1Binding
-import com.munchbot.munchbot.ui.auth.AuthViewModel
-import com.munchbot.munchbot.ui.auth.Login
+import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
+import com.munchbot.munchbot.ui.main_view.auth.Login
+import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
 class SignUpStep1Fragment : Fragment() {
     private var _binding: SignUp1Binding? = null
@@ -240,12 +239,5 @@ class SignUpStep1Fragment : Fragment() {
         _binding = null
         verificationDialog?.dismiss()
         verificationDialog = null
-    }
-
-    private fun navigateToNextFragment() {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, SignUpStep2Fragment())
-            .addToBackStack(null)
-            .commit()
     }
 }

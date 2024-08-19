@@ -15,7 +15,7 @@
         android:focusableInTouchMode="true"
         android:importantForAccessibility="no"
         android:orientation="vertical"
-        tools:context=".ui.auth.Login"
+        tools:context=".ui.main_view.auth.Login"
         tools:ignore="PxUsage,UselessParent,ContentDescription">
 
         <RelativeLayout
@@ -115,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100px"
                     android:gravity="center"
-                    android:hint="Username"
+                    android:hint="@string/usernameUser"
                     app:hintAnimationEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -125,7 +125,7 @@
                         android:layout_marginHorizontal="30px"
                         android:drawableStart="@drawable/ic_username"
                         android:drawablePadding="30px"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:textAppearance="@style/input_32px_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -144,7 +144,7 @@
                         android:layout_marginHorizontal="30px"
                         android:drawableStart="@drawable/ic_status"
                         android:drawablePadding="30px"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:textAppearance="@style/input_32px_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -154,7 +154,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/text_area"
+            android:id="@+id/text_area_bio"
             android:layout_width="match_parent"
             android:layout_height="200px"
             android:layout_marginHorizontal="30px"

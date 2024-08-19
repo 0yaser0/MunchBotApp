@@ -1,13 +1,16 @@
 @file:Suppress("DEPRECATION")
 
-package com.munchbot.munchbot.Utils
+package com.munchbot.munchbot.ui.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.munchbot.munchbot.ui.fragments.signUp.*
 import androidx.viewpager.widget.ViewPager
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep1Fragment
+import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep2Fragment
+import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep3Fragment
+import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep4Fragment
+import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep5Fragment
 
 class SignUpAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
@@ -49,12 +52,23 @@ class BtnContinueClickListener(private val viewPager: ViewPager) {
     }
 
     private fun performActionForFragment1() {
-        val fragment = (viewPager.adapter as? SignUpAdapter)?.instantiateItem(viewPager, 0) as? SignUpStep1Fragment
+        val fragment = (viewPager.adapter as? SignUpAdapter)?.instantiateItem(
+            viewPager,
+            0
+        ) as? SignUpStep1Fragment
         fragment?.signUpValidate()
     }
 
     private fun performActionForFragment2() {
-        (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 2)
+        val fragment = (viewPager.adapter as? SignUpAdapter)?.instantiateItem(
+            viewPager,
+            1
+        ) as? SignUpStep2Fragment
+        fragment?.validateInputAndProceed { isValid ->
+            if (isValid) {
+                (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 2)
+            }
+        }
     }
 
     private fun performActionForFragment3() {

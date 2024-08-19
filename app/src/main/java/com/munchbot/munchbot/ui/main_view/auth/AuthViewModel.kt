@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.ui.auth
+package com.munchbot.munchbot.ui.main_view.auth
 
 import android.os.Handler
 import android.os.Looper

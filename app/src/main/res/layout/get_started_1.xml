@@ -4,7 +4,7 @@
     android:layout_height="1612px"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:context=".GetStarted"
+    tools:context=".ui.main_view.GetStarted"
     android:id="@+id/swipe_layout"
     tools:ignore="PxUsage">
 

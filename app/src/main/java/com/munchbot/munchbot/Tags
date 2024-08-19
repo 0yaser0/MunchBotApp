@@ -11,9 +11,9 @@ Our MVVM of auth :
 │   │   │   │   └── AuthViewModel.kt (New ViewModel to handle authentication logic)
 │   │   ├── data
 │   │   │   ├── model
-│   │   │   │   └── User.kt (New data class for User)
+│   │   │   │   └── com.munchbot.munchbot.User.kt (New data class for com.munchbot.munchbot.User)
 │   │   │   ├── repository
-│   │   │   │   └── UserRepository.kt (New Repository for user data)
+│   │   │   │   └── DataRepository.kt (New Repository for user data)
 │   │   │   └── remote
 │   │   │       └── FirebaseDataSource.kt (New Data Source for Firebase operations)
 │   │   └── utils

@@ -1,9 +1,9 @@
-package com.munchbot.munchbot
+package com.munchbot.munchbot.ui.main_view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.munchbot.munchbot.Utils.GetstartedAdapter
 import com.munchbot.munchbot.databinding.GetStartedBinding
+import com.munchbot.munchbot.ui.adapters.GetstartedAdapter
 
 class GetStarted : AppCompatActivity() {
 

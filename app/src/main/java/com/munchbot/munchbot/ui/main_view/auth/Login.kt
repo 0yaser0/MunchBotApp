@@ -1,4 +1,4 @@
-package com.munchbot.munchbot.ui.auth
+package com.munchbot.munchbot.ui.main_view.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.R
-import com.munchbot.munchbot.SignUp
 import com.munchbot.munchbot.Utils.SetupUI
+import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.LoginBinding
 
 class Login : AppCompatActivity() {

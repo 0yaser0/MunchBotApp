@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Munch Bot</string>
+    <string name="app_name">MunchBot</string>
     <string name="welcome_to_">Welcome to MunchBot!</string>
     <string name="meet_munchb">Meet MUNCHBOT, the smart device that automatically feeds your pet and tracks their eating habits. Say goodbye to worries about feeding times with this innovative solution.</string>
     <string name="skip">Skip</string>
@@ -48,5 +48,12 @@
     <string name="we_will_ask_you_some_questions_for_finding_you_pets_of_your_choice">We will ask you some questions for finding you pets of your choice</string>
     <string name="congratulations"><font color="#0F2032">Congratulations !!</font></string>
     <string name="you_have_successfully_completed_all_the_steps_click_on_finish_to_create_your_account_and_start_your_journey_with_us">You have successfully completed all the steps. Click on <font color="#0F2032"><b>\'Finish\'</b></font> to create your account and start your journey with us.</string>
-
+    <string name="pet_name">Pet Name</string>
+    <string name="hello_user_">Hello<font color="#0491E9"><b> User ! </b></font>, please connect your phone to the <font color="#0491E9"><b>MunchBot</b></font> device via Bluetooth to configure your settings. Once connected, you will be able to proceed with the setup process smoothly.\n</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="home">Home</string>
+    <string name="planner">Planner</string>
+    <string name="vet">Vet</string>
+    <string name="health">Health</string>
+    <string name="usernameUser">Username</string>
 </resources>

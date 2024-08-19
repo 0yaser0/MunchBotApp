@@ -15,7 +15,7 @@
         android:focusableInTouchMode="true"
         android:importantForAccessibility="no"
         android:orientation="vertical"
-        tools:context=".ui.auth.Login"
+        tools:context=".ui.main_view.auth.Login"
         tools:ignore="PxUsage,UselessParent,ContentDescription">
 
         <RelativeLayout
