@@ -56,4 +56,5 @@
     <string name="vet">Vet</string>
     <string name="health">Health</string>
     <string name="usernameUser">Username</string>
+    <string name="horse"><font color="#0F2032"><b>Horse</b></font></string>
 </resources>

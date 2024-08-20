@@ -1,12 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinner_options">
         <item>None</item>
-        <item>Option 1</item>
-        <item>Option 2</item>
-        <item>Option 3</item>
-        <item>Option 4</item>
-        <item>Option 5</item>
-        <item>Option 6</item>
+        <item>Hamsters</item>
+        <item>Guinea Pigs</item>
+        <item>Ferrets</item>
+        <item>Rabbits</item>
+        <item>Birds</item>
+        <item>Sheep</item>
+        <item>Goats</item>
+        <item>Fish</item>
+        <item>Turtles</item>
+        <item>Snakes</item>
+        <item>Lizards</item>
+        <item>Chinchillas</item>
+        <item>Sugar Gliders</item>
+        <item>Hedgehogs</item>
+        <item>Rats</item>
+        <item>Mice</item>
+        <item>Pigs</item>
     </string-array>
 </resources>

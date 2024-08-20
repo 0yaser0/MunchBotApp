@@ -6,29 +6,36 @@ import androidx.lifecycle.viewModelScope
 import com.munchbot.munchbot.data.repository.DataRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class MyViewModelData @Inject constructor(private val repository: DataRepository) : ViewModel() {
+class MyViewModelData(private val repository: DataRepository) : ViewModel() {
 
-    val username: Flow<String?> = repository.getUsername()
-    val status: Flow<String?> = repository.getStatus()
-    val bio: Flow<String?> = repository.getBio()
+    fun getUsername(userID: String): Flow<String?> = repository.getUsername(userID)
+    fun getStatus(userID: String): Flow<String?> = repository.getStatus(userID)
+    fun getBio(userID: String): Flow<String?> = repository.getBio(userID)
+    fun getPetType(userID: String): Flow<String?> = repository.getPetType(userID)
 
-    fun saveUsername(username: String) {
+    fun saveUsername(userID: String, username: String) {
         viewModelScope.launch {
-            repository.setUsername(username)
+            repository.setUsername(userID, username)
         }
     }
 
-    fun saveStatus(status: String) {
+    fun saveStatus(userID: String, status: String) {
         viewModelScope.launch {
-            repository.setStatus(status)
+            repository.setStatus(userID, status)
         }
     }
 
-    fun saveBio(bio: String) {
+    fun saveBio(userID: String, bio: String) {
         viewModelScope.launch {
-            repository.setBio(bio)
+            repository.setBio(userID, bio)
         }
     }
+
+    fun savePetType(userID: String, petType: String) {
+        viewModelScope.launch {
+            repository.setPetType(userID, petType)
+        }
+    }
+
 }

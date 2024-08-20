@@ -7,6 +7,7 @@ import com.munchbot.munchbot.databinding.SignUpBinding
 import com.munchbot.munchbot.ui.adapters.BtnContinueClickListener
 import com.munchbot.munchbot.ui.adapters.SignUpAdapter
 
+
 class SignUp : AppCompatActivity() {
     private lateinit var binding: SignUpBinding
     lateinit var viewPager: ViewPager

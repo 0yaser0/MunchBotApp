@@ -12,14 +12,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.DataStoreManager
-import com.munchbot.munchbot.data.repository.DataRepository
 import com.munchbot.munchbot.data.viewmodel.MyViewModelData
-import com.munchbot.munchbot.data.viewmodel.MyViewModelFactory
 import com.munchbot.munchbot.databinding.SignUp2Binding
 
 @Suppress("DEPRECATION")
@@ -41,12 +38,6 @@ class SignUpStep2Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val dataStoreManager = DataStoreManager(requireContext())
-        val repository = DataRepository(dataStoreManager)
-        val factory = MyViewModelFactory(repository)
-        userViewModel = ViewModelProvider(this, factory)[MyViewModelData::class.java]
-
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
         SetupUI.setupUI(binding.root)
 
@@ -87,9 +78,15 @@ class SignUpStep2Fragment : Fragment() {
             android.util.Log.d("SignUpStep2Fragment", "Saving Status: $status")
             android.util.Log.d("SignUpStep2Fragment", "Saving Bio: $bio")
 
-            userViewModel.saveUsername(username)
-            userViewModel.saveStatus(status)
-            userViewModel.saveBio(bio)
+            val userID = FirebaseAuth.getInstance().currentUser?.uid
+
+            android.util.Log.d("SignUpStep2Fragment", "UserID: $userID")
+
+            userID?.let {
+                userViewModel.saveUsername(it, username)
+                userViewModel.saveStatus(it, status)
+                userViewModel.saveBio(it, bio)
+            }
 
             Toast.makeText(requireContext(), "Data saved successfully!", Toast.LENGTH_LONG).show()
             callback(true)

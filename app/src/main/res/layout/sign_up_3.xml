@@ -24,10 +24,10 @@
             tools:ignore="PxUsage">
 
             <view
+                class="android.widget.LinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="271px"
-                tools:ignore="PxUsage"
-                class="android.widget.LinearLayout"/>
+                tools:ignore="PxUsage" />
 
             <ImageButton
                 android:id="@+id/arrow_back"
@@ -42,7 +42,6 @@
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,99 +74,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0px"
-                    android:textSize="36px"
                     android:gravity="center"
-                    android:text="@string/pet_choice" />
+                    android:text="@string/pet_choice"
+                    android:textSize="36px" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
             android:layout_width="match_parent"
-            android:layout_height="320px"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="300px"
-                android:layout_height="300px"
-                android:layout_margin="30px">
-
-                <ImageView
-                    android:id="@+id/pet_chose_cat"
-                    android:layout_width="300px"
-                    android:layout_height="300px"
-                    android:src="@drawable/pet_chose" />
-
-                <ImageView
-                    android:id="@+id/cat"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignStart="@+id/pet_chose_cat"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="15px"
-                    android:src="@drawable/cat" />
-
-                <TextView
-                    android:id="@+id/CatText"
-                    android:layout_width="match_parent"
-                    android:layout_height="40px"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/pet_chose_cat"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="230px"
-                    android:text="@string/catText"
-                    android:textAppearance="@style/input_32px_gray" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="300px"
-                android:layout_height="300px"
-                android:layout_margin="30px">
-
-                <ImageView
-                    android:id="@+id/pet_chose_dog"
-                    android:layout_width="300px"
-                    android:layout_height="300px"
-                    android:src="@drawable/pet_chose" />
-
-                <ImageView
-                    android:id="@+id/dog"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignStart="@+id/pet_chose_dog"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="40px"
-                    android:src="@drawable/dog" />
-
-                <TextView
-                    android:id="@+id/DogText"
-                    android:layout_width="match_parent"
-                    android:layout_height="40px"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/pet_chose_dog"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="230px"
-                    android:text="@string/dogText"
-                    android:textAppearance="@style/input_32px_gray" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
+            android:layout_height="300px"
+            android:layout_gravity="center"
+            android:layout_marginVertical="20px"
+            android:clipChildren="false"
+            android:clipToPadding="false" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130px"
+            android:layout_height="200px"
             android:orientation="vertical">
 
             <TextView
@@ -175,18 +101,19 @@
                 android:layout_width="400px"
                 android:layout_height="40px"
                 android:layout_marginStart="30px"
-                android:layout_marginTop="10px"
+                android:layout_marginTop="20px"
                 android:text="@string/other"
                 android:textAppearance="@style/input_32px_gray" />
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80px"
                 android:layout_marginHorizontal="30px"
                 android:layout_marginTop="20px"
                 android:background="@drawable/x_border"
                 android:entries="@array/spinner_options"
+                style="@style/text_32px_darkBlue"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>

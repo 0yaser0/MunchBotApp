@@ -72,7 +72,15 @@ class BtnContinueClickListener(private val viewPager: ViewPager) {
     }
 
     private fun performActionForFragment3() {
-        (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 3)
+        val fragment = (viewPager.adapter as? SignUpAdapter)?.instantiateItem(
+            viewPager,
+            2
+        ) as? SignUpStep3Fragment
+        fragment?.saveSelectedPetType()
+
+        if (!fragment?.selectedImageValue.isNullOrEmpty() || !fragment?.selectedSpinnerValue.isNullOrEmpty()) {
+            (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 3)
+        }
     }
 
     private fun performActionForFragment4() {
