@@ -12,18 +12,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
+import com.munchbot.munchbot.data.database.DataStoreManager
+import com.munchbot.munchbot.data.repository.DataRepository
 import com.munchbot.munchbot.data.viewmodel.MyViewModelData
+import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
 import com.munchbot.munchbot.databinding.SignUp2Binding
 
 @Suppress("DEPRECATION")
 class SignUpStep2Fragment : Fragment() {
     private lateinit var binding: SignUp2Binding
-    private val PICK_IMAGE_REQUEST = 1
-    private val CAMERA_REQUEST = 2
+    private val pickImageRequest = 1
+    private val cameraRequest = 2
     private lateinit var selectedImageUri: Uri
     private lateinit var userViewModel: MyViewModelData
 
@@ -41,19 +48,12 @@ class SignUpStep2Fragment : Fragment() {
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
         SetupUI.setupUI(binding.root)
 
-        binding.camera.setOnClickListener {
-            val options = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
-            AlertDialog.Builder(requireContext())
-                .setTitle("Select Action")
-                .setItems(options) { _, which ->
-                    when (which) {
-                        0 -> dispatchTakePictureIntent()
-                        1 -> dispatchChoosePictureIntent()
-                        2 -> {}
-                    }
-                }
-                .show()
-        }
+        val repository = DataRepository(DataStoreManager(requireContext()))
+        val factory = MyViewModelDataFactory(repository)
+        userViewModel = ViewModelProvider(this, factory)[MyViewModelData::class.java]
+
+        imageUpload()
+
     }
 
     fun validateInputAndProceed(callback: (Boolean) -> Unit) {
@@ -93,16 +93,43 @@ class SignUpStep2Fragment : Fragment() {
         }
     }
 
+    private fun imageUpload() {
+        binding.camera.setOnClickListener {
+            val options = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
+            AlertDialog.Builder(requireContext())
+                .setTitle("Select Action")
+                .setItems(options) { _, which ->
+                    when (which) {
+                        0 -> dispatchTakePictureIntent()
+                        1 -> dispatchChoosePictureIntent()
+                        2 -> {}
+                    }
+                }
+                .show()
+        }
+    }
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
-            startActivityForResult(takePictureIntent, CAMERA_REQUEST)
+            startActivityForResult(takePictureIntent, cameraRequest)
         }
     }
 
     private fun dispatchChoosePictureIntent() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        startActivityForResult(intent, pickImageRequest)
+    }
+
+    private fun handleImageUpload(imageUri: Uri) {
+        val requestOptions = RequestOptions()
+            .transforms(CircleCrop())
+            .placeholder(R.drawable.ic_camera)
+            .error(R.drawable.ic_error)
+
+        Glide.with(this)
+            .load(imageUri)
+            .apply(requestOptions)
+            .into(binding.camera)
     }
 
     @Deprecated("Deprecated in Java")
@@ -110,14 +137,15 @@ class SignUpStep2Fragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
-                PICK_IMAGE_REQUEST -> {
+                pickImageRequest -> {
                     selectedImageUri = data.data!!
-                    binding.camera.setImageURI(selectedImageUri)
+                    handleImageUpload(selectedImageUri)
                 }
 
-                CAMERA_REQUEST -> {
+                cameraRequest -> {
                     val imageBitmap = data.extras?.get("data") as Bitmap
-                    binding.camera.setImageBitmap(imageBitmap)
+                    val uri = Uri.parse(MediaStore.Images.Media.insertImage(requireContext().contentResolver, imageBitmap, null, null))
+                    handleImageUpload(uri)
                 }
             }
         }

@@ -24,6 +24,7 @@ import kotlin.math.abs
 
 class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
     AdapterView.OnItemSelectedListener {
+
     private lateinit var petViewModel: MyViewModelData
     private lateinit var binding: SignUp3Binding
     private lateinit var viewPager: ViewPager2
@@ -47,10 +48,11 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
         savedInstanceState: Bundle?
     ): View {
         binding = SignUp3Binding.inflate(inflater, container, false)
+        setupViewModel()
         return binding.root
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    private fun setupViewModel() {
         val repository = DataRepository(DataStoreManager(requireContext()))
         val factory = MyViewModelDataFactory(repository)
         petViewModel = ViewModelProvider(this, factory)[MyViewModelData::class.java]
@@ -58,7 +60,6 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
         SetupUI.setupUI(binding.root)
 
@@ -79,7 +80,7 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
 
         val userID = FirebaseAuth.getInstance().currentUser?.uid
         userID?.let {
-            petViewModel.savePetType(userID, selectedPetType)
+            petViewModel.savePetType(it, selectedPetType)
             android.util.Log.d("SignUpStep3Fragment", "Saved Pet Type: $selectedPetType for User: $userID")
         }
     }
@@ -119,6 +120,9 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
             }
             android.util.Log.d("SignUpStep3Fragment", "Image: $selectedImageValue")
 
+            selectedSpinnerValue = null
+            spinner.setSelection(0)
+
             val currentItem = viewPager.currentItem
             val imagesSize = images.size
             val targetItem = when {
@@ -127,7 +131,6 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
                 else -> currentItem
             }
             viewPager.setCurrentItem(targetItem, true)
-            spinner.setSelection(0)
         }
     }
 
@@ -137,9 +140,10 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
             selectedPosition = -1
 
             selectedSpinnerValue = parent?.getItemAtPosition(position).toString()
+            android.util.Log.d("SignUpStep3Fragment", "Spinner: $selectedSpinnerValue")
 
-            val startPosition = images.size * 1000
-            viewPager.setCurrentItem(startPosition, false)
+            selectedImageValue = null
+            viewPager.setCurrentItem(images.size * 1000, false)
         }
     }
 

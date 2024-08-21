@@ -1,6 +1,7 @@
 package com.munchbot.munchbot.data.viewmodel
 
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.munchbot.munchbot.data.repository.DataRepository
@@ -13,6 +14,14 @@ class MyViewModelData(private val repository: DataRepository) : ViewModel() {
     fun getStatus(userID: String): Flow<String?> = repository.getStatus(userID)
     fun getBio(userID: String): Flow<String?> = repository.getBio(userID)
     fun getPetType(userID: String): Flow<String?> = repository.getPetType(userID)
+    fun getPetName(userID: String): Flow<String?> = repository.getPetName(userID)
+    fun getPetGender(userID: String): Flow<String?> = repository.getPetGender(userID)
+    fun getPetWeight(userID: String): Flow<String?> = repository.getPetWeight(userID)
+    fun getPetBreed(userID: String): Flow<String?> = repository.getPetBreed(userID)
+    fun getPetDateOfBirth(userID: String): Flow<String?> = repository.getPetDateOfBirth(userID)
+    fun getPetHeight(userID: String): Flow<String?> = repository.getPetHeight(userID)
+    fun getUserProfileImage(userID: String): Flow<String?> = repository.getUserProfileImage(userID)
+    fun getPetProfileImage(userID: String): Flow<String?> = repository.getPetProfileImage(userID)
 
     fun saveUsername(userID: String, username: String) {
         viewModelScope.launch {
@@ -38,4 +47,51 @@ class MyViewModelData(private val repository: DataRepository) : ViewModel() {
         }
     }
 
+    fun savePetName(userID: String, petName: String) {
+        viewModelScope.launch {
+            repository.setPetName(userID, petName)
+        }
+    }
+
+    fun savePetGender(userID: String, petGender: String) {
+        viewModelScope.launch {
+            repository.setPetGender(userID, petGender)
+        }
+    }
+
+    fun savePetWeight(userID: String, petWeight: String) {
+        viewModelScope.launch {
+            repository.setPetWeight(userID, petWeight)
+        }
+    }
+
+    fun savePetBreed(userID: String, petBreed: String) {
+        viewModelScope.launch {
+            repository.setPetBreed(userID, petBreed)
+        }
+    }
+
+    fun savePetDateOfBirth(userID: String, petDateOfBirth: String) {
+        viewModelScope.launch {
+            repository.setPetDateOfBirth(userID, petDateOfBirth)
+        }
+    }
+
+    fun savePetHeight(userID: String, petHeight: String) {
+        viewModelScope.launch {
+            repository.setPetHeight(userID, petHeight)
+        }
+    }
+
+    fun saveUserProfileImage(userID: String, uri: Uri) {
+        viewModelScope.launch {
+            repository.saveUserProfileImage(userID, uri)
+        }
+    }
+
+    fun savePetProfileImage(userID: String, uri: Uri) {
+        viewModelScope.launch {
+            repository.savePetProfileImage(userID, uri)
+        }
+    }
 }

@@ -84,7 +84,15 @@ class BtnContinueClickListener(private val viewPager: ViewPager) {
     }
 
     private fun performActionForFragment4() {
-        (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 4)
+        val fragment = (viewPager.adapter as? SignUpAdapter)?.instantiateItem(
+            viewPager,
+            3
+        ) as? SignUpStep4Fragment
+        fragment?.validatePetProfileInputAndProceed { isValid ->
+            if (isValid) {
+                (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 4)
+            }
+        }
     }
 
     private fun performActionForFragment5() {

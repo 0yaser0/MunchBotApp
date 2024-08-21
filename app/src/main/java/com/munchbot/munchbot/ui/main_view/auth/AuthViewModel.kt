@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.viewpager.widget.ViewPager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -42,6 +41,10 @@ class AuthViewModel : ViewModel() {
 
     enum class ButtonState {
         CLICKABLE, UNCLICKABLE
+    }
+
+    fun updateResendButtonState(state: ButtonState) {
+        _resendButtonState.value = state
     }
 
     fun signUp(email: String, password: String) {

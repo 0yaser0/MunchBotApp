@@ -1,5 +1,6 @@
 package com.munchbot.munchbot.ui.fragments.signUp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,6 +8,7 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -21,10 +23,13 @@ import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
 import com.munchbot.munchbot.ui.main_view.auth.Login
 import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
+@Suppress("DEPRECATION")
 class SignUpStep1Fragment : Fragment() {
     private var _binding: SignUp1Binding? = null
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
+
+    private var verificationDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,15 +77,9 @@ class SignUpStep1Fragment : Fragment() {
                 showVerificationAlertDialog()
             }
         }
-
-        authViewModel.resendButtonState.observe(viewLifecycleOwner) { state ->
-            // Update UI based on resend button state
-            // This code assumes you have a reference to the resend button in the alert dialog
-            // You'll need to update the dialog button state here
-        }
     }
 
-     fun signUpValidate() {
+    fun signUpValidate() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
         val confirmPassword = binding.confirmPasswordEditText.text.toString()
@@ -134,8 +133,7 @@ class SignUpStep1Fragment : Fragment() {
                 requireContext(),
                 "You must accept the terms and conditions",
                 Toast.LENGTH_LONG
-            )
-                .show()
+            ).show()
             isValid = false
         }
 
@@ -157,8 +155,6 @@ class SignUpStep1Fragment : Fragment() {
         }
     }
 
-    private var verificationDialog: AlertDialog? = null
-
     private fun showVerificationAlertDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Email Verification")
@@ -178,7 +174,7 @@ class SignUpStep1Fragment : Fragment() {
             val resendButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             resendButton.setOnClickListener {
                 authViewModel.resendVerificationEmail()
-                startResendButtonTimer()
+                startResendButtonTimer(resendButton)
             }
 
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener {
@@ -186,16 +182,24 @@ class SignUpStep1Fragment : Fragment() {
                     if (isVerified) {
                         dialog.dismiss()
                         (activity as? SignUp)?.let {
-                            Toast.makeText(requireContext(), "Account created successfully!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Account created successfully!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             it.adapter.navigateToFragment(it.viewPager, 1)
                         }
                     } else {
-                        Toast.makeText(requireContext(), "Email not verified yet.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Email not verified yet.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
 
-            startResendButtonTimer()
+            startResendButtonTimer(resendButton)
         }
 
         authViewModel.resendButtonState.observe(viewLifecycleOwner) { state ->
@@ -210,27 +214,25 @@ class SignUpStep1Fragment : Fragment() {
                 )
             }
         }
+
     }
 
+    private fun startResendButtonTimer(resendButton: Button) {
+        resendButton.isEnabled = false
+        resendButton.setTextColor(resources.getColor(R.color.p))
+        object : CountDownTimer(60000, 1000) {
+            @SuppressLint("SetTextI18n")
+            override fun onTick(millisUntilFinished: Long) {
+                resendButton.text = "Resend (${millisUntilFinished / 1000}s)"
+            }
 
-    private fun startResendButtonTimer() {
-        verificationDialog?.let { dialog ->
-            val resendButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            resendButton.isEnabled = false
-            resendButton.setTextColor(resources.getColor(R.color.p))
-
-            object : CountDownTimer(60000, 1000) { // 60 seconds timer
-                override fun onTick(millisUntilFinished: Long) {
-                    "Resend (${millisUntilFinished / 1000}s)".also { resendButton.text = it }
-                }
-
-                override fun onFinish() {
-                    "Resend".also { resendButton.text = it }
-                    resendButton.isEnabled = true
-                    resendButton.setTextColor(resources.getColor(R.color.circle_color_selected))
-                }
-            }.start()
-        }
+            @SuppressLint("SetTextI18n")
+            override fun onFinish() {
+                resendButton.text = "Resend"
+                resendButton.isEnabled = true
+                resendButton.setTextColor(resources.getColor(R.color.circle_color_selected))
+            }
+        }.start()
     }
 
 

@@ -86,6 +86,9 @@ dependencies {
     implementation (libs.androidx.datastore.preferences)
     implementation(libs.androidx.media3.common)
 
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
