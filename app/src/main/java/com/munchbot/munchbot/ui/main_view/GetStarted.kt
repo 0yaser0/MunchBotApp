@@ -1,11 +1,11 @@
 package com.munchbot.munchbot.ui.main_view
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.databinding.GetStartedBinding
 import com.munchbot.munchbot.ui.adapters.GetstartedAdapter
 
-class GetStarted : AppCompatActivity() {
+class GetStarted : MunchBotActivity() {
 
     lateinit var binding: GetStartedBinding
 

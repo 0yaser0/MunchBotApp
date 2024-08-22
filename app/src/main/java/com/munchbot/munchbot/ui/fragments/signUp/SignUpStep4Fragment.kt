@@ -7,35 +7,41 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.auth.FirebaseAuth
+import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.DataStoreManager
-import com.munchbot.munchbot.data.repository.DataRepository
-import com.munchbot.munchbot.data.viewmodel.MyViewModelData
+import com.munchbot.munchbot.data.database.SignUpDataStoreManager
+import com.munchbot.munchbot.data.repository.SignUpDataRepository
 import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
+import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
+import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
 import com.munchbot.munchbot.databinding.SignUp4Binding
+import com.munchbot.munchbot.ui.adapters.SignUpAdapter
+import com.munchbot.munchbot.ui.main_view.auth.SignUp
 import java.util.Calendar
 
 @Suppress("DEPRECATION")
-class SignUpStep4Fragment : Fragment() {
+class SignUpStep4Fragment : MunchBotFragments() {
     private lateinit var binding: SignUp4Binding
     private val pickImageRequest = 1
     private val cameraRequest = 2
     private lateinit var selectedImageUri: Uri
-    private lateinit var petViewModel: MyViewModelData
+    private lateinit var petViewModel: SignUpViewModelData
+    private lateinit var sharedViewModel: SignUpSharedViewModel
+    private lateinit var adapter: SignUpAdapter
+    private lateinit var signUp: SignUp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,19 +59,22 @@ class SignUpStep4Fragment : Fragment() {
 
         setupViewModel()
 
+        signUp = activity as SignUp
+        adapter = signUp.adapter
+
         chosePetImage()
 
         handleErrorsCalendar()
 
         choseGender()
 
-
     }
 
     private fun setupViewModel() {
-        val repository = DataRepository(DataStoreManager(requireContext()))
+        val repository = SignUpDataRepository(SignUpDataStoreManager(requireContext()))
         val factory = MyViewModelDataFactory(repository)
-        petViewModel = ViewModelProvider(this, factory)[MyViewModelData::class.java]
+        petViewModel = ViewModelProvider(this, factory)[SignUpViewModelData::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
     }
 
     fun validatePetProfileInputAndProceed(callback: (Boolean) -> Unit) {
@@ -75,6 +84,9 @@ class SignUpStep4Fragment : Fragment() {
         val petBreed = binding.breedEditText.text.toString()
         val petDateOfBirth = binding.calendarEditText.text.toString()
         val petHeight = binding.heightEditText.text.toString()
+
+        validatePetDetails()
+        validatePetMeasurements()
 
         if (petName.isEmpty()) {
             binding.nameEditText.error = "Name cannot be empty"
@@ -94,10 +106,11 @@ class SignUpStep4Fragment : Fragment() {
         } else if (petHeight.isEmpty()) {
             binding.heightEditText.error = "Height cannot be empty"
             callback(false)
-        }else if (!::selectedImageUri.isInitialized) {
+        } else if (!::selectedImageUri.isInitialized) {
             Toast.makeText(requireContext(), "Please select a picture.", Toast.LENGTH_LONG).show()
             callback(false)
         } else {
+            showLoader()
             android.util.Log.d("PetProfileFragment", "Saving Name: $petName")
             android.util.Log.d("PetProfileFragment", "Saving Gender: $petGender")
             android.util.Log.d("PetProfileFragment", "Saving Weight: $petWeight")
@@ -105,24 +118,22 @@ class SignUpStep4Fragment : Fragment() {
             android.util.Log.d("PetProfileFragment", "Saving Date of Birth: $petDateOfBirth")
             android.util.Log.d("PetProfileFragment", "Saving Height: $petHeight")
 
-            val userID = FirebaseAuth.getInstance().currentUser?.uid
+            sharedViewModel.savePetName(petName)
+            sharedViewModel.savePetGender(petGender)
+            sharedViewModel.savePetWeight(petWeight)
+            sharedViewModel.savePetBreed(petBreed)
+            sharedViewModel.savePetDateOfBirth(petDateOfBirth)
+            sharedViewModel.savePetHeight(petHeight)
+            sharedViewModel.savePetImageProfile(selectedImageUri)
 
-            android.util.Log.d("SignUpStep2Fragment", "UserID: $userID")
-            userID?.let {
-                petViewModel.savePetName(it, petName)
-                petViewModel.savePetGender(it, petGender)
-                petViewModel.savePetWeight(it, petWeight)
-                petViewModel.savePetBreed(it, petBreed)
-                petViewModel.savePetDateOfBirth(it, petDateOfBirth)
-                petViewModel.savePetHeight(it, petHeight)
-            }
-
-            Toast.makeText(requireContext(), "Pet profile saved successfully!", Toast.LENGTH_LONG)
-                .show()
-            callback(true)
+            binding.root.postDelayed({
+                hideLoader()
+                Toast.makeText(requireContext(), "Pet profile saved successfully!", Toast.LENGTH_LONG)
+                    .show()
+                callback(true)
+            }, 2000)
         }
     }
-
 
     private fun handleErrorsCalendar() {
         binding.calendarEditText.setOnClickListener {
@@ -138,6 +149,7 @@ class SignUpStep4Fragment : Fragment() {
                 if (dayMonthYear.size == 3) {
                     val day = dayMonthYear[0].toIntOrNull() ?: 0
                     val month = dayMonthYear[1].toIntOrNull() ?: 0
+                    val year = dayMonthYear[2].toIntOrNull() ?: 0
 
                     if (!input.matches(regex)) {
                         binding.calendarEditText.error =
@@ -148,8 +160,16 @@ class SignUpStep4Fragment : Fragment() {
                     } else if (month !in 1..12) {
                         binding.calendarEditText.error =
                             "Invalid date. Month must be between 1 and 12."
+                    } else if (year < 1900 || year > 2100) {
+                        binding.calendarEditText.error =
+                            "Invalid year. Year must be between 1900 and 2100."
                     } else {
-                        binding.calendarEditText.error = null
+                        if (isFutureDate(day, month, year)) {
+                            binding.calendarEditText.error =
+                                "Invalid date. You cannot select a future date."
+                        } else {
+                            binding.calendarEditText.error = null
+                        }
                     }
                 } else {
                     binding.calendarEditText.error = "Invalid date format. Please use DD-MM-YYYY."
@@ -157,6 +177,38 @@ class SignUpStep4Fragment : Fragment() {
             }
         }
     }
+
+    private fun isFutureDate(day: Int, month: Int, year: Int): Boolean {
+        val today = Calendar.getInstance()
+        val inputDate = Calendar.getInstance().apply {
+            set(year, month - 1, day)
+        }
+        return inputDate.after(today)
+    }
+
+
+
+    private fun validatePetDetails() {
+        val petName = binding.nameEditText.text.toString().trim()
+        val petBreed = binding.breedEditText.text.toString().trim()
+
+        val namePattern = "^[A-Za-z]+$"
+        val isValidName = petName.matches(namePattern.toRegex())
+        val isValidBreed = petBreed.matches(namePattern.toRegex())
+
+        if (!isValidName) {
+            binding.nameEditText.error = "Name should only contain letters"
+        } else {
+            binding.nameEditText.error = null
+        }
+
+        if (!isValidBreed) {
+            binding.breedEditText.error = "Breed should only contain letters"
+        } else {
+            binding.breedEditText.error = null
+        }
+    }
+
 
     private fun choseGender() {
         val genderEditText = binding.genderEditText
@@ -169,8 +221,10 @@ class SignUpStep4Fragment : Fragment() {
 
         genderEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                val input = genderEditText.text.toString()
-                if (input !in arrayOf("Male", "Female")) {
+                val input = genderEditText.text.toString().trim()
+                val validInputs = arrayOf("Male", "Female")
+
+               if (validInputs.none { it.equals(input, ignoreCase = true) }) {
                     binding.genderTextInputLayout.error = "Please specify Male or Female"
                     genderEditText.error = "Please specify Male or Female"
                 } else {
@@ -181,9 +235,30 @@ class SignUpStep4Fragment : Fragment() {
         }
     }
 
+    private fun validatePetMeasurements() {
+        val petWeightStr = binding.weightEditText.text.toString().trim()
+        val petHeightStr = binding.heightEditText.text.toString().trim()
+
+        val petWeight = petWeightStr.toDoubleOrNull()
+        val petHeight = petHeightStr.toDoubleOrNull()
+
+        if (petWeight == null || petWeight <= 0) {
+            binding.weightEditText.error = "Weight must be greater than 0"
+        } else {
+            binding.weightEditText.error = null
+        }
+
+        if (petHeight == null || petHeight <= 0) {
+            binding.heightEditText.error = "Height must be greater than 0"
+        } else {
+            binding.heightEditText.error = null
+        }
+    }
+
     private fun showDatePickerDialog() {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
+            R.style.CustomDatePickerDialog,
             { _, year, month, day ->
                 val selectedDate = "$day-${month + 1}-$year"
                 binding.calendarEditText.setText(selectedDate)
@@ -192,6 +267,11 @@ class SignUpStep4Fragment : Fragment() {
             Calendar.getInstance().get(Calendar.MONTH),
             Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         )
+        datePickerDialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        datePickerDialog.window?.setGravity(Gravity.CENTER)
         datePickerDialog.show()
     }
 
@@ -253,4 +333,17 @@ class SignUpStep4Fragment : Fragment() {
             }
         }
     }
+
+    private fun showLoader() {
+        (activity as? SignUp)?.showLoader(true)
+        binding.root.isClickable = false
+        binding.root.isEnabled = false
+    }
+
+    private fun hideLoader() {
+        (activity as? SignUp)?.showLoader(false)
+        binding.root.isClickable = true
+        binding.root.isEnabled = true
+    }
 }
+

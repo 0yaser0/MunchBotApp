@@ -11,28 +11,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.auth.FirebaseAuth
+import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.DataStoreManager
-import com.munchbot.munchbot.data.repository.DataRepository
-import com.munchbot.munchbot.data.viewmodel.MyViewModelData
+import com.munchbot.munchbot.data.database.SignUpDataStoreManager
+import com.munchbot.munchbot.data.repository.SignUpDataRepository
 import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
+import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
+import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
 import com.munchbot.munchbot.databinding.SignUp2Binding
+import com.munchbot.munchbot.ui.adapters.SignUpAdapter
+import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
 @Suppress("DEPRECATION")
-class SignUpStep2Fragment : Fragment() {
+class SignUpStep2Fragment : MunchBotFragments() {
     private lateinit var binding: SignUp2Binding
     private val pickImageRequest = 1
     private val cameraRequest = 2
-    private lateinit var selectedImageUri: Uri
-    private lateinit var userViewModel: MyViewModelData
+    private lateinit var userProfileImage: Uri
+    private lateinit var userViewModel: SignUpViewModelData
+    private lateinit var sharedViewModel: SignUpSharedViewModel
+    private lateinit var adapter: SignUpAdapter
+    private lateinit var signUp: SignUp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,29 +53,48 @@ class SignUpStep2Fragment : Fragment() {
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
         SetupUI.setupUI(binding.root)
 
-        val repository = DataRepository(DataStoreManager(requireContext()))
-        val factory = MyViewModelDataFactory(repository)
-        userViewModel = ViewModelProvider(this, factory)[MyViewModelData::class.java]
-
+        setupViewModel()
         imageUpload()
+
+        signUp = activity as SignUp
+        adapter = signUp.adapter
 
     }
 
+    private fun setupViewModel() {
+        val repository = SignUpDataRepository(SignUpDataStoreManager(requireContext()))
+        val factory = MyViewModelDataFactory(repository)
+        userViewModel = ViewModelProvider(this, factory)[SignUpViewModelData::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
+    }
+
     fun validateInputAndProceed(callback: (Boolean) -> Unit) {
-        val username = binding.userNameEditText.text.toString()
-        val status = binding.statusEditText.text.toString()
-        val bio = binding.textAreaBio.text.toString()
+        val username = binding.userNameEditText.text.toString().trim()
+        val status = binding.statusEditText.text.toString().trim()
+        val bio = binding.textAreaBio.text.toString().trim()
+
+        val lettersOnlyPattern = "^[A-Za-z]+$"
+        val lettersRequiredPattern = ".*[A-Za-z].*"
 
         if (username.isEmpty()) {
             binding.userNameEditText.error = "Username cannot be empty"
             callback(false)
+        } else if (!username.matches(lettersOnlyPattern.toRegex())) {
+            binding.userNameEditText.error = "Username must contain only letters"
+            callback(false)
         } else if (status.isEmpty()) {
             binding.statusEditText.error = "Status cannot be empty"
+            callback(false)
+        } else if (!status.matches(lettersOnlyPattern.toRegex())) {
+            binding.statusEditText.error = "Status must contain only letters"
             callback(false)
         } else if (bio.isEmpty()) {
             binding.textAreaBio.error = "Bio cannot be empty"
             callback(false)
-        } else if (!::selectedImageUri.isInitialized) {
+        } else if (!bio.matches(lettersRequiredPattern.toRegex())) {
+            binding.textAreaBio.error = "Bio must contain at least one letter"
+            callback(false)
+        } else if (!::userProfileImage.isInitialized) {
             Toast.makeText(requireContext(), "Please select a picture.", Toast.LENGTH_LONG).show()
             callback(false)
         } else {
@@ -78,18 +102,18 @@ class SignUpStep2Fragment : Fragment() {
             android.util.Log.d("SignUpStep2Fragment", "Saving Status: $status")
             android.util.Log.d("SignUpStep2Fragment", "Saving Bio: $bio")
 
-            val userID = FirebaseAuth.getInstance().currentUser?.uid
+            showLoader()
+            sharedViewModel.setUsername(username)
+            sharedViewModel.setStatus(status)
+            sharedViewModel.setBio(bio)
+            sharedViewModel.userProfileImage(userProfileImage)
 
-            android.util.Log.d("SignUpStep2Fragment", "UserID: $userID")
-
-            userID?.let {
-                userViewModel.saveUsername(it, username)
-                userViewModel.saveStatus(it, status)
-                userViewModel.saveBio(it, bio)
-            }
-
-            Toast.makeText(requireContext(), "Data saved successfully!", Toast.LENGTH_LONG).show()
-            callback(true)
+            binding.root.postDelayed({
+                hideLoader()
+                Toast.makeText(requireContext(), "Data saved successfully!", Toast.LENGTH_LONG)
+                    .show()
+                callback(true)
+            }, 2000)
         }
     }
 
@@ -108,6 +132,7 @@ class SignUpStep2Fragment : Fragment() {
                 .show()
         }
     }
+
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
@@ -138,16 +163,37 @@ class SignUpStep2Fragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 pickImageRequest -> {
-                    selectedImageUri = data.data!!
-                    handleImageUpload(selectedImageUri)
+                    userProfileImage = data.data!!
+                    handleImageUpload(userProfileImage)
                 }
 
                 cameraRequest -> {
                     val imageBitmap = data.extras?.get("data") as Bitmap
-                    val uri = Uri.parse(MediaStore.Images.Media.insertImage(requireContext().contentResolver, imageBitmap, null, null))
+                    val uri = Uri.parse(
+                        MediaStore.Images.Media.insertImage(
+                            requireContext().contentResolver,
+                            imageBitmap,
+                            null,
+                            null
+                        )
+                    )
                     handleImageUpload(uri)
                 }
             }
         }
     }
+
+    private fun showLoader() {
+        (activity as? SignUp)?.showLoader(true)
+        binding.root.isClickable = false
+        binding.root.isEnabled = false
+    }
+
+    private fun hideLoader() {
+        (activity as? SignUp)?.showLoader(false)
+        binding.root.isClickable = true
+        binding.root.isEnabled = true
+    }
+
+
 }

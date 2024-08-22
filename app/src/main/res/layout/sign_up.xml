@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signUp"
     android:layout_width="756px"
     android:layout_height="1612px"
-    android:id="@+id/signUp"
     android:layout_gravity="center"
     android:orientation="vertical"
     tools:context=".ui.main_view.GetStarted"
@@ -21,10 +21,12 @@
         android:background="@drawable/vectors_bar"
         tools:ignore="PxUsage" />
 
-    <androidx.viewpager.widget.ViewPager
+    <com.munchbot.munchbot.ui.main_view.auth.CustomViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +80,19 @@
                     android:layout_marginEnd="30px"
                     android:src="@drawable/ic_stepsignupclean" />
 
+                <ImageView
+                    android:id="@+id/checkImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/stepsignupclean"
+                    android:layout_alignBottom="@+id/stepsignupclean"
+                    android:layout_alignStart="@+id/stepsignupclean"
+                    android:layout_alignEnd="@+id/stepsignupclean"
+                    android:src="@drawable/ic_check"
+                    android:visibility="gone" />
+
                 <TextView
+                    android:id="@+id/txt1"
                     android:layout_width="100px"
                     android:layout_height="38px"
                     android:layout_alignBottom="@+id/stepsignupclean"
@@ -118,7 +132,19 @@
                     android:layout_marginEnd="30px"
                     android:src="@drawable/ic_stepsignupblur" />
 
+                <ImageView
+                    android:id="@+id/checkImage2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/stepsignupblur1"
+                    android:layout_alignBottom="@+id/stepsignupblur1"
+                    android:layout_alignStart="@+id/stepsignupblur1"
+                    android:layout_alignEnd="@+id/stepsignupblur1"
+                    android:src="@drawable/ic_check"
+                    android:visibility="gone" />
+
                 <TextView
+                    android:id="@+id/txt2"
                     android:layout_width="100px"
                     android:layout_height="38px"
                     android:layout_alignBottom="@+id/stepsignupblur1"
@@ -159,7 +185,19 @@
                     android:layout_marginEnd="30px"
                     android:src="@drawable/ic_stepsignupblur" />
 
+                <ImageView
+                    android:id="@+id/checkImage3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/stepsignupblur2"
+                    android:layout_alignBottom="@+id/stepsignupblur2"
+                    android:layout_alignStart="@+id/stepsignupblur2"
+                    android:layout_alignEnd="@+id/stepsignupblur2"
+                    android:src="@drawable/ic_check"
+                    android:visibility="gone" />
+
                 <TextView
+                    android:id="@+id/txt3"
                     android:layout_width="100px"
                     android:layout_height="38px"
                     android:layout_alignBottom="@+id/stepsignupblur2"
@@ -224,7 +262,7 @@
                 android:layout_height="45px"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="73dp"
+                android:layout_marginStart="54dp"
                 android:layout_marginBottom="40dp"
                 android:src="@drawable/pet_paw"
                 android:translationX="5dp" />
@@ -245,5 +283,18 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loader_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CB000000"
+        android:gravity="center"
+        android:paddingTop="70px"
+        android:visibility="gone">
+
+        <include layout="@layout/loader" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

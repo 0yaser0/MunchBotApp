@@ -151,17 +151,4 @@
             tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/loader_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#CB000000"
-        android:gravity="center"
-        android:paddingTop="70px"
-        android:visibility="gone">
-
-        <include layout="@layout/loader" />
-
-    </RelativeLayout>
 </RelativeLayout>

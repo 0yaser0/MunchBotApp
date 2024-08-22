@@ -39,6 +39,8 @@ class AuthViewModel : ViewModel() {
     private val handler = Handler(Looper.getMainLooper())
     private var resendButtonRunnable: Runnable? = null
 
+    val authComplete = MutableLiveData<Boolean>()
+
     enum class ButtonState {
         CLICKABLE, UNCLICKABLE
     }
@@ -62,6 +64,7 @@ class AuthViewModel : ViewModel() {
                     Log.e("SignUpStep1", "Email check failed: ${task.exception?.message}")
                 }
             }
+        authComplete.value = true
     }
 
     private fun createUser(email: String, password: String) {
@@ -72,6 +75,7 @@ class AuthViewModel : ViewModel() {
                         ?.addOnCompleteListener { verifyTask ->
                             if (verifyTask.isSuccessful) {
                                 _showVerificationAlert.value = true
+
                                 startResendButtonTimer()
                             } else {
                                 _toastMessage.value = "Failed to send verification email."
@@ -91,7 +95,7 @@ class AuthViewModel : ViewModel() {
     }
 
     private fun handleExistingEmail(email: String) {
-        auth.signInWithEmailAndPassword(email, "dummyPassword") // Use dummy password for existing email
+        auth.signInWithEmailAndPassword(email, "dummyPassword")
             .addOnCompleteListener { signInTask ->
                 if (signInTask.isSuccessful) {
                     auth.currentUser?.reload()?.addOnCompleteListener { reloadTask ->
@@ -119,7 +123,7 @@ class AuthViewModel : ViewModel() {
         resendButtonRunnable = Runnable {
             _resendButtonState.value = ButtonState.CLICKABLE
         }
-        handler.postDelayed(resendButtonRunnable!!, 60000) // 1 minute delay
+        handler.postDelayed(resendButtonRunnable!!, 60000)
     }
 
     fun resendVerificationEmail() {

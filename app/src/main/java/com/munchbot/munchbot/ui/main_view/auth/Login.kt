@@ -8,13 +8,13 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.LoginBinding
 
-class Login : AppCompatActivity() {
+class Login : MunchBotActivity() {
     private lateinit var binding: LoginBinding
     private val authViewModel: AuthViewModel by viewModels()
 

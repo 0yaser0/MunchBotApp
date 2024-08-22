@@ -70,6 +70,7 @@
             <RelativeLayout
                 android:layout_width="200px"
                 android:layout_height="200px"
+                android:layout_marginStart="30px"
                 android:layout_gravity="center">
 
                 <ImageView

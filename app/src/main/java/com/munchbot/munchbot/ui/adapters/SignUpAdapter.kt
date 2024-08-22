@@ -2,6 +2,8 @@
 
 package com.munchbot.munchbot.ui.adapters
 
+import android.content.Intent
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -11,6 +13,8 @@ import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep2Fragment
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep3Fragment
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep4Fragment
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep5Fragment
+import com.munchbot.munchbot.ui.main_view.Home
+import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
 class SignUpAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
@@ -38,7 +42,8 @@ class SignUpAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 }
 
-class BtnContinueClickListener(private val viewPager: ViewPager) {
+class BtnContinueClickListener(private val viewPager: ViewPager, private val signUp: SignUp) {
+    private val progressStates = arrayOf(0, 50, 80, 100)
 
     fun handleBtnContinueClick(fragmentNumber: Int) {
         when (fragmentNumber) {
@@ -67,6 +72,7 @@ class BtnContinueClickListener(private val viewPager: ViewPager) {
         fragment?.validateInputAndProceed { isValid ->
             if (isValid) {
                 (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 2)
+                signUp.updateProgress(progressStates[2])
             }
         }
     }
@@ -91,11 +97,27 @@ class BtnContinueClickListener(private val viewPager: ViewPager) {
         fragment?.validatePetProfileInputAndProceed { isValid ->
             if (isValid) {
                 (viewPager.adapter as? SignUpAdapter)?.navigateToFragment(viewPager, 4)
+                signUp.updateProgress(progressStates[3])
+                signUp.updateButtonText("Finish")
             }
         }
     }
 
     private fun performActionForFragment5() {
-        // Actions specific to Fragment 5
+        val fragment = (viewPager.adapter as? SignUpAdapter)?.instantiateItem(
+            viewPager,
+            4
+        ) as? SignUpStep5Fragment
+        fragment?.saveAllData()
+        fragment?.let {
+            Toast.makeText(
+                it.requireContext(),
+                "Sign-up completed successfully!",
+                Toast.LENGTH_LONG
+            ).show()
+            val intent = Intent(it.requireContext(), Home::class.java)
+            it.startActivity(intent)
+            it.requireActivity().finish()
+        }
     }
 }

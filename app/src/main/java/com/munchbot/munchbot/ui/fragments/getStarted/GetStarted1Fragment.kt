@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
-import com.munchbot.munchbot.ui.main_view.GetStarted
+import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.AnimationUtils.Companion.startJumpingAnimation
-import com.munchbot.munchbot.databinding.GetStarted1Binding
 import com.munchbot.munchbot.Utils.StatusBarUtils
+import com.munchbot.munchbot.databinding.GetStarted1Binding
+import com.munchbot.munchbot.ui.main_view.GetStarted
 
-class GetStarted1Fragment : Fragment() {
+class GetStarted1Fragment : MunchBotFragments() {
     private var _binding: GetStarted1Binding? = null
     private val binding get() = _binding!!
 

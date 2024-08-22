@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +16,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.firebase.firestore.FirebaseFirestore
+import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
@@ -24,12 +28,12 @@ import com.munchbot.munchbot.ui.main_view.auth.Login
 import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
 @Suppress("DEPRECATION")
-class SignUpStep1Fragment : Fragment() {
+class SignUpStep1Fragment : MunchBotFragments() {
     private var _binding: SignUp1Binding? = null
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
-
     private var verificationDialog: AlertDialog? = null
+    private lateinit var signUp: SignUp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,16 +49,14 @@ class SignUpStep1Fragment : Fragment() {
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
         SetupUI.setupUI(binding.root)
 
+        signUp = requireActivity() as SignUp
+
         binding.passwordEditText.togglePasswordVisibility(binding.passwordToggle)
         binding.confirmPasswordEditText.togglePasswordVisibility(binding.ConfirmPasswordToggle)
 
-        binding.signUp.setOnClickListener {
-            signUpValidate()
-        }
-
         authViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
             message?.let {
-                binding.loaderLayout.visibility = View.GONE
+                hideLoader()
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
             }
         }
@@ -67,7 +69,7 @@ class SignUpStep1Fragment : Fragment() {
 
         authViewModel.authError.observe(viewLifecycleOwner) { error ->
             error?.let {
-                binding.loaderLayout.visibility = View.GONE
+                hideLoader()
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
             }
         }
@@ -77,6 +79,16 @@ class SignUpStep1Fragment : Fragment() {
                 showVerificationAlertDialog()
             }
         }
+
+        binding.termsCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                @Suppress("DEPRECATION")
+                binding.termsCheckBox.setTextColor(resources.getColor(R.color.p))
+            } else {
+                @Suppress("DEPRECATION")
+                binding.termsCheckBox.setTextColor(resources.getColor(R.color.red))
+            }
+        }
     }
 
     fun signUpValidate() {
@@ -84,10 +96,24 @@ class SignUpStep1Fragment : Fragment() {
         val password = binding.passwordEditText.text.toString()
         val confirmPassword = binding.confirmPasswordEditText.text.toString()
         val termsAccepted = binding.termsCheckBox.isChecked
+
         if (validateInput(email, password, confirmPassword, termsAccepted)) {
+            showLoader()
             authViewModel.signUp(email, password)
+            saveEmailForValidation(email)
         }
-        binding.loaderLayout.visibility = View.VISIBLE
+    }
+
+    private fun showLoader() {
+        (activity as? SignUp)?.showLoader(true)
+        binding.root.isClickable = false
+        binding.root.isEnabled = false
+    }
+
+    private fun hideLoader() {
+        (activity as? SignUp)?.showLoader(false)
+        binding.root.isClickable = true
+        binding.root.isEnabled = true
     }
 
     private fun redirectToLoginPage() {
@@ -99,6 +125,8 @@ class SignUpStep1Fragment : Fragment() {
             R.animator.slide_out_right
         )
     }
+
+    private var isTermsAccepted = false
 
     private fun validateInput(
         email: String,
@@ -126,7 +154,6 @@ class SignUpStep1Fragment : Fragment() {
         }
 
         if (!termsAccepted) {
-            binding.loaderLayout.visibility = View.GONE
             @Suppress("DEPRECATION")
             binding.termsCheckBox.setTextColor(resources.getColor(R.color.red))
             Toast.makeText(
@@ -135,6 +162,10 @@ class SignUpStep1Fragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()
             isValid = false
+        } else {
+            @Suppress("DEPRECATION")
+            binding.termsCheckBox.setTextColor(resources.getColor(R.color.p))
+            isTermsAccepted = true
         }
 
         return isValid
@@ -187,7 +218,10 @@ class SignUpStep1Fragment : Fragment() {
                                 "Account created successfully!",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            hideLoader()
                             it.adapter.navigateToFragment(it.viewPager, 1)
+                            val progressStates = arrayOf(0, 50, 80, 100)
+                            signUp.updateProgress(progressStates[1])
                         }
                     } else {
                         Toast.makeText(
@@ -214,7 +248,6 @@ class SignUpStep1Fragment : Fragment() {
                 )
             }
         }
-
     }
 
     private fun startResendButtonTimer(resendButton: Button) {
@@ -235,11 +268,60 @@ class SignUpStep1Fragment : Fragment() {
         }.start()
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
         verificationDialog?.dismiss()
         verificationDialog = null
     }
+
+    fun saveEmailForValidation(email: String) {
+        val emailData = hashMapOf(
+            "email" to email,
+            "timestamp" to System.currentTimeMillis(),
+            "validated" to false
+        )
+
+        FirebaseFirestore.getInstance().collection("pendingEmails")
+            .add(emailData)
+            .addOnSuccessListener { documentReference ->
+                Log.d("SignUp", "Email saved for validation with ID: ${documentReference.id}")
+                scheduleEmailDeletion(documentReference.id)
+            }
+            .addOnFailureListener { e ->
+                Log.w("SignUp", "Error adding email for validation", e)
+            }
+    }
+
+    private fun scheduleEmailDeletion(documentId: String) {
+        val handler = Handler(Looper.getMainLooper())
+        val runnable = Runnable {
+            deleteEmailIfNotValidated(documentId)
+        }
+        //  1 hour katsawi (3600000 milliseconds)
+        handler.postDelayed(runnable, 300000)
+    }
+
+    private fun deleteEmailIfNotValidated(documentId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val documentRef = db.collection("pendingEmails").document(documentId)
+
+        documentRef.get().addOnSuccessListener { document ->
+            if (document.exists()) {
+                val validated = document.getBoolean("validated") ?: false
+                if (!validated) {
+                    documentRef.delete()
+                        .addOnSuccessListener {
+                            Log.d("SignUp", "Expired email deleted successfully")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("SignUp", "Error deleting expired email", e)
+                        }
+                }
+            }
+        }.addOnFailureListener { e ->
+            Log.w("SignUp", "Error fetching email for deletion", e)
+        }
+    }
+
 }

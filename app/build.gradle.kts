@@ -87,6 +87,9 @@ dependencies {
     implementation(libs.androidx.media3.common)
 
     implementation (libs.glide)
+    implementation(libs.filament.android)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.places)
     annotationProcessor (libs.compiler)
 
     testImplementation(libs.junit)

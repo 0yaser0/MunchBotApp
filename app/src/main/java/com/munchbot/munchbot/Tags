@@ -13,7 +13,7 @@ Our MVVM of auth :
 │   │   │   ├── model
 │   │   │   │   └── com.munchbot.munchbot.User.kt (New data class for com.munchbot.munchbot.User)
 │   │   │   ├── repository
-│   │   │   │   └── DataRepository.kt (New Repository for user data)
+│   │   │   │   └── SignUpDataRepository.kt (New Repository for user data)
 │   │   │   └── remote
 │   │   │       └── FirebaseDataSource.kt (New Data Source for Firebase operations)
 │   │   └── utils

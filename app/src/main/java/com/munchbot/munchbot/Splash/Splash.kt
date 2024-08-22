@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
-import com.munchbot.munchbot.ui.main_view.GetStarted
+import androidx.core.content.ContextCompat
+import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
+import com.munchbot.munchbot.ui.main_view.GetStarted
 
-class Splash : AppCompatActivity() {
+class Splash : MunchBotActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

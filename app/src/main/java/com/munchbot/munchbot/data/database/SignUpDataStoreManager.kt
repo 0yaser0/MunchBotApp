@@ -14,7 +14,7 @@ import java.io.ByteArrayOutputStream
 import javax.inject.Singleton
 
 @Singleton
-class DataStoreManager(private val context: Context) {
+class SignUpDataStoreManager(private val context: Context) {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_prefs")
     private val dataStore = context.dataStore

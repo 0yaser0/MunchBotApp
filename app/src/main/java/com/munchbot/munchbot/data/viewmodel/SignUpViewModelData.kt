@@ -2,13 +2,15 @@ package com.munchbot.munchbot.data.viewmodel
 
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.munchbot.munchbot.data.repository.DataRepository
+import com.munchbot.munchbot.data.repository.SignUpDataRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class MyViewModelData(private val repository: DataRepository) : ViewModel() {
+class SignUpViewModelData(private val repository: SignUpDataRepository) : ViewModel() {
 
     fun getUsername(userID: String): Flow<String?> = repository.getUsername(userID)
     fun getStatus(userID: String): Flow<String?> = repository.getStatus(userID)
@@ -94,4 +96,92 @@ class MyViewModelData(private val repository: DataRepository) : ViewModel() {
             repository.savePetProfileImage(userID, uri)
         }
     }
+}
+
+class SignUpSharedViewModel : ViewModel() {
+
+    private val _username = MutableLiveData<String>()
+    val username: LiveData<String> get() = _username
+
+    private val _status = MutableLiveData<String>()
+    val status: LiveData<String> get() = _status
+
+    private val _bio = MutableLiveData<String>()
+    val bio: LiveData<String> get() = _bio
+
+    private val _userProfileImage = MutableLiveData<Uri>()
+    val userProfileImage: LiveData<Uri> get() = _userProfileImage
+
+    private val _petType = MutableLiveData<String>()
+    val petType: LiveData<String> get() = _petType
+
+    private val _petName = MutableLiveData<String>()
+    val petName: LiveData<String> get() = _petName
+
+    private val _petGender = MutableLiveData<String>()
+    val petGender: LiveData<String> get() = _petGender
+
+    private val _petWeight = MutableLiveData<String>()
+    val petWeight: LiveData<String> get() = _petWeight
+
+    private val _petBreed = MutableLiveData<String>()
+    val petBreed: LiveData<String> get() = _petBreed
+
+    private val _petDateOfBirth = MutableLiveData<String>()
+    val petDateOfBirth: LiveData<String> get() = _petDateOfBirth
+
+    private val _petHeight = MutableLiveData<String>()
+    val petHeight: LiveData<String> get() = _petHeight
+
+    private val _petImageProfile = MutableLiveData<Uri>()
+    val petImageProfile: LiveData<Uri> get() = _petImageProfile
+
+    fun setUsername(username: String) {
+        _username.value = username
+    }
+
+    fun setStatus(status: String) {
+        _status.value = status
+    }
+
+    fun setBio(bio: String) {
+        _bio.value = bio
+    }
+
+    fun userProfileImage(uri: Uri) {
+        _userProfileImage.value = uri
+    }
+
+    fun setPetType(petType: String) {
+        _petType.value = petType
+    }
+
+    fun savePetName(name: String) {
+        _petName.value = name
+    }
+
+    fun savePetGender(gender: String) {
+        _petGender.value = gender
+    }
+
+    fun savePetWeight(weight: String) {
+        _petWeight.value = weight
+    }
+
+    fun savePetBreed(breed: String) {
+        _petBreed.value = breed
+    }
+
+    fun savePetDateOfBirth(dateOfBirth: String) {
+        _petDateOfBirth.value = dateOfBirth
+    }
+
+    fun savePetHeight(height: String) {
+        _petHeight.value = height
+    }
+
+    fun savePetImageProfile(imageUri: Uri) {
+        _petImageProfile.value = imageUri
+    }
+
 }

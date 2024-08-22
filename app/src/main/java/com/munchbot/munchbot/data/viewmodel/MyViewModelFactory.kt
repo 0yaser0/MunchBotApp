@@ -2,13 +2,13 @@ package com.munchbot.munchbot.data.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.munchbot.munchbot.data.repository.DataRepository
+import com.munchbot.munchbot.data.repository.SignUpDataRepository
 
-class MyViewModelDataFactory(private val repository: DataRepository) : ViewModelProvider.Factory {
+class MyViewModelDataFactory(private val repository: SignUpDataRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MyViewModelData::class.java)) {
+        if (modelClass.isAssignableFrom(SignUpViewModelData::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MyViewModelData(repository) as T
+            return SignUpViewModelData(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

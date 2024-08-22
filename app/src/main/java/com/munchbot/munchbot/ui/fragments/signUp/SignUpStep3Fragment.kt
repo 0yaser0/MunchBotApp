@@ -7,32 +7,37 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import com.google.firebase.auth.FirebaseAuth
+import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.DataStoreManager
-import com.munchbot.munchbot.data.repository.DataRepository
-import com.munchbot.munchbot.data.viewmodel.MyViewModelData
+import com.munchbot.munchbot.data.database.SignUpDataStoreManager
+import com.munchbot.munchbot.data.repository.SignUpDataRepository
 import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
+import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
+import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
 import com.munchbot.munchbot.databinding.SignUp3Binding
 import com.munchbot.munchbot.ui.adapters.ImageAdapterChose
+import com.munchbot.munchbot.ui.adapters.SignUpAdapter
+import com.munchbot.munchbot.ui.main_view.auth.SignUp
 import kotlin.math.abs
 
-class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
+class SignUpStep3Fragment : MunchBotFragments(), ImageAdapterChose.OnImageClickListener,
     AdapterView.OnItemSelectedListener {
 
-    private lateinit var petViewModel: MyViewModelData
+    private lateinit var petViewModel: SignUpViewModelData
+    private lateinit var sharedViewModel: SignUpSharedViewModel
     private lateinit var binding: SignUp3Binding
     private lateinit var viewPager: ViewPager2
-    private lateinit var adapter: ImageAdapterChose
+    private lateinit var adapterImage: ImageAdapterChose
     private var selectedPosition = -1
     private lateinit var spinner: Spinner
     var selectedSpinnerValue: String? = null
     var selectedImageValue: String? = null
+    private lateinit var adapter: SignUpAdapter
+    private lateinit var signUp: SignUp
 
     private val images = listOf(
         R.drawable.horse,
@@ -53,9 +58,10 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
     }
 
     private fun setupViewModel() {
-        val repository = DataRepository(DataStoreManager(requireContext()))
+        val repository = SignUpDataRepository(SignUpDataStoreManager(requireContext()))
         val factory = MyViewModelDataFactory(repository)
-        petViewModel = ViewModelProvider(this, factory)[MyViewModelData::class.java]
+        petViewModel = ViewModelProvider(this, factory)[SignUpViewModelData::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,6 +74,10 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
 
         setupViewPager()
         setupSpinner()
+
+        signUp = activity as SignUp
+        adapter = signUp.adapter
+
     }
 
     fun saveSelectedPetType() {
@@ -78,16 +88,18 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
             return
         }
 
-        val userID = FirebaseAuth.getInstance().currentUser?.uid
-        userID?.let {
-            petViewModel.savePetType(it, selectedPetType)
-            android.util.Log.d("SignUpStep3Fragment", "Saved Pet Type: $selectedPetType for User: $userID")
-        }
+        showLoader()
+            sharedViewModel.setPetType(selectedPetType)
+            android.util.Log.d("SignUpStep3Fragment", "Saved Pet Type: $selectedPetType ")
+
+            binding.root.postDelayed({
+                hideLoader()
+            }, 2000)
     }
 
     private fun setupViewPager() {
-        adapter = ImageAdapterChose(images, this)
-        viewPager.adapter = adapter
+        adapterImage = ImageAdapterChose(images, this)
+        viewPager.adapter = adapterImage
         viewPager.offscreenPageLimit = 1
 
         val startPosition = images.size * 1000
@@ -108,7 +120,7 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
     override fun onImageClick(position: Int) {
         if (selectedPosition != position) {
             selectedPosition = position
-            adapter.setSelectedPosition(selectedPosition)
+            adapterImage.setSelectedPosition(selectedPosition)
 
             selectedImageValue = when (images[position]) {
                 R.drawable.horse -> "Horse"
@@ -136,7 +148,7 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (position != 0) {
-            adapter.setSelectedPosition(-1)
+            adapterImage.setSelectedPosition(-1)
             selectedPosition = -1
 
             selectedSpinnerValue = parent?.getItemAtPosition(position).toString()
@@ -154,4 +166,17 @@ class SignUpStep3Fragment : Fragment(), ImageAdapterChose.OnImageClickListener,
     private fun Int.dpToPx(): Int {
         return (this * resources.displayMetrics.density).toInt()
     }
+
+    private fun showLoader() {
+        (activity as? SignUp)?.showLoader(true)
+        binding.root.isClickable = false
+        binding.root.isEnabled = false
+    }
+
+    private fun hideLoader() {
+        (activity as? SignUp)?.showLoader(false)
+        binding.root.isClickable = true
+        binding.root.isEnabled = true
+    }
+
 }
