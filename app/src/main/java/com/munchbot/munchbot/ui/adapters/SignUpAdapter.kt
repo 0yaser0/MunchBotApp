@@ -13,7 +13,7 @@ import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep2Fragment
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep3Fragment
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep4Fragment
 import com.munchbot.munchbot.ui.fragments.signUp.SignUpStep5Fragment
-import com.munchbot.munchbot.ui.main_view.Home
+import com.munchbot.munchbot.ui.main_view.auth.Login
 import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
 class SignUpAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -115,9 +115,18 @@ class BtnContinueClickListener(private val viewPager: ViewPager, private val sig
                 "Sign-up completed successfully!",
                 Toast.LENGTH_LONG
             ).show()
-            val intent = Intent(it.requireContext(), Home::class.java)
+            val intent = Intent(it.requireContext(), Login::class.java)
             it.startActivity(intent)
             it.requireActivity().finish()
+            it.requireActivity().overridePendingTransition(
+                com.munchbot.munchbot.R.animator.slide_in_left,
+                com.munchbot.munchbot.R.animator.slide_out_right
+            )
+            Toast.makeText(
+                it.requireContext(),
+                "Now Login !",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }

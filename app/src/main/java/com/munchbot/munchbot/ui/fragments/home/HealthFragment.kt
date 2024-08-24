@@ -9,7 +9,7 @@ import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.HomeBinding
 
-class Home1Fragment : MunchBotFragments() {
+class HealthFragment : MunchBotFragments() {
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
 

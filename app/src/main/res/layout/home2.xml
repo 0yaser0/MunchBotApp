@@ -16,115 +16,25 @@
         tools:context=".ui.main_view.auth.Login"
         tools:ignore="PxUsage,UselessParent,ContentDescription">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/actionbar_top">
-
-            <ImageView
-                android:id="@+id/action_bar_setting"
-                android:layout_width="50px"
-                android:layout_height="50px"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="30px"
-                android:background="@drawable/ic_settings" />
-
-            <TextView
-                android:id="@+id/munchbot"
-                android:layout_width="246px"
-                android:layout_height="80px"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50px"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/app_name"
-                android:textAppearance="@style/munchbotTitleActionBar" />
-
-            <ImageView
-                android:id="@+id/action_bar_profile"
-                android:layout_width="90px"
-                android:layout_height="90px"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20px"
-                android:background="@drawable/ic_cadre_pic"
-                android:src="@drawable/dog" />
-
-            <ImageView
-                android:id="@+id/action_bar_notifications"
-                android:layout_width="50px"
-                android:layout_height="50px"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20px"
-                android:layout_toStartOf="@+id/action_bar_profile"
-                android:background="@drawable/ic_notifications" />
-
-        </RelativeLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="115px"
-            app:cardCornerRadius="250px"
-            app:cardElevation="50px">
-
-            <ImageView
-                android:id="@+id/PetImageHome"
-                android:layout_width="450px"
-                android:layout_height="450px"
-                android:background="@drawable/ic_cadre_pic"
-                android:src="@drawable/dog" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/pet_name"
-            android:layout_width="756px"
-            android:layout_height="106px"
-            android:layout_marginTop="70px"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="@string/pet_name"
-            android:textAppearance="@style/title_48px_blue" />
-
-        <TextView
-            android:id="@+id/hello_user_"
-            android:layout_width="637px"
-            android:layout_height="270px"
-            android:text="@string/hello_user_"
-            android:textAppearance="@style/para_32px_gray"
-            android:lineSpacingExtra="12px"
-            android:layout_marginTop="30px"
-            android:translationY="-6.25px"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal|top"/>
-
-        <Button
-            android:id="@+id/bluetooth"
-            android:layout_width="473.3px"
-            android:layout_height="88px"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30px"
-            android:background="@drawable/ic_btn_getstarted"
-            android:text="@string/bluetooth"
-            android:textAppearance="@style/btn_36px_white"
-            tools:ignore="PxUsage,TouchTargetSizeCheck" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80px">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigation"
+            <view
+                class="android.widget.LinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="150px"
+                android:layout_height="200px"
+                tools:ignore="PxUsage" />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="PxUsage">
+
+            <view
+                class="android.widget.LinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
                 android:layout_alignParentBottom="true"
-                app:itemTextAppearanceActive="@style/txt_24px_blue"
-                android:background="@drawable/actionbar_buttom"
-                app:menu="@menu/nav_bar_buttom"
-                app:itemIconTint="@color/white"
-                app:itemTextColor="@color/white" />
+                tools:ignore="PxUsage" />
 
         </RelativeLayout>
 

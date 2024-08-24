@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -41,6 +42,7 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        dataBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -91,6 +93,10 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.places)
     annotationProcessor (libs.compiler)
+
+    implementation (libs.androidx.databinding.runtime)
+    implementation(libs.animated.navigation.bar)
+    implementation (libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

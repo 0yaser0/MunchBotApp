@@ -4,21 +4,29 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_nav_home"
+        android:orderInCategory="1"
+        android:titleTextAppearance="@style/btn_36px_white"
         android:title="@string/home"/>
 
     <item
         android:id="@+id/nav_planner"
         android:icon="@drawable/ic_nav_planner"
+        android:orderInCategory="2"
+        android:titleTextAppearance="@style/btn_36px_white"
         android:title="@string/planner"/>
 
     <item
         android:id="@+id/nav_vet"
         android:icon="@drawable/ic_nav_vet"
+        android:orderInCategory="3"
+        android:titleTextAppearance="@style/btn_36px_white"
         android:title="@string/vet"/>
 
     <item
         android:id="@+id/nav_health"
         android:icon="@drawable/ic_nav_health"
+        android:orderInCategory="4"
+        android:titleTextAppearance="@style/btn_36px_white"
         android:title="@string/health"/>
 
 </menu>

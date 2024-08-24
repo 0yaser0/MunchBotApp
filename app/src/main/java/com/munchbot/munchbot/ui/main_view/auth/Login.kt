@@ -8,15 +8,19 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.LoginBinding
+import com.munchbot.munchbot.ui.main_view.Home
 
 class Login : MunchBotActivity() {
     private lateinit var binding: LoginBinding
-    private val authViewModel: AuthViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +40,6 @@ class Login : MunchBotActivity() {
         }
 
         binding.doesnTHav.setOnClickListener {
-            binding.loaderLayout.visibility = View.GONE
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
             @Suppress("DEPRECATION")
@@ -45,8 +48,10 @@ class Login : MunchBotActivity() {
 
         authViewModel.user.observe(this) { user ->
             if (user != null) {
-                binding.loaderLayout.visibility = View.GONE
-                Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Home::class.java)
+                startActivity(intent)
+                @Suppress("DEPRECATION")
+                overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
             }
         }
 
@@ -54,6 +59,23 @@ class Login : MunchBotActivity() {
             error?.let {
                 binding.loaderLayout.visibility = View.GONE
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val sharedPreferences = getSharedPreferences("MunchBotPrefs", MODE_PRIVATE)
+        val loggedInUser = sharedPreferences.getString("LoggedInUser", null)
+
+        if (loggedInUser != null) {
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
+        }
+
+        authViewModel.authComplete.observe(this) { isComplete ->
+            if (isComplete) {
+                binding.loaderLayout.visibility = View.GONE
             }
         }
     }

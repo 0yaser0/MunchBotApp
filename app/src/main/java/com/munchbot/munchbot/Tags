@@ -22,17 +22,38 @@ Our MVVM of auth :
 
 
 all function used for the Authentication :
-- checkCurrentUser()
+- checkCurrentUser() ✔
 - getUserProfile()
 - getProviderData()
 - updateProfile()
 - updateEmail()
 - updatePassword()
-- sendEmailVerification()
+- sendEmailVerification() ✔
 - sendPasswordReset()
-- signOut()
-- updateUI()
-- createAccount()
-- signIn()
-- getIdToken()
+- signOut() ✔
+- updateUI() ✔
+- createAccount() ✔
+- signIn() ✔
+- getIdToken() ✔
 - reauthenticate()
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180px"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <com.qamar.curvedbottomnaviagtion.CurvedBottomNavigation
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cbn_background="@color/black"
+            app:cbn_curve_radius="180px"
+            app:cbn_fabColor="@color/circle_color_selected"
+            app:cbn_height="180px"
+            app:cbn_iconColor="@color/white"
+            app:cbn_icon_size="40px"
+            app:cbn_selectedIconColor="@color/white"
+            app:cbn_selected_icon_size="50px"
+            />
+    </LinearLayout>

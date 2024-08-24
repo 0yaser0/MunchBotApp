@@ -1,9 +1,11 @@
 [versions]
 agp = "8.5.2"
+animatedNavigationBar = "1.0.0"
 circleindicator = "2.1.6"
 compiler = "4.12.0"
+databindingRuntime = "8.5.2"
 datastorePreferences = "1.1.1"
-firebaseBom = "33.1.2"
+firebaseBom = "33.2.0"
 firebaseUiAuth = "8.0.2"
 glide = "4.12.0"
 kotlin = "1.9.0"
@@ -13,7 +15,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
-composeBom = "2024.06.00"
+composeBom = "2024.08.00"
 constraintlayout = "2.1.4"
 appcompat = "1.7.0"
 material = "1.12.0"
@@ -24,18 +26,22 @@ lifecycleViewmodelKtx = "2.8.4"
 firebaseDatabaseKtx = "21.0.0"
 firebaseAuthKtx = "23.0.0"
 animationGraphicsAndroid = "1.6.8"
+navigationCompose = "2.7.7"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 fragmentKtx = "1.8.2"
 datastorePreferencesCoreJvm = "1.1.1"
 media3Common = "1.4.0"
 filamentAndroid = "1.17.1"
-firebaseFirestoreKtx = "25.0.0"
+firebaseFirestoreKtx = "25.1.0"
 places = "3.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-databinding-runtime = { module = "androidx.databinding:databinding-runtime", version.ref = "databindingRuntime" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+animated-navigation-bar = { module = "com.exyte:animated-navigation-bar", version.ref = "animatedNavigationBar" }
 circleindicator = { module = "me.relex:circleindicator", version.ref = "circleindicator" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }

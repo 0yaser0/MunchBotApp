@@ -1,11 +1,13 @@
 package com.munchbot.munchbot.ui.main_view.auth
 
+import android.app.Application
+import android.content.Context.MODE_PRIVATE
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -13,7 +15,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 
 @Suppress("DEPRECATION")
-class AuthViewModel : ViewModel() {
+class AuthViewModel(application: Application) : AndroidViewModel(application) {
+    private val appContext = application.applicationContext
     private val auth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
     }
@@ -154,11 +157,12 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-
-
     fun signOut() {
         auth.signOut()
         _user.value = null
+
+        val sharedPreferences = appContext.getSharedPreferences("MunchBotPrefs", MODE_PRIVATE)
+        sharedPreferences.edit().remove("LoggedInUser").apply()
     }
 
     fun logIn(email: String, password: String) {
@@ -168,6 +172,7 @@ class AuthViewModel : ViewModel() {
                     val user = auth.currentUser
                     if (user != null && user.isEmailVerified) {
                         _user.value = user
+                        saveLoginState(email)
                     } else {
                         _authError.value = "Please verify your email address."
                         auth.signOut()
@@ -176,13 +181,19 @@ class AuthViewModel : ViewModel() {
                     try {
                         throw task.exception!!
                     } catch (e: FirebaseAuthInvalidUserException) {
-                        _authError.value = "Invalid email Or password."
+                        _authError.value = "Invalid email or password."
                     } catch (e: FirebaseAuthInvalidCredentialsException) {
-                        _authError.value = "Invalid email Or password."
+                        _authError.value = "Invalid email or password."
                     } catch (e: Exception) {
                         _authError.value = "Login failed. Please try again."
                     }
                 }
             }
     }
+
+    private fun saveLoginState(email: String) {
+        val sharedPreferences = appContext.getSharedPreferences("MunchBotPrefs", MODE_PRIVATE)
+        sharedPreferences.edit().putString("LoggedInUser", email).apply()
+    }
+
 }

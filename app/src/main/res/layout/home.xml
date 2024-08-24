@@ -8,12 +8,50 @@
     tools:context=".ui.main_view.Home"
     tools:ignore="PxUsage">
 
-    <ImageView
-        android:id="@+id/myImageView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="271px"
-        android:background="@drawable/vectors_bar"
-        tools:ignore="PxUsage" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/actionbar_top">
+
+        <ImageView
+            android:id="@+id/action_bar_setting"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30px"
+            android:background="@drawable/ic_settings" />
+
+        <TextView
+            android:id="@+id/munchbot"
+            android:layout_width="246px"
+            android:layout_height="80px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50px"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/app_name"
+            android:textAppearance="@style/munchbotTitleActionBar" />
+
+        <ImageView
+            android:id="@+id/action_bar_profile"
+            android:layout_width="90px"
+            android:layout_height="90px"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20px"
+            android:background="@drawable/ic_cadre_pic"
+            android:src="@drawable/dog" />
+
+        <ImageView
+            android:id="@+id/action_bar_notifications"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20px"
+            android:layout_toStartOf="@+id/action_bar_profile"
+            android:background="@drawable/ic_notifications" />
+
+    </RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
@@ -27,21 +65,5 @@
         android:layout_height="match_parent" />
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80px">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="150px"
-            android:layout_alignParentBottom="true"
-            app:itemTextAppearanceActive="@style/txt_24px_blue"
-            android:background="@drawable/actionbar_buttom"
-            app:menu="@menu/nav_bar_buttom"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white" />
-
-    </RelativeLayout>
 </RelativeLayout>
