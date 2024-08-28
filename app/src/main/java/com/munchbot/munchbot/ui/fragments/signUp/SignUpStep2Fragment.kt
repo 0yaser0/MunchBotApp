@@ -15,18 +15,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.SignUpDataStoreManager
-import com.munchbot.munchbot.data.repository.SignUpDataRepository
-import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
+import com.munchbot.munchbot.data.database.getUserId
 import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
-import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
 import com.munchbot.munchbot.databinding.SignUp2Binding
 import com.munchbot.munchbot.ui.adapters.SignUpAdapter
 import com.munchbot.munchbot.ui.main_view.auth.SignUp
+import java.util.UUID
 
 @Suppress("DEPRECATION")
 class SignUpStep2Fragment : MunchBotFragments() {
@@ -34,7 +34,6 @@ class SignUpStep2Fragment : MunchBotFragments() {
     private val pickImageRequest = 1
     private val cameraRequest = 2
     private lateinit var userProfileImage: Uri
-    private lateinit var userViewModel: SignUpViewModelData
     private lateinit var sharedViewModel: SignUpSharedViewModel
     private lateinit var adapter: SignUpAdapter
     private lateinit var signUp: SignUp
@@ -50,7 +49,7 @@ class SignUpStep2Fragment : MunchBotFragments() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.secondColor)
         SetupUI.setupUI(binding.root)
 
         setupViewModel()
@@ -62,9 +61,6 @@ class SignUpStep2Fragment : MunchBotFragments() {
     }
 
     private fun setupViewModel() {
-        val repository = SignUpDataRepository(SignUpDataStoreManager(requireContext()))
-        val factory = MyViewModelDataFactory(repository)
-        userViewModel = ViewModelProvider(this, factory)[SignUpViewModelData::class.java]
         sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
     }
 
@@ -106,7 +102,7 @@ class SignUpStep2Fragment : MunchBotFragments() {
             sharedViewModel.setUsername(username)
             sharedViewModel.setStatus(status)
             sharedViewModel.setBio(bio)
-            sharedViewModel.userProfileImage(userProfileImage)
+            sharedViewModel.setUserProfileImage(userProfileImage)
 
             binding.root.postDelayed({
                 hideLoader()
@@ -155,6 +151,37 @@ class SignUpStep2Fragment : MunchBotFragments() {
             .load(imageUri)
             .apply(requestOptions)
             .into(binding.camera)
+
+        uploadImageToFirebase(imageUri)
+    }
+
+    private fun uploadImageToFirebase(imageUri: Uri) {
+        val storageReference = FirebaseStorage.getInstance().reference
+            .child("userProfileImages/${UUID.randomUUID()}")
+
+        storageReference.putFile(imageUri)
+            .addOnSuccessListener {
+                storageReference.downloadUrl.addOnSuccessListener { uri ->
+                    saveImageUrlToDatabase(uri.toString())
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(requireContext(), "Failed to upload image: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun saveImageUrlToDatabase(imageUrl: String) {
+        val userId = getUserId()
+        val databaseReference = FirebaseDatabase.getInstance().getReference("users/$userId")
+        val userMap = mapOf("profileImageUrl" to imageUrl)
+
+        databaseReference.updateChildren(userMap)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Image URL saved to database", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(requireContext(), "Failed to save image URL: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     @Deprecated("Deprecated in Java")
@@ -194,6 +221,4 @@ class SignUpStep2Fragment : MunchBotFragments() {
         binding.root.isClickable = true
         binding.root.isEnabled = true
     }
-
-
 }

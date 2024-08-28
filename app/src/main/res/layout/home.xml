@@ -4,11 +4,13 @@
     android:layout_width="756px"
     android:layout_height="1612px"
     android:layout_gravity="center"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.main_view.Home"
     tools:ignore="PxUsage">
 
     <RelativeLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/actionbar_top">
@@ -19,7 +21,7 @@
             android:layout_height="50px"
             android:layout_centerVertical="true"
             android:layout_marginStart="30px"
-            android:background="@drawable/ic_settings" />
+            android:src="@drawable/ic_settings" />
 
         <TextView
             android:id="@+id/munchbot"
@@ -49,21 +51,25 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="20px"
             android:layout_toStartOf="@+id/action_bar_profile"
-            android:background="@drawable/ic_notifications" />
+            android:src="@drawable/ic_notifications" />
 
     </RelativeLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/basic" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="180px"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

@@ -1,0 +1,132 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:layout_gravity="center"
+    tools:ignore="PxUsage">
+
+    <view
+        android:id="@+id/actionBarTop"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBarTop"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Pet Profile Image -->
+        <ImageView
+            android:id="@+id/ivPetProfileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_cadre_pic"
+            android:scaleType="centerCrop" />
+
+        <!-- Pet Name -->
+        <TextView
+            android:id="@+id/tvPetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            tools:text="Bella" />
+
+        <!-- Pet Type -->
+        <TextView
+            android:id="@+id/tvPetType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="Dog" />
+
+        <!-- Pet Breed -->
+        <TextView
+            android:id="@+id/tvPetBreed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="Golden Retriever" />
+
+        <!-- Pet Gender -->
+        <TextView
+            android:id="@+id/tvPetGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="Female" />
+
+        <!-- Pet Weight -->
+        <TextView
+            android:id="@+id/tvPetWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="25 kg" />
+
+        <!-- Pet Height -->
+        <TextView
+            android:id="@+id/tvPetHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="50 cm" />
+
+        <!-- Pet Date of Birth -->
+        <TextView
+            android:id="@+id/tvPetDateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="01/01/2020" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="name" />
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="id" />
+
+    </LinearLayout>
+
+    <view
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentBottom="true"
+        tools:ignore="PxUsage" />
+
+</RelativeLayout>

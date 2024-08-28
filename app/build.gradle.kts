@@ -92,6 +92,9 @@ dependencies {
     implementation(libs.filament.android)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.places)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.identity.jvm)
     annotationProcessor (libs.compiler)
 
     implementation (libs.androidx.databinding.runtime)

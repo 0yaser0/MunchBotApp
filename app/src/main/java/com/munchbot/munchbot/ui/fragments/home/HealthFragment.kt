@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.databinding.HomeBinding
+import com.munchbot.munchbot.databinding.FragmentHealthBinding
 
 class HealthFragment : MunchBotFragments() {
-    private var _binding: HomeBinding? = null
+    private var _binding: FragmentHealthBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = HomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHealthBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,8 +25,6 @@ class HealthFragment : MunchBotFragments() {
         super.onCreate(savedInstanceState)
 
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.black)
-
-
 
     }
 

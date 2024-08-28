@@ -2,11 +2,13 @@ package com.munchbot.munchbot.ui.fragments.signUp
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,34 +16,39 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.SignUpDataStoreManager
-import com.munchbot.munchbot.data.repository.SignUpDataRepository
-import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
+import com.munchbot.munchbot.data.database.getPetId
+import com.munchbot.munchbot.data.database.getUserId
+import com.munchbot.munchbot.data.viewmodel.PetViewModel
 import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
-import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
+import com.munchbot.munchbot.data.viewmodel.UserViewModel
 import com.munchbot.munchbot.databinding.SignUp4Binding
 import com.munchbot.munchbot.ui.adapters.SignUpAdapter
 import com.munchbot.munchbot.ui.main_view.auth.SignUp
 import java.util.Calendar
+import java.util.UUID
 
 @Suppress("DEPRECATION")
 class SignUpStep4Fragment : MunchBotFragments() {
     private lateinit var binding: SignUp4Binding
     private val pickImageRequest = 1
     private val cameraRequest = 2
-    private lateinit var selectedImageUri: Uri
-    private lateinit var petViewModel: SignUpViewModelData
+    private var selectedImageUri: Uri? = null
     private lateinit var sharedViewModel: SignUpSharedViewModel
     private lateinit var adapter: SignUpAdapter
     private lateinit var signUp: SignUp
+    private val userViewModel: UserViewModel by viewModels()
+    private val petViewModel: PetViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +61,7 @@ class SignUpStep4Fragment : MunchBotFragments() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.secondColor)
         SetupUI.setupUI(binding.root)
 
         setupViewModel()
@@ -62,7 +69,7 @@ class SignUpStep4Fragment : MunchBotFragments() {
         signUp = activity as SignUp
         adapter = signUp.adapter
 
-        chosePetImage()
+        choosePetImage()
 
         handleErrorsCalendar()
 
@@ -71,9 +78,6 @@ class SignUpStep4Fragment : MunchBotFragments() {
     }
 
     private fun setupViewModel() {
-        val repository = SignUpDataRepository(SignUpDataStoreManager(requireContext()))
-        val factory = MyViewModelDataFactory(repository)
-        petViewModel = ViewModelProvider(this, factory)[SignUpViewModelData::class.java]
         sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
     }
 
@@ -106,25 +110,25 @@ class SignUpStep4Fragment : MunchBotFragments() {
         } else if (petHeight.isEmpty()) {
             binding.heightEditText.error = "Height cannot be empty"
             callback(false)
-        } else if (!::selectedImageUri.isInitialized) {
+        } else if (selectedImageUri == null) {
             Toast.makeText(requireContext(), "Please select a picture.", Toast.LENGTH_LONG).show()
             callback(false)
         } else {
             showLoader()
-            android.util.Log.d("PetProfileFragment", "Saving Name: $petName")
-            android.util.Log.d("PetProfileFragment", "Saving Gender: $petGender")
-            android.util.Log.d("PetProfileFragment", "Saving Weight: $petWeight")
-            android.util.Log.d("PetProfileFragment", "Saving Breed: $petBreed")
-            android.util.Log.d("PetProfileFragment", "Saving Date of Birth: $petDateOfBirth")
-            android.util.Log.d("PetProfileFragment", "Saving Height: $petHeight")
+            Log.d("PetProfileFragment", "Saving Name: $petName")
+            Log.d("PetProfileFragment", "Saving Gender: $petGender")
+            Log.d("PetProfileFragment", "Saving Weight: $petWeight")
+            Log.d("PetProfileFragment", "Saving Breed: $petBreed")
+            Log.d("PetProfileFragment", "Saving Date of Birth: $petDateOfBirth")
+            Log.d("PetProfileFragment", "Saving Height: $petHeight")
 
-            sharedViewModel.savePetName(petName)
-            sharedViewModel.savePetGender(petGender)
-            sharedViewModel.savePetWeight(petWeight)
-            sharedViewModel.savePetBreed(petBreed)
-            sharedViewModel.savePetDateOfBirth(petDateOfBirth)
-            sharedViewModel.savePetHeight(petHeight)
-            sharedViewModel.savePetImageProfile(selectedImageUri)
+            sharedViewModel.setPetName(petName)
+            sharedViewModel.setPetGender(petGender)
+            sharedViewModel.setPetWeight(petWeight)
+            sharedViewModel.setPetBreed(petBreed)
+            sharedViewModel.setPetDateOfBirth(petDateOfBirth)
+            sharedViewModel.setPetHeight(petHeight)
+            selectedImageUri?.let { sharedViewModel.setPetImageProfile(it) }
 
             binding.root.postDelayed({
                 hideLoader()
@@ -186,8 +190,6 @@ class SignUpStep4Fragment : MunchBotFragments() {
         return inputDate.after(today)
     }
 
-
-
     private fun validatePetDetails() {
         val petName = binding.nameEditText.text.toString().trim()
         val petBreed = binding.breedEditText.text.toString().trim()
@@ -208,7 +210,6 @@ class SignUpStep4Fragment : MunchBotFragments() {
             binding.breedEditText.error = null
         }
     }
-
 
     private fun choseGender() {
         val genderEditText = binding.genderEditText
@@ -275,7 +276,7 @@ class SignUpStep4Fragment : MunchBotFragments() {
         datePickerDialog.show()
     }
 
-    private fun chosePetImage() {
+    private fun choosePetImage() {
         binding.camera.setOnClickListener {
             val options = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
             AlertDialog.Builder(requireContext())
@@ -304,16 +305,61 @@ class SignUpStep4Fragment : MunchBotFragments() {
     }
 
     private fun handleImageUpload(imageUri: Uri) {
-        val requestOptions = RequestOptions()
-            .transforms(CircleCrop())
-            .placeholder(R.drawable.ic_camera)
-            .error(R.drawable.ic_error)
+        try {
+            val requestOptions = RequestOptions()
+                .transforms(CircleCrop())
+                .placeholder(R.drawable.ic_camera)
+                .error(R.drawable.ic_error)
 
-        Glide.with(this)
-            .load(imageUri)
-            .apply(requestOptions)
-            .into(binding.camera)
+            Glide.with(this)
+                .load(imageUri)
+                .apply(requestOptions)
+                .into(binding.camera)
+
+            uploadPetImageToFirebase(imageUri)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading image: ${e.message}")
+        }
     }
+
+    private fun uploadPetImageToFirebase(imageUri: Uri) {
+        val storageReference = FirebaseStorage.getInstance().reference
+            .child("petProfileImages/${UUID.randomUUID()}")
+
+        storageReference.putFile(imageUri)
+            .addOnSuccessListener {
+                storageReference.downloadUrl.addOnSuccessListener { uri ->
+                    savePetImageUrlToDatabase(uri.toString())
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(requireContext(), "Failed to upload image: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun savePetImageUrlToDatabase(imageUrl: String) {
+        val userId = getUserId()
+
+        if (userId != null) {
+            getPetId(userId) { petId ->
+                if (petId != null) {
+                    val databaseReference = FirebaseDatabase.getInstance().getReference("pets/$petId")
+                    val petMap = mapOf("profileImageUrl" to imageUrl)
+
+                    databaseReference.updateChildren(petMap)
+                        .addOnSuccessListener {
+                            Toast.makeText(requireContext(), "Pet image URL saved to database", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { exception ->
+                            Toast.makeText(requireContext(), "Failed to save pet image URL: ${exception.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to retrieve pet ID", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -322,17 +368,31 @@ class SignUpStep4Fragment : MunchBotFragments() {
             when (requestCode) {
                 pickImageRequest -> {
                     selectedImageUri = data.data!!
-                    handleImageUpload(selectedImageUri)
+                    handleImageUpload(selectedImageUri!!)
                 }
 
                 cameraRequest -> {
                     val imageBitmap = data.extras?.get("data") as Bitmap
-                    val uri = Uri.parse(MediaStore.Images.Media.insertImage(requireContext().contentResolver, imageBitmap, null, null))
+                    val uri = Uri.parse(
+                        MediaStore.Images.Media.insertImage(
+                            requireContext().contentResolver,
+                            imageBitmap,
+                            null,
+                            null
+                        )
+                    )
                     handleImageUpload(uri)
                 }
             }
         }
     }
+
+    private fun getPetIdForCurrentUser(userId: String?): String {
+        // Implement this function to retrieve the pet ID for the current user from Firebase Database
+        // Return the pet ID as a String
+        return "petIdPlaceholder" // Replace with actual implementation
+    }
+
 
     private fun showLoader() {
         (activity as? SignUp)?.showLoader(true)

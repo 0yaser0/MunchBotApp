@@ -1,40 +1,79 @@
 package com.munchbot.munchbot.ui.main_view
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
+import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.BottomNavBar
+import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
+import com.munchbot.munchbot.databinding.HomeBinding
+import com.munchbot.munchbot.ui.adapters.HomeAdapter
+import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
+import com.munchbot.munchbot.ui.main_view.auth.Login
 
-class Home : ComponentActivity() {
+class Home : MunchBotActivity() {
+    private lateinit var binding: HomeBinding
+    lateinit var viewPager: ViewPager
+    lateinit var adapter: HomeAdapter
+    private val authViewModel: AuthViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    }
+
+    private val selectedIndexState = mutableIntStateOf(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            BottomBarDemoTheme {
-                BottomNavBar()
-            }
-        }
+        binding = HomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         StatusBarUtils.setStatusBarColor(this.window, R.color.black)
-        hideSystemUI()
-    }
+        SetupUI.setupUI(binding.root)
 
-    private fun hideSystemUI() {
-        window.decorView.systemUiVisibility =
-            (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-    }
+        viewPager = binding.viewPager
+        adapter = HomeAdapter(supportFragmentManager)
+        viewPager.adapter = adapter
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            hideSystemUI()
+        binding.actionBarSetting.setOnClickListener {
+            Log.d("Home", "clicked setting: ")
+            authViewModel.signOut()
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                // No scroll
+            }
+
+            override fun onPageSelected(position: Int) {
+                selectedIndexState.intValue = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                // No scroll
+            }
+        })
+
+        binding.composeView.setContent {
+            BottomBarDemoTheme {
+                BottomNavBar(
+                    selectedIndexState = selectedIndexState,
+                    onItemSelected = { index ->
+                        viewPager.setCurrentItem(index, true)
+                    }
+                )
+            }
         }
     }
 }

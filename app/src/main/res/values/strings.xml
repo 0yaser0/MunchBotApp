@@ -25,7 +25,6 @@
     <string name="i_forgot_pa">I Forgot Password ?</string>
     <string name="log_in">Log in</string>
     <string name="please_wait">Please wait …</string>
-    <string name="sign_up"><font color="#0F2032">Sign</font> <font color="#407BFF">Up</font></string>
     <string name="survey_questions"><font color="#0F2032">Survey</font> <font color="#407BFF">Questions</font></string>
     <string name="pet_choice"><font color="#0F2032">Pet</font> <font color="#407BFF">Choice</font></string>
     <string name="create_a_ne"> Create a new account to join \nour furry community </string>
@@ -49,7 +48,7 @@
     <string name="congratulations"><font color="#0F2032">Congratulations !!</font></string>
     <string name="you_have_successfully_completed_all_the_steps_click_on_finish_to_create_your_account_and_start_your_journey_with_us">You have successfully completed all the steps. Click on <font color="#0F2032"><b>\'Finish\'</b></font> to create your account and start your journey with us.</string>
     <string name="pet_name">Pet Name</string>
-    <string name="hello_user_">Hello<font color="#0491E9"><b> User ! </b></font>, please connect your phone to the <font color="#0491E9"><b>MunchBot</b></font> device via Bluetooth to configure your settings. Once connected, you will be able to proceed with the setup process smoothly.\n</string>
+    <string name="helloUser">Hello<font color="#0491E9"><b> %1$s </b></font>, please connect your phone to the <font color="#0491E9"><b>MunchBot</b></font> device via Bluetooth to configure your settings. Once connected, you will be able to proceed with the setup process smoothly.\n</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="home">Home</string>
     <string name="planner">Planner</string>
@@ -57,4 +56,19 @@
     <string name="health">Health</string>
     <string name="usernameUser">Username</string>
     <string name="horse"><font color="#0F2032"><b>Horse</b></font></string>
+    <string name="phone_label">Phone: %s</string>
+    <string name="email_label">Email: %s</string>
+    <string name="add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape">Add a vet and ensure your pet\'s health stays in top shape!</string>
+    <string name="Take_a_look_at_how_pet_s_day_was_planned">Take a look at how %1$s\’s day was planned.</string>
+    <string name="search">Search . . .</string>
+    <string name="Today_s_Daily_Habits">Today’s Daily Habits</string>
+    <string name="Today_s_Special_Events">Today’s Special Events</string>
+    <string name="MunchBot_1">MunchBot-1</string>
+    <string name="FoodTime"><font color="#0491E9"><b>Food</b></font><font color="#0F2032"><b> Time !!</b></font></string>
+    <string name="FoodTimepara">Here you can put the Time and the Quantity of meel drops !</string>
+    <string name="DeviceName">Device Name</string>
+    <string name="save_meel">Save Meel</string>
+    <string name="This_is_Pet_s_Diary"><font color="@color/darkFirstColor">This is </font> <font color="#407BFF">Pet’s</font><font color="@color/darkFirstColor"> Diary!</font></string>
+    <string name="sign_up"><font color="@color/darkFirstColor">Sign</font> <font color="#407BFF">Up</font></string>
+    <string name="consultVet"><font color="@color/darkFirstColor">Consult a</font> <font color="#407BFF">Vet!</font></string>
 </resources>

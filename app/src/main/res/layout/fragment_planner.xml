@@ -1,0 +1,205 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:layout_gravity="center"
+    tools:ignore="PxUsage">
+
+    <view
+        android:id="@+id/topNavBar"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view"
+        android:layout_below="@+id/topNavBar"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="no"
+        android:orientation="vertical"
+        tools:ignore="PxUsage,UselessParent,ContentDescription">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:layout_margin="30px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="450px"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/This_is_Pet_s_Diary"
+                    android:layout_width="450px"
+                    android:layout_height="100px"
+                    android:gravity="center"
+                    android:text="@string/This_is_Pet_s_Diary"
+                    android:textAppearance="@style/title_48px_darkblue" />
+
+                <TextView
+                    android:id="@+id/Take_a_look_at_how_pet_s_day_was_planned"
+                    android:layout_width="450px"
+                    android:layout_height="100px"
+                    android:text="@string/Take_a_look_at_how_pet_s_day_was_planned"
+                    android:textAppearance="@style/CreateANewTextStyle" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_gravity="center"
+                android:layout_marginStart="30px">
+
+                <ImageView
+                    android:id="@+id/cadre_pic"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/circular_border" />
+
+                <ImageView
+                    android:id="@+id/petImagePlanner"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:foregroundGravity="center"
+                    android:src="@drawable/ic_camera"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="440px"
+            android:layout_margin="30px"
+            android:background="@drawable/today_s_special_events"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50px"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginTop="20px">
+
+                <TextView
+                    android:id="@+id/Today_s_Daily_Habits"
+                    android:layout_width="380px"
+                    android:layout_height="50px"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/Today_s_Daily_Habits"
+                    android:textAppearance="@style/title_36px_darkBlue" />
+
+                <ImageButton
+                    android:id="@+id/Edit_Daily_Habits"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="150px"
+                    android:src="@drawable/ic_edit" />
+
+                <ImageButton
+                    android:id="@+id/Add_Daily_Habits"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30px"
+                    android:src="@drawable/ic_add" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20px">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/DailyHabitsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350px"
+            android:layout_marginStart="30px"
+            android:layout_marginEnd="30px"
+            android:background="@drawable/today_s_special_events"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50px"
+                android:layout_marginHorizontal="20px"
+                android:layout_marginTop="20px">
+
+                <TextView
+                    android:id="@+id/Today_s_Special_Events"
+                    android:layout_width="450px"
+                    android:layout_height="50px"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/Today_s_Special_Events"
+                    android:textAppearance="@style/title_36px_darkBlue" />
+
+                <ImageButton
+                    android:id="@+id/Edit_Special_Events"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="80px"
+                    android:src="@drawable/ic_edit" />
+
+                <ImageButton
+                    android:id="@+id/Add_Special_Events"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30px"
+                    android:src="@drawable/ic_add" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20px">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/SpecialEventsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <view
+        android:id="@+id/view"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentBottom="true"
+        tools:ignore="PxUsage" />
+
+</RelativeLayout>

@@ -27,7 +27,7 @@ class GetStarted2Fragment : MunchBotFragments() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.secondColor)
 
         AnimationUtils.startJumpingAnimation(binding.playPetJump, -60f, 1000, 20)
 

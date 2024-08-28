@@ -48,10 +48,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         CLICKABLE, UNCLICKABLE
     }
 
-    fun updateResendButtonState(state: ButtonState) {
-        _resendButtonState.value = state
-    }
-
     fun signUp(email: String, password: String) {
         auth.fetchSignInMethodsForEmail(email)
             .addOnCompleteListener { task ->
@@ -172,7 +168,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     val user = auth.currentUser
                     if (user != null && user.isEmailVerified) {
                         _user.value = user
-                        saveLoginState(email)
                     } else {
                         _authError.value = "Please verify your email address."
                         auth.signOut()
@@ -189,11 +184,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
             }
-    }
-
-    private fun saveLoginState(email: String) {
-        val sharedPreferences = appContext.getSharedPreferences("MunchBotPrefs", MODE_PRIVATE)
-        sharedPreferences.edit().putString("LoggedInUser", email).apply()
     }
 
 }

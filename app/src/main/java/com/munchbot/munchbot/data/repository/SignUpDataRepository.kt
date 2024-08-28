@@ -3,10 +3,11 @@ package com.munchbot.munchbot.data.repository
 import android.net.Uri
 import com.munchbot.munchbot.data.database.SignUpDataStoreManager
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SignUpDataRepository(private val signUpDataStoreManager: SignUpDataStoreManager) {
+class SignUpDataRepository @Inject constructor(private val signUpDataStoreManager: SignUpDataStoreManager) {
 
     fun getUsername(userID: String): Flow<String?> = signUpDataStoreManager.getUsernameFlow(userID)
     fun getStatus(userID: String): Flow<String?> = signUpDataStoreManager.getStatusFlow(userID)

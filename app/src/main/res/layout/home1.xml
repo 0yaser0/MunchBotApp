@@ -1,4 +1,4 @@
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="756px"
@@ -13,7 +13,6 @@
         android:focusableInTouchMode="true"
         android:importantForAccessibility="no"
         android:orientation="vertical"
-        tools:context=".ui.main_view.auth.Login"
         tools:ignore="PxUsage,UselessParent,ContentDescription">
 
         <view
@@ -34,8 +33,7 @@
                 android:id="@+id/PetImageHome"
                 android:layout_width="450px"
                 android:layout_height="450px"
-                android:background="@drawable/ic_cadre_pic"
-                android:src="@drawable/dog" />
+                android:background="@drawable/ic_cadre_pic" />
 
         </androidx.cardview.widget.CardView>
 
@@ -52,13 +50,13 @@
             android:id="@+id/hello_user_"
             android:layout_width="637px"
             android:layout_height="270px"
-            android:text="@string/hello_user_"
-            android:textAppearance="@style/para_32px_gray"
-            android:lineSpacingExtra="12px"
-            android:layout_marginTop="50px"
-            android:translationY="-6.25px"
             android:layout_gravity="center"
-            android:gravity="center_horizontal|top"/>
+            android:layout_marginTop="50px"
+            android:gravity="center_horizontal|top"
+            android:lineSpacingExtra="12px"
+            android:text="@string/helloUser"
+            android:textAppearance="@style/para_32px_gray"
+            android:translationY="-6.25px" />
 
         <Button
             android:id="@+id/bluetooth"
@@ -71,19 +69,13 @@
             android:textAppearance="@style/btn_36px_white"
             tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="PxUsage">
-
-            <view
-                class="android.widget.LinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="180px"
-                android:layout_alignParentBottom="true"
-                tools:ignore="PxUsage" />
-
-        </RelativeLayout>
-
     </LinearLayout>
+
+    <view
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentBottom="true"
+        tools:ignore="PxUsage" />
+
 </RelativeLayout>

@@ -1,4 +1,4 @@
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="756px"
@@ -6,37 +6,120 @@
     android:layout_gravity="center"
     tools:ignore="PxUsage">
 
+    <view
+        android:id="@+id/topNavBar"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        tools:ignore="PxUsage" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/view"
+        android:layout_below="@+id/topNavBar"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:importantForAccessibility="no"
         android:orientation="vertical"
-        tools:context=".ui.main_view.auth.Login"
         tools:ignore="PxUsage,UselessParent,ContentDescription">
 
-            <view
-                class="android.widget.LinearLayout"
+        <LinearLayout
+            android:layout_width="756px"
+            android:layout_height="1612px"
+            android:layout_gravity="center">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200px"
-                tools:ignore="PxUsage" />
+                android:layout_height="1612px"
+                tools:ignore="PxUsage">
+
+                <TextView
+                    android:id="@+id/BluetoothText"
+                    android:layout_width="600px"
+                    android:layout_height="120px"
+                    android:layout_marginStart="70px"
+                    android:layout_marginTop="70px"
+                    android:background="@drawable/ic_btn_getstarted"
+                    android:gravity="center_vertical"
+                    android:paddingStart="80px"
+                    android:paddingEnd="0px"
+                    android:text="@string/MunchBot_1"
+                    android:textAppearance="@style/btn_36px_white" />
+
+                <ImageView
+                    android:id="@+id/state"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_alignBottom="@+id/BluetoothText"
+                    android:layout_marginEnd="30px"
+                    android:layout_marginBottom="40px"
+                    android:layout_toStartOf="@+id/editFood"
+                    android:src="@drawable/ic_state" />
+
+                <ImageView
+                    android:id="@+id/editFood"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_toStartOf="@+id/deleteDevice"
+                    android:layout_alignBottom="@+id/BluetoothText"
+                    android:layout_marginEnd="30px"
+                    android:layout_marginBottom="40px"
+                    android:src="@drawable/ic_edit_food" />
+
+
+                <ImageView
+                    android:id="@+id/deleteDevice"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_alignEnd="@+id/BluetoothText"
+                    android:layout_alignBottom="@+id/BluetoothText"
+                    android:layout_marginEnd="30px"
+                    android:layout_marginBottom="40px"
+                    android:src="@drawable/ic_delete_device" />
 
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="PxUsage">
 
-            <view
-                class="android.widget.LinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="180px"
-                android:layout_alignParentBottom="true"
-                tools:ignore="PxUsage" />
+            </RelativeLayout>
+        </LinearLayout>
 
-        </RelativeLayout>
 
     </LinearLayout>
+
+    <view
+        android:id="@+id/view"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="170px"
+        android:layout_alignParentBottom="true"
+        tools:ignore="PxUsage" />
+
+    <TextView
+        android:id="@+id/To_add_more_MunchBot_devices_simply_tap_btn_located_at_the_bottom_of_your_screen"
+        android:layout_width="460px"
+        android:layout_height="150px"
+        android:layout_below="@+id/topNavBar"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="150px"
+        android:layout_marginVertical="545px"
+        android:background="@drawable/add_more_device_text"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/add_round_broken_line"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30px"
+        android:layout_marginBottom="200px"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_add_round_broken_line"
+        android:visibility="visible" />
+
 </RelativeLayout>

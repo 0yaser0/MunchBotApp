@@ -5,10 +5,11 @@ package com.munchbot.munchbot.ui.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.munchbot.munchbot.ui.fragments.home.HealthFragment
+import com.munchbot.munchbot.ui.fragments.home.Home1Fragment
 import com.munchbot.munchbot.ui.fragments.home.PlannerFragment
 import com.munchbot.munchbot.ui.fragments.home.VetFragment
-import com.munchbot.munchbot.ui.fragments.home.home.Home1Fragment
 
 class HomeAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
@@ -24,5 +25,13 @@ class HomeAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getCount(): Int {
         return 4
+    }
+
+    fun navigateToFragment(viewPager: ViewPager, index: Int) {
+        if (index in 0 until count) {
+            viewPager.currentItem = index
+        } else {
+            throw IllegalArgumentException("Invalid fragment index: $index")
+        }
     }
 }

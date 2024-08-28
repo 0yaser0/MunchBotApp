@@ -46,7 +46,7 @@ class SignUpStep1Fragment : MunchBotFragments() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.secondColor)
         SetupUI.setupUI(binding.root)
 
         signUp = requireActivity() as SignUp
@@ -242,7 +242,7 @@ class SignUpStep1Fragment : MunchBotFragments() {
                 resendButton.isEnabled = (state == AuthViewModel.ButtonState.CLICKABLE)
                 resendButton.setTextColor(
                     if (state == AuthViewModel.ButtonState.CLICKABLE)
-                        resources.getColor(R.color.circle_color_selected)
+                        resources.getColor(R.color.firstColor)
                     else
                         resources.getColor(R.color.p)
                 )
@@ -263,7 +263,7 @@ class SignUpStep1Fragment : MunchBotFragments() {
             override fun onFinish() {
                 resendButton.text = "Resend"
                 resendButton.isEnabled = true
-                resendButton.setTextColor(resources.getColor(R.color.circle_color_selected))
+                resendButton.setTextColor(resources.getColor(R.color.firstColor))
             }
         }.start()
     }

@@ -16,6 +16,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.viewpager.widget.ViewPager
 import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
+import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.databinding.SignUpBinding
 import com.munchbot.munchbot.ui.adapters.BtnContinueClickListener
 import com.munchbot.munchbot.ui.adapters.SignUpAdapter
@@ -39,6 +40,8 @@ class SignUp : MunchBotActivity() {
         super.onCreate(savedInstanceState)
         binding = SignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        SetupUI.setupUI(binding.root)
 
         viewPager = binding.viewPager
         adapter = SignUpAdapter(supportFragmentManager)

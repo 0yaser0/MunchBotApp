@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="700px"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="30px"
+    android:gravity="center"
+    android:layout_gravity="center"
+    tools:ignore="PxUsage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="220px"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_marginStart="30px"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/cadre_pic_vet"
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_cadre_pic" />
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_camera" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="220px"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:gravity="center"
+                android:hint="Vet name"
+                app:hintAnimationEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_marginHorizontal="30px"
+                    android:drawableStart="@drawable/ic_username"
+                    android:drawablePadding="30px"
+                    android:inputType="text"
+                    android:textAppearance="@style/input_32px_gray"
+                    tools:ignore="PxUsage,TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:gravity="center"
+                android:hint="Category"
+                app:hintAnimationEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/categoryEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_marginHorizontal="30px"
+                    android:drawableStart="@drawable/type"
+                    android:drawablePadding="30px"
+                    android:inputType="text"
+                    android:textAppearance="@style/input_32px_gray"
+                    tools:ignore="PxUsage,TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="220px"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center"
+            android:hint="Phone number"
+            app:hintAnimationEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_marginHorizontal="30px"
+                android:drawableStart="@drawable/ic_of_phone"
+                android:drawablePadding="30px"
+                android:inputType="number"
+                android:textAppearance="@style/input_32px_gray"
+                tools:ignore="PxUsage,TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center"
+            android:hint="Email"
+            app:hintAnimationEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_marginHorizontal="30px"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="30px"
+                android:inputType="textEmailAddress"
+                android:textAppearance="@style/input_32px_gray"
+                tools:ignore="PxUsage,TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -87,6 +87,7 @@
                     android:layout_height="120px"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_camera" />
+
             </RelativeLayout>
 
             <LinearLayout

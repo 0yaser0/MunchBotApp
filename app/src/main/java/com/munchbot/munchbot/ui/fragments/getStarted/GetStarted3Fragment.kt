@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.databinding.GetStarted3Binding
 import com.munchbot.munchbot.ui.main_view.GetStarted
+import com.munchbot.munchbot.ui.main_view.Home
 import com.munchbot.munchbot.ui.main_view.auth.Login
 import com.munchbot.munchbot.ui.main_view.auth.SignUp
 
@@ -28,14 +30,19 @@ class GetStarted3Fragment : MunchBotFragments() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.secondColor)
 
         binding.arrowBack.setOnClickListener {
             (activity as? GetStarted)?.binding?.viewPager?.currentItem = 1
         }
 
         binding.btnGetstarted.setOnClickListener {
-            startActivity(Intent(requireActivity(), Login::class.java))
+            val user = FirebaseAuth.getInstance().currentUser
+            if (user != null) {
+                startActivity(Intent(requireActivity(), Home::class.java))
+            } else {
+                startActivity(Intent(requireActivity(), Login::class.java))
+            }
             requireActivity().overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
 

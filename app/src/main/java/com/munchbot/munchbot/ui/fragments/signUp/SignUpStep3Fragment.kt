@@ -13,9 +13,6 @@ import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.SignUpDataStoreManager
-import com.munchbot.munchbot.data.repository.SignUpDataRepository
-import com.munchbot.munchbot.data.viewmodel.MyViewModelDataFactory
 import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
 import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
 import com.munchbot.munchbot.databinding.SignUp3Binding
@@ -27,7 +24,6 @@ import kotlin.math.abs
 class SignUpStep3Fragment : MunchBotFragments(), ImageAdapterChose.OnImageClickListener,
     AdapterView.OnItemSelectedListener {
 
-    private lateinit var petViewModel: SignUpViewModelData
     private lateinit var sharedViewModel: SignUpSharedViewModel
     private lateinit var binding: SignUp3Binding
     private lateinit var viewPager: ViewPager2
@@ -58,15 +54,12 @@ class SignUpStep3Fragment : MunchBotFragments(), ImageAdapterChose.OnImageClickL
     }
 
     private fun setupViewModel() {
-        val repository = SignUpDataRepository(SignUpDataStoreManager(requireContext()))
-        val factory = MyViewModelDataFactory(repository)
-        petViewModel = ViewModelProvider(this, factory)[SignUpViewModelData::class.java]
         sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.secondColor)
         SetupUI.setupUI(binding.root)
 
         viewPager = binding.viewPager2

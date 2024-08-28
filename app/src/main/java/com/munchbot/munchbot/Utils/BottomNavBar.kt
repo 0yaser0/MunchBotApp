@@ -15,10 +15,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -31,14 +29,17 @@ import com.exyte.animatednavbar.animation.indendshape.shapeCornerRadius
 import com.exyte.animatednavbar.utils.noRippleClickable
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.ui.fragments.home.HealthFragment
+import com.munchbot.munchbot.ui.fragments.home.Home1Fragment
 import com.munchbot.munchbot.ui.fragments.home.PlannerFragment
 import com.munchbot.munchbot.ui.fragments.home.VetFragment
-import com.munchbot.munchbot.ui.fragments.home.home.Home1Fragment
 
 @Composable
-fun BottomNavBar() {
+fun BottomNavBar(
+    selectedIndexState: MutableState<Int>,
+    onItemSelected: (Int) -> Unit
+) {
     val navigationBarItems = remember { NavigationBarItems.entries.toTypedArray() }
-    var selectedIndex by remember { mutableIntStateOf(0) }
+    val selectedIndex = selectedIndexState.value
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
@@ -52,11 +53,14 @@ fun BottomNavBar() {
                 barColor = MaterialTheme.colorScheme.onBackground,
                 ballColor = MaterialTheme.colorScheme.onBackground
             ) {
-                navigationBarItems.forEachIndexed { index, item ->
+                navigationBarItems.forEach { item ->
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .noRippleClickable { selectedIndex = index },
+                            .noRippleClickable {
+                                selectedIndexState.value = item.item.index // Update state
+                                onItemSelected(item.item.index) // Trigger callback to update ViewPager
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Column(
@@ -65,14 +69,14 @@ fun BottomNavBar() {
                         ) {
                             Icon(
                                 modifier = Modifier.size(35.dp),
-                                painter = painterResource(id = item.iconResId),
-                                contentDescription = item.description,
-                                tint = if (selectedIndex == index) MaterialTheme.colorScheme.surface
+                                painter = painterResource(id = item.item.iconResId),
+                                contentDescription = item.item.description,
+                                tint = if (selectedIndex == item.item.index) MaterialTheme.colorScheme.surface
                                 else MaterialTheme.colorScheme.inverseSurface
                             )
-                            if (selectedIndex == index) {
+                            if (selectedIndex == item.item.index) {
                                 Text(
-                                    text = item.label,
+                                    text = item.item.label,
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.surface,
                                     modifier = Modifier.padding(top = 4.dp)
@@ -105,10 +109,18 @@ fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier = composed {
         }
     )
 }
-enum class NavigationBarItems(val label: String, val iconResId: Int, val description: String) {
-    HOME("Home", R.drawable.ic_nav_home, "Home"),
-    PLANNER("planner" ,R.drawable.ic_nav_planner, "Planner"),
-    VET("Vet" ,R.drawable.ic_nav_vet, "Vet"),
-    HEALTH("Health",R.drawable.ic_nav_health, "Health")
+
+enum class NavigationBarItems(val item: NavigationItem) {
+    HOME(NavigationItem(0, "Home", R.drawable.ic_nav_home, "Home")),
+    PLANNER(NavigationItem(1, "Planner", R.drawable.ic_nav_planner, "Planner")),
+    VET(NavigationItem(2, "Vet", R.drawable.ic_nav_vet, "Vet")),
+    HEALTH(NavigationItem(3, "Health", R.drawable.ic_nav_health, "Health"))
 }
 
+
+data class NavigationItem(
+    val index: Int,
+    val label: String,
+    val iconResId: Int,
+    val description: String
+)

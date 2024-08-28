@@ -27,7 +27,7 @@ class Login : MunchBotActivity() {
         binding = LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        StatusBarUtils.setStatusBarColor(window, R.color.status_bar_color)
+        StatusBarUtils.setStatusBarColor(window, R.color.secondColor)
 
         SetupUI.setupUI(binding.root)
         passwordVisibility(binding.passwordEditText, binding.passwordToggle)
@@ -60,17 +60,6 @@ class Login : MunchBotActivity() {
                 binding.loaderLayout.visibility = View.GONE
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
-        }
-
-        val sharedPreferences = getSharedPreferences("MunchBotPrefs", MODE_PRIVATE)
-        val loggedInUser = sharedPreferences.getString("LoggedInUser", null)
-
-        if (loggedInUser != null) {
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            finish()
-            @Suppress("DEPRECATION")
-            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
 
         authViewModel.authComplete.observe(this) { isComplete ->

@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:layout_gravity="center"
+    tools:ignore="PxUsage">
+
+    <view
+        android:id="@+id/topNavBar"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view"
+        android:layout_below="@+id/topNavBar"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:importantForAccessibility="no"
+        android:orientation="vertical"
+        tools:ignore="PxUsage,UselessParent,ContentDescription">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:layout_margin="30px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="450px"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/consultVet"
+                    android:layout_width="450px"
+                    android:layout_height="100px"
+                    android:text="@string/consultVet"
+                    android:textAppearance="@style/title_48px_darkblue" />
+
+                <TextView
+                    android:id="@+id/add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape"
+                    android:layout_width="450px"
+                    android:layout_height="100px"
+                    android:text="@string/add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape"
+                    android:textAppearance="@style/CreateANewTextStyle" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="200px"
+                android:layout_height="200px"
+                android:layout_gravity="center"
+                android:layout_marginStart="30px">
+
+                <ImageView
+                    android:id="@+id/cadre_pic"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/circular_border" />
+
+                <ImageView
+                    android:id="@+id/petImage"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:foregroundGravity="center"
+                    android:src="@drawable/ic_camera"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="500px"
+                android:layout_height="100px"
+                android:hint="@string/search"
+                app:hintAnimationEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_marginHorizontal="30px"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="30px"
+                    android:inputType="text"
+                    android:textAppearance="@style/input_32px_gray"
+                    tools:ignore="PxUsage,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/passwordToggle"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:layout_marginStart="-100px"
+                android:layout_marginTop="25px"
+                android:src="@drawable/ic_filter" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/addVetButton"
+                    android:layout_width="180px"
+                    android:layout_height="100px"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30px"
+                    android:layout_marginEnd="30px"
+                    android:background="@drawable/btn_add_vet" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30px"
+            android:background="@drawable/cadre_vet"
+            android:padding="30px">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vetRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <view
+        android:id="@+id/view"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="170px"
+        android:layout_alignParentBottom="true"
+        tools:ignore="PxUsage" />
+
+</RelativeLayout>
