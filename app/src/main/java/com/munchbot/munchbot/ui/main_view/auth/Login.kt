@@ -36,7 +36,14 @@ class Login : MunchBotActivity() {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
             binding.loaderLayout.visibility = View.VISIBLE
-            authViewModel.logIn(email, password)
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+                binding.loaderLayout.visibility = View.GONE
+                return@setOnClickListener
+            }else{
+                authViewModel.logIn(email, password)
+            }
+
         }
 
         binding.doesnTHav.setOnClickListener {

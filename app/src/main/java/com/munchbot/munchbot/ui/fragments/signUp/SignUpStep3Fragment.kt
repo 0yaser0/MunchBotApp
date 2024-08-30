@@ -14,7 +14,6 @@ import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
-import com.munchbot.munchbot.data.viewmodel.SignUpViewModelData
 import com.munchbot.munchbot.databinding.SignUp3Binding
 import com.munchbot.munchbot.ui.adapters.ImageAdapterChose
 import com.munchbot.munchbot.ui.adapters.SignUpAdapter

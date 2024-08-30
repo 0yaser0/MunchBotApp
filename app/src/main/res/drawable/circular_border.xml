@@ -5,7 +5,7 @@
             <solid android:color="@android:color/transparent"/>
             <stroke
                 android:width="8px"
-                android:color="@color/firstColor"/>
+                android:color="@color/darkFirstColor"/>
         </shape>
     </item>
 </layer-list>

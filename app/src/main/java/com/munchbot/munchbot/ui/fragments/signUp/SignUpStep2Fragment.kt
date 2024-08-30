@@ -1,11 +1,13 @@
 package com.munchbot.munchbot.ui.fragments.signUp
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +17,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.data.database.getUserId
 import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
 import com.munchbot.munchbot.databinding.SignUp2Binding
 import com.munchbot.munchbot.ui.adapters.SignUpAdapter
@@ -33,7 +33,7 @@ class SignUpStep2Fragment : MunchBotFragments() {
     private lateinit var binding: SignUp2Binding
     private val pickImageRequest = 1
     private val cameraRequest = 2
-    private lateinit var userProfileImage: Uri
+    private var userProfileImage: Uri? = null
     private lateinit var sharedViewModel: SignUpSharedViewModel
     private lateinit var adapter: SignUpAdapter
     private lateinit var signUp: SignUp
@@ -57,7 +57,6 @@ class SignUpStep2Fragment : MunchBotFragments() {
 
         signUp = activity as SignUp
         adapter = signUp.adapter
-
     }
 
     private fun setupViewModel() {
@@ -90,23 +89,26 @@ class SignUpStep2Fragment : MunchBotFragments() {
         } else if (!bio.matches(lettersRequiredPattern.toRegex())) {
             binding.textAreaBio.error = "Bio must contain at least one letter"
             callback(false)
-        } else if (!::userProfileImage.isInitialized) {
+        } else if (sharedViewModel.getUserImageProfile() == null) {
             Toast.makeText(requireContext(), "Please select a picture.", Toast.LENGTH_LONG).show()
             callback(false)
         } else {
-            android.util.Log.d("SignUpStep2Fragment", "Saving Username: $username")
-            android.util.Log.d("SignUpStep2Fragment", "Saving Status: $status")
-            android.util.Log.d("SignUpStep2Fragment", "Saving Bio: $bio")
+            Log.d("SignUpStep2Fragment", "Saving Username: $username")
+            Log.d("SignUpStep2Fragment", "Saving Status: $status")
+            Log.d("SignUpStep2Fragment", "Saving Bio: $bio")
 
             showLoader()
             sharedViewModel.setUsername(username)
             sharedViewModel.setStatus(status)
             sharedViewModel.setBio(bio)
-            sharedViewModel.setUserProfileImage(userProfileImage)
 
             binding.root.postDelayed({
                 hideLoader()
-                Toast.makeText(requireContext(), "Data saved successfully!", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    requireContext(),
+                    "Data saved successfully!",
+                    Toast.LENGTH_LONG
+                )
                     .show()
                 callback(true)
             }, 2000)
@@ -142,45 +144,39 @@ class SignUpStep2Fragment : MunchBotFragments() {
     }
 
     private fun handleImageUpload(imageUri: Uri) {
-        val requestOptions = RequestOptions()
-            .transforms(CircleCrop())
-            .placeholder(R.drawable.ic_camera)
-            .error(R.drawable.ic_error)
+        try {
+            val requestOptions = RequestOptions()
+                .transforms(CircleCrop())
+                .placeholder(R.drawable.ic_camera)
+                .error(R.drawable.ic_error)
 
-        Glide.with(this)
-            .load(imageUri)
-            .apply(requestOptions)
-            .into(binding.camera)
+            Glide.with(this)
+                .load(imageUri)
+                .apply(requestOptions)
+                .into(binding.camera)
 
-        uploadImageToFirebase(imageUri)
+            uploadUserImageToFirebase(imageUri)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading image: ${e.message}")
+        }
     }
 
-    private fun uploadImageToFirebase(imageUri: Uri) {
+    private fun uploadUserImageToFirebase(imageUri: Uri) {
         val storageReference = FirebaseStorage.getInstance().reference
             .child("userProfileImages/${UUID.randomUUID()}")
 
         storageReference.putFile(imageUri)
             .addOnSuccessListener {
                 storageReference.downloadUrl.addOnSuccessListener { uri ->
-                    saveImageUrlToDatabase(uri.toString())
+                    sharedViewModel.setUserProfileImage(uri)
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(requireContext(), "Failed to upload image: ${exception.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun saveImageUrlToDatabase(imageUrl: String) {
-        val userId = getUserId()
-        val databaseReference = FirebaseDatabase.getInstance().getReference("users/$userId")
-        val userMap = mapOf("profileImageUrl" to imageUrl)
-
-        databaseReference.updateChildren(userMap)
-            .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Image URL saved to database", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(requireContext(), "Failed to save image URL: ${exception.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to upload image: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
@@ -190,21 +186,26 @@ class SignUpStep2Fragment : MunchBotFragments() {
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 pickImageRequest -> {
-                    userProfileImage = data.data!!
-                    handleImageUpload(userProfileImage)
+                    data.data?.let {
+                        userProfileImage = it
+                        handleImageUpload(it)
+                    }
                 }
 
                 cameraRequest -> {
-                    val imageBitmap = data.extras?.get("data") as Bitmap
-                    val uri = Uri.parse(
-                        MediaStore.Images.Media.insertImage(
-                            requireContext().contentResolver,
-                            imageBitmap,
-                            null,
-                            null
+                    val imageBitmap = data.extras?.get("data") as? Bitmap
+                    imageBitmap?.let {
+                        val uri = Uri.parse(
+                            MediaStore.Images.Media.insertImage(
+                                requireContext().contentResolver,
+                                it,
+                                null,
+                                null
+                            )
                         )
-                    )
-                    handleImageUpload(uri)
+                        userProfileImage = uri
+                        handleImageUpload(uri)
+                    }
                 }
             }
         }

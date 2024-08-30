@@ -173,17 +173,26 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                         auth.signOut()
                     }
                 } else {
-                    try {
-                        throw task.exception!!
-                    } catch (e: FirebaseAuthInvalidUserException) {
-                        _authError.value = "Invalid email or password."
-                    } catch (e: FirebaseAuthInvalidCredentialsException) {
-                        _authError.value = "Invalid email or password."
-                    } catch (e: Exception) {
-                        _authError.value = "Login failed. Please try again."
-                    }
+                    handleAuthError(task.exception)
                 }
             }
+    }
+
+    private fun handleAuthError(exception: Exception?) {
+        when (exception) {
+            is FirebaseAuthInvalidUserException -> {
+                _authError.value = "Email not registered. Please check your email or sign up."
+            }
+            is FirebaseAuthInvalidCredentialsException -> {
+                _authError.value = "Invalid email or password. Please try again."
+            }
+            is FirebaseAuthUserCollisionException -> {
+                _authError.value = "This email is already in use. Try logging in or using a different email."
+            }
+            else -> {
+                _authError.value = "Login failed. Please try again."
+            }
+        }
     }
 
 }

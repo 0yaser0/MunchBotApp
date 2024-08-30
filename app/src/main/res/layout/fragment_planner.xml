@@ -28,26 +28,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200px"
-            android:layout_margin="30px"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="450px"
+                android:layout_width="500px"
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/This_is_Pet_s_Diary"
-                    android:layout_width="450px"
+                    android:layout_width="500px"
                     android:layout_height="100px"
                     android:gravity="center"
+                    android:layout_marginHorizontal="20px"
                     android:text="@string/This_is_Pet_s_Diary"
                     android:textAppearance="@style/title_48px_darkblue" />
 
                 <TextView
                     android:id="@+id/Take_a_look_at_how_pet_s_day_was_planned"
-                    android:layout_width="450px"
+                    android:layout_width="500px"
                     android:layout_height="100px"
+                    android:layout_marginHorizontal="20px"
                     android:text="@string/Take_a_look_at_how_pet_s_day_was_planned"
                     android:textAppearance="@style/CreateANewTextStyle" />
 
@@ -57,14 +58,7 @@
                 android:layout_width="200px"
                 android:layout_height="200px"
                 android:layout_gravity="center"
-                android:layout_marginStart="30px">
-
-                <ImageView
-                    android:id="@+id/cadre_pic"
-                    android:layout_width="200px"
-                    android:layout_height="200px"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/circular_border" />
+                android:layout_marginStart="10px">
 
                 <ImageView
                     android:id="@+id/petImagePlanner"
@@ -74,9 +68,14 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:foregroundGravity="center"
-                    android:src="@drawable/ic_camera"
-                    android:visibility="gone" />
+                    android:foregroundGravity="center" />
+
+                <ImageView
+                    android:id="@+id/cadre_pic"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/circular_border" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -113,7 +112,8 @@
                     android:layout_width="40px"
                     android:layout_height="40px"
                     android:layout_gravity="center"
-                    android:layout_marginStart="150px"
+                    android:layout_marginStart="130px"
+                    android:background="#00FFFFFF"
                     android:src="@drawable/ic_edit" />
 
                 <ImageButton
@@ -121,7 +121,8 @@
                     android:layout_width="50px"
                     android:layout_height="50px"
                     android:layout_gravity="center"
-                    android:layout_marginStart="30px"
+                    android:layout_marginStart="10px"
+                    android:background="#00FFFFFF"
                     android:src="@drawable/ic_add" />
 
             </LinearLayout>
@@ -166,7 +167,8 @@
                     android:layout_width="40px"
                     android:layout_height="40px"
                     android:layout_gravity="center"
-                    android:layout_marginStart="80px"
+                    android:layout_marginStart="50px"
+                    android:background="#00FFFFFF"
                     android:src="@drawable/ic_edit" />
 
                 <ImageButton
@@ -174,7 +176,8 @@
                     android:layout_width="50px"
                     android:layout_height="50px"
                     android:layout_gravity="center"
-                    android:layout_marginStart="30px"
+                    android:layout_marginStart="10px"
+                    android:background="#00FFFFFF"
                     android:src="@drawable/ic_add" />
 
             </LinearLayout>

@@ -52,11 +52,16 @@ class SignUpStep5Fragment : MunchBotFragments() {
 
             sharedViewModel.saveUserAndPet(uid)
 
-            binding.root.postDelayed({
-                hideLoader()
-                Toast.makeText(requireContext(), "All data saved successfully!", Toast.LENGTH_LONG)
-                    .show()
+           binding.root.postDelayed({
+                if (isAdded) {
+                    hideLoader()
+                    Toast.makeText(requireContext(), "All data saved successfully!", Toast.LENGTH_LONG).show()
+                } else {
+                    android.util.Log.e("FinalSignUpFragment", "Fragment is not attached to context, cannot show Toast.")
+                }
             }, 2000)
+        } ?: run {
+            android.util.Log.e("FinalSignUpFragment", "UserID is null.")
         }
     }
 

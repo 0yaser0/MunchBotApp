@@ -29,11 +29,28 @@
             app:cardCornerRadius="250px"
             app:cardElevation="50px">
 
-            <ImageView
-                android:id="@+id/PetImageHome"
+            <RelativeLayout
                 android:layout_width="450px"
                 android:layout_height="450px"
-                android:background="@drawable/ic_cadre_pic" />
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/PetImageHome"
+                    android:layout_width="450px"
+                    android:layout_height="450px"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:foregroundGravity="center" />
+
+                <ImageView
+                    android:layout_width="450px"
+                    android:layout_height="450px"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/circular_border" />
+
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -74,7 +91,7 @@
     <view
         class="android.widget.LinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="200px"
+        android:layout_height="220px"
         android:layout_alignParentBottom="true"
         tools:ignore="PxUsage" />
 

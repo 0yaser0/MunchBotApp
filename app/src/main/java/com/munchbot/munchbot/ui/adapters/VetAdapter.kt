@@ -29,10 +29,10 @@ class VetAdapter(private var vetList: MutableList<Vet>) :
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.ic_camera)
                 .error(R.drawable.ic_error)
-                .transform(CircleCrop())  // Apply CircleCrop to make the image circular
+                .transform(CircleCrop())
 
             Glide.with(itemView.context)
-                .load(vet.profileImage)
+                .load(vet.vetProfileImage)
                 .apply(requestOptions)
                 .into(profileImage)
 
@@ -73,4 +73,20 @@ class VetAdapter(private var vetList: MutableList<Vet>) :
         vetList.add(vet)
         notifyItemInserted(vetList.size - 1)
     }
+
+    fun setVets(vets: List<Vet>) {
+        vetList.clear()
+        vetList.addAll(vets)
+        notifyDataSetChanged()
+    }
+
+    fun getVetAtPosition(position: Int): Vet {
+        return vetList[position]
+    }
+
+    fun removeVetAtPosition(position: Int) {
+        vetList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
 }

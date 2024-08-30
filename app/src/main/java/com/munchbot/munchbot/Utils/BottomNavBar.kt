@@ -45,11 +45,11 @@ fun BottomNavBar(
         containerColor = MaterialTheme.colorScheme.surface,
         bottomBar = {
             AnimatedNavigationBar(
-                modifier = Modifier.height(90.dp),
+                modifier = Modifier.height(75.dp),
                 selectedIndex = selectedIndex,
                 cornerRadius = shapeCornerRadius(30.dp, 30.dp, 0.dp, 0.dp),
-                ballAnimation = Parabolic(tween(500)),
-                indentAnimation = Height(tween(500)),
+                ballAnimation = Parabolic(tween(400), 60.dp),
+                indentAnimation = Height(tween(500), 50.dp, 10.dp),
                 barColor = MaterialTheme.colorScheme.onBackground,
                 ballColor = MaterialTheme.colorScheme.onBackground
             ) {
@@ -58,8 +58,8 @@ fun BottomNavBar(
                         modifier = Modifier
                             .fillMaxSize()
                             .noRippleClickable {
-                                selectedIndexState.value = item.item.index // Update state
-                                onItemSelected(item.item.index) // Trigger callback to update ViewPager
+                                selectedIndexState.value = item.item.index
+                                onItemSelected(item.item.index)
                             },
                         contentAlignment = Alignment.Center
                     ) {
@@ -68,7 +68,7 @@ fun BottomNavBar(
                             verticalArrangement = Arrangement.Center
                         ) {
                             Icon(
-                                modifier = Modifier.size(35.dp),
+                                modifier = Modifier.size(25.dp),
                                 painter = painterResource(id = item.item.iconResId),
                                 contentDescription = item.item.description,
                                 tint = if (selectedIndex == item.item.index) MaterialTheme.colorScheme.surface
@@ -79,7 +79,7 @@ fun BottomNavBar(
                                     text = item.item.label,
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.surface,
-                                    modifier = Modifier.padding(top = 4.dp)
+                                    modifier = Modifier.padding(top = 2.dp)
                                 )
                             }
                         }

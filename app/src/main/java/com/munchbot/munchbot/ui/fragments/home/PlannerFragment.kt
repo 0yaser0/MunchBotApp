@@ -38,8 +38,8 @@ class PlannerFragment : MunchBotFragments() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.black)
 
@@ -47,15 +47,19 @@ class PlannerFragment : MunchBotFragments() {
 
         petViewModel.petLiveData.observe(viewLifecycleOwner) { pet ->
             pet?.let {
-                val petName = getString(R.string.Take_a_look_at_how_pet_s_day_was_planned, it.petName)
-                binding.TakeALookAtHowPetSDayWasPlanned.text = petName
+                val petNameTextView = binding.TakeALookAtHowPetSDayWasPlanned
+                val stringPetName = getString(R.string.Take_a_look_at_how_pet_s_day_was_planned, it.petName)
+                petNameTextView.text = stringPetName
 
                 val petImageView = binding.petImagePlanner
                 if (it.petProfileImage.isNotEmpty()) {
+                    Log.d("PlannerFragment", "Loading image URL: ${it.petProfileImage}")
                     Glide.with(this)
                         .load(it.petProfileImage)
                         .error(R.drawable.ic_error)
                         .into(petImageView)
+                } else {
+                    petImageView.setImageResource(R.drawable.ic_error)
                 }
             }
         }
@@ -66,17 +70,15 @@ class PlannerFragment : MunchBotFragments() {
         Log.d(TAG, "User ID $userId")
 
         if (userId != null) {
-            getPetId(userId) { petId ->
-                if (petId != null) {
-                    petViewModel.loadPet(userId, petId)
-                    Log.d(TAG, "Pet ID $petId")
-                } else {
-                    Log.d(TAG, "Pet ID not found")
-                }
-            }
-
+            val petId = getPetId(userId)
+            Log.d(TAG, "Pet ID $petId")
+            petViewModel.loadPet(userId, petId)
             userViewModel.loadUser(userId)
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

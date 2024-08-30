@@ -1,13 +1,17 @@
 package com.munchbot.munchbot.data.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.munchbot.munchbot.data.model.Pet
 import com.munchbot.munchbot.data.model.User
+import com.munchbot.munchbot.data.model.Vet
 import com.munchbot.munchbot.data.repository.PetRepository
 import com.munchbot.munchbot.data.repository.UserRepository
+import com.munchbot.munchbot.data.repository.VetRepository
+import com.munchbot.munchbot.ui.adapters.VetAdapter
 
 class SignUpSharedViewModel : ViewModel() {
 
@@ -22,6 +26,9 @@ class SignUpSharedViewModel : ViewModel() {
 
     private val _userProfileImage = MutableLiveData<Uri>()
     val userProfileImage: LiveData<Uri> get() = _userProfileImage
+
+    private val _vetProfileImage = MutableLiveData<Uri>()
+    val vetProfileImage: LiveData<Uri> get() = _vetProfileImage
 
     private val _petType = MutableLiveData<String>()
     val petType: LiveData<String> get() = _petType
@@ -63,6 +70,10 @@ class SignUpSharedViewModel : ViewModel() {
         _userProfileImage.value = uri
     }
 
+    fun setVetProfileImage(uri: Uri) {
+        _vetProfileImage.value = uri
+    }
+
     fun setPetType(petType: String) {
         _petType.value = petType
     }
@@ -95,12 +106,12 @@ class SignUpSharedViewModel : ViewModel() {
         _petImageProfile.value = imageUri
     }
 
-    fun getUsername(): String {
-        return _username.value ?: ""
+    fun getPetImageProfile(): Uri? {
+        return _petImageProfile.value
     }
 
-    fun getPetName(): String {
-        return _petName.value ?: ""
+    fun getUserImageProfile(): Uri? {
+        return _userProfileImage.value
     }
 
 
@@ -118,7 +129,7 @@ class SignUpSharedViewModel : ViewModel() {
         val userRepository = UserRepository()
         userRepository.saveUser(uid, user)
 
-        val petId = "pet_${System.currentTimeMillis()}"
+        val petId = "${uid}pet"
         val pet = Pet(
             petType = _petType.value ?: "",
             petName = _petName.value ?: "",
@@ -132,5 +143,32 @@ class SignUpSharedViewModel : ViewModel() {
 
         val petRepository = PetRepository()
         petRepository.savePet(uid, petId, pet)
+    }
+
+    fun saveNewVet(
+        uid: String,
+        name: String,
+        category: String,
+        phoneNumber: String,
+        email: String,
+        vetAdapter: VetAdapter,
+        imageUrl: String? = null
+    ) {
+        val vetId = "${uid}vet${System.currentTimeMillis()}"
+
+        val vet = Vet(
+            vetProfileImage = imageUrl,
+            name = name,
+            category = category,
+            phoneNumber = phoneNumber,
+            email = email,
+            vetId = vetId
+        )
+
+        Log.d("Vet Object", vet.toString())
+
+        val vetRepository = VetRepository()
+        vetRepository.saveVet(uid, vetId, vet)
+        vetAdapter.addVet(vet)
     }
 }

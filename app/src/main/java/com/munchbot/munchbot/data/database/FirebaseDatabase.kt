@@ -13,16 +13,11 @@ object FirebaseDatabase {
 }
 
 fun getUserId(): String? {
-    return FirebaseAuth.getInstance().currentUser?.uid
+    val userId = FirebaseAuth.getInstance().currentUser?.uid
+    return userId
 }
 
-fun getPetId(userId: String, callback: (String?) -> Unit) {
-    val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("users/$userId/pets")
-
-    database.get().addOnSuccessListener { snapshot ->
-        val petId = snapshot.children.firstOrNull()?.key
-        callback(petId)
-    }.addOnFailureListener {
-        callback(null)
-    }
+fun getPetId(userId: String): String {
+     val petId = "${userId}pet"
+    return petId
 }

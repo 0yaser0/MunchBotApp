@@ -2,8 +2,6 @@ package com.munchbot.munchbot.ui.fragments.home
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -11,7 +9,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -96,39 +93,27 @@ class Home1Fragment : MunchBotFragments() {
 
                 val petImageView = binding.PetImageHome
                 if (it.petProfileImage.isNotEmpty()) {
+                    Log.d("Home1Fragment", "Loading image URL: ${it.petProfileImage}")
                     Glide.with(this)
                         .load(it.petProfileImage)
                         .error(R.drawable.ic_error)
                         .into(petImageView)
+                } else {
+                    petImageView.setImageResource(R.drawable.ic_launcher_round)
                 }
             }
         }
     }
 
-    private fun setupGetter(){
+    private fun setupGetter() {
         val userId = getUserId()
         Log.d(TAG, "User ID $userId")
 
         if (userId != null) {
-            getPetId(userId) { petId ->
-                if (petId != null) {
-                    petViewModel.loadPet(userId, petId)
-                    Log.d(TAG, "Pet ID $petId")
-                } else {
-                    Log.d(TAG, "Pet ID not found")
-                }
-            }
+            val petId = getPetId(userId)
+            Log.d(TAG, "Pet ID $petId")
             userViewModel.loadUser(userId)
-        }
-    }
-
-    private fun base64ToBitmap(base64: String): Bitmap? {
-        return try {
-            val decodedString = Base64.decode(base64, Base64.DEFAULT)
-            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        } catch (e: Exception) {
-            Log.e("Home1Fragment", "Error decoding Base64 string to Bitmap", e)
-            null
+            petViewModel.loadPet(userId, petId)
         }
     }
 

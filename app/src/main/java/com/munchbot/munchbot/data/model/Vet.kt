@@ -1,13 +1,14 @@
 package com.munchbot.munchbot.data.model
 
-import android.net.Uri
-
 
 data class Vet(
-    val profileImage: Uri?,
+    val vetProfileImage: String? = null,
     val name: String,
     val category: String,
     val phoneNumber: String,
     val email: String,
+    val vetId: String,
     var isExpanded: Boolean = false
-)
+){
+    constructor() : this("", "", "", "", "","",)
+}
