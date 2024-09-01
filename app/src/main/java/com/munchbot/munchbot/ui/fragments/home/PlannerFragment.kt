@@ -1,13 +1,20 @@
 package com.munchbot.munchbot.ui.fragments.home
 
+import android.animation.ArgbEvaluator
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
@@ -15,26 +22,38 @@ import com.munchbot.munchbot.Utils.StatusBarUtils
 import com.munchbot.munchbot.data.database.getPetId
 import com.munchbot.munchbot.data.database.getUserId
 import com.munchbot.munchbot.data.viewmodel.PetViewModel
-import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
+import com.munchbot.munchbot.data.viewmodel.PlannerViewModel
 import com.munchbot.munchbot.data.viewmodel.UserViewModel
 import com.munchbot.munchbot.databinding.FragmentPlannerBinding
-import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
+import com.munchbot.munchbot.ui.adapters.PlannerAdapter
+import kotlin.math.abs
 
 class PlannerFragment : MunchBotFragments() {
     private var _binding: FragmentPlannerBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: SignUpSharedViewModel
-    private lateinit var authViewModel: AuthViewModel
     private val userViewModel: UserViewModel by viewModels()
     private val petViewModel: PetViewModel by viewModels()
+    private val plannerViewModel: PlannerViewModel by viewModels()
+    private lateinit var plannerAdapter: PlannerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlannerBinding.inflate(inflater, container, false)
-        authViewModel = ViewModelProvider(requireActivity())[AuthViewModel::class.java]
-        viewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]
+
+        plannerAdapter = PlannerAdapter(
+            mutableListOf(),
+            binding.DailyHabitsRecyclerView,
+            requireContext(),
+            plannerViewModel
+        )
+
+        binding.DailyHabitsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = plannerAdapter
+        }
+
         return binding.root
     }
 
@@ -43,8 +62,16 @@ class PlannerFragment : MunchBotFragments() {
 
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.black)
 
-        setupGetter()
+        setupObservers()
+        setupListeners()
+        deleteHabitWithSwipe()
 
+        val userId = getUserId() ?: return
+        plannerViewModel.loadHabits(userId)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setupObservers() {
         petViewModel.petLiveData.observe(viewLifecycleOwner) { pet ->
             pet?.let {
                 val petNameTextView = binding.TakeALookAtHowPetSDayWasPlanned
@@ -63,18 +90,91 @@ class PlannerFragment : MunchBotFragments() {
                 }
             }
         }
+
+        plannerViewModel.habitListLiveData.observe(viewLifecycleOwner) { habits ->
+            habits?.let {
+                plannerAdapter.habitList.clear()
+                plannerAdapter.habitList.addAll(it)
+                plannerAdapter.notifyDataSetChanged()
+            }
+        }
+        setupGetter()
     }
 
-    private fun setupGetter(){
-        val userId = getUserId()
+    private fun setupGetter() {
+        val userId = getUserId() ?: return
         Log.d(TAG, "User ID $userId")
 
-        if (userId != null) {
-            val petId = getPetId(userId)
-            Log.d(TAG, "Pet ID $petId")
-            petViewModel.loadPet(userId, petId)
-            userViewModel.loadUser(userId)
+        val petId = getPetId(userId)
+        Log.d(TAG, "Pet ID $petId")
+
+        petViewModel.loadPet(userId, petId)
+        userViewModel.loadUser(userId)
+        plannerViewModel.loadHabits(userId)
+    }
+
+    private fun setupListeners() {
+        binding.AddDailyHabits.setOnClickListener {
+            plannerAdapter.addHabit()
         }
+    }
+
+    private fun deleteHabitWithSwipe() {
+        val itemTouchHelperCallback =
+            object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean = false
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    val habit = plannerAdapter.habitList[position]
+                    val userId = getUserId() ?: return
+                    Log.d(TAG, "User ID $userId")
+                    plannerViewModel.deleteHabit(userId, habit.id)
+                    plannerAdapter.habitList.removeAt(position)
+                    plannerAdapter.notifyItemRemoved(position)
+                }
+
+                override fun onChildDraw(
+                    c: Canvas,
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    dX: Float,
+                    dY: Float,
+                    actionState: Int,
+                    isCurrentlyActive: Boolean
+                ) {
+                    val itemView = viewHolder.itemView
+                    val backgroundColorStart = ContextCompat.getColor(requireContext(), com.firebase.ui.auth.R.color.fui_transparent)
+                    val backgroundColorEnd = ContextCompat.getColor(requireContext(), R.color.firstColor)
+
+                    val paint = Paint()
+                    paint.color = if (dX > 0) {
+                        backgroundColorEnd
+                    } else {
+                        val fraction = abs(dX) / itemView.width
+                        val interpolatedColor = ArgbEvaluator().evaluate(fraction, backgroundColorStart, backgroundColorEnd) as Int
+                        interpolatedColor
+                    }
+
+                    paint.alpha = (abs(dX) / itemView.width * 255).toInt()
+
+                    c.drawRect(itemView.left.toFloat(), itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat(), paint)
+
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                }
+
+                override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+                    super.clearView(recyclerView, viewHolder)
+                }
+            }
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(binding.DailyHabitsRecyclerView)
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -190,32 +191,27 @@ class VetFragment : MunchBotFragments() {
                     isCurrentlyActive: Boolean
                 ) {
                     val itemView = viewHolder.itemView
-                    val backgroundColor = if (dX < 0) {
-                        val fraction = abs(dX) / itemView.width
-                        val interpolatedColor = ArgbEvaluator().evaluate(
-                            fraction,
-                            backgroundColorStart,
-                            backgroundColorEnd
-                        ) as Int
-                        interpolatedColor
+                    val backgroundColorStart = ContextCompat.getColor(requireContext(), com.firebase.ui.auth.R.color.fui_transparent)
+                    val backgroundColorEnd = ContextCompat.getColor(requireContext(), R.color.red)
+
+                    val paint = Paint()
+                    paint.color = if (dX > 0) {
+                        backgroundColorEnd
                     } else {
-                        backgroundColorStart
+                        val fraction = abs(dX) / itemView.width
+                        val interpolatedColor = ArgbEvaluator().evaluate(fraction, backgroundColorStart, backgroundColorEnd) as Int
+                        interpolatedColor
                     }
-                    itemView.setBackgroundColor(backgroundColor)
-                    super.onChildDraw(
-                        c,
-                        recyclerView,
-                        viewHolder,
-                        dX,
-                        dY,
-                        actionState,
-                        isCurrentlyActive
-                    )
+
+                    paint.alpha = (abs(dX) / itemView.width * 255).toInt()
+
+                    c.drawRect(itemView.left.toFloat(), itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat(), paint)
+
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                 }
 
                 override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
                     super.clearView(recyclerView, viewHolder)
-                    viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
                 }
             }
 

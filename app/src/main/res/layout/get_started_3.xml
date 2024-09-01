@@ -68,13 +68,13 @@
 
     <view
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         class="android.widget.LinearLayout"/>
 
     <Button
         android:id="@+id/btn_getstarted"
-        android:layout_width="473.3px"
-        android:layout_height="88px"
+        android:layout_width="475px"
+        android:layout_height="100px"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10px"
         android:background="@drawable/ic_btn_getstarted"

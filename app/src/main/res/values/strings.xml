@@ -68,7 +68,9 @@
     <string name="FoodTimepara">Here you can put the Time and the Quantity of meel drops !</string>
     <string name="DeviceName">Device Name</string>
     <string name="save_meel">Save Meel</string>
-    <string name="This_is_Pet_s_Diary"><font color="@color/darkFirstColor">This is </font> <font color="#407BFF">Pet’s</font><font color="@color/darkFirstColor"> Diary!</font></string>
+    <string name="This_is_Pet_s_Diary"><font color="@color/darkFirstColor">This is </font><font color="#407BFF">Pet’s</font><font color="@color/darkFirstColor"> Diary!</font></string>
     <string name="sign_up"><font color="@color/darkFirstColor">Sign</font> <font color="#407BFF">Up</font></string>
     <string name="consultVet"><font color="@color/darkFirstColor">Consult a</font> <font color="#407BFF">Vet!</font></string>
+    <string name="enter_a_habit">Enter a habit</string>
+    <string name="undo">Undo . . .</string>
 </resources>

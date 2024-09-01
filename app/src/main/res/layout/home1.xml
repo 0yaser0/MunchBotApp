@@ -42,6 +42,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
+                    android:scaleType="centerCrop"
                     android:foregroundGravity="center" />
 
                 <ImageView
@@ -56,7 +57,7 @@
 
         <TextView
             android:id="@+id/pet_name"
-            android:layout_width="756px"
+            android:layout_width="match_parent"
             android:layout_height="100px"
             android:layout_marginTop="70px"
             android:gravity="center_horizontal|center_vertical"
@@ -79,7 +80,7 @@
             android:id="@+id/bluetooth"
             android:layout_width="473.3px"
             android:layout_height="88px"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_marginTop="50px"
             android:background="@drawable/ic_btn_getstarted"
             android:text="@string/bluetooth"

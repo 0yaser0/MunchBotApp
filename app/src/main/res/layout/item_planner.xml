@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_task"
+    android:layout_width="match_parent"
+    android:layout_height="80px"
+    android:orientation="horizontal"
+    android:background="@drawable/line_vet"
+    android:gravity="center"
+    tools:ignore="PxUsage">
+
+    <EditText
+        android:id="@+id/task"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="50px"
+        android:gravity="center_vertical|start"
+        android:layout_marginStart="20px"
+        android:hint="@string/enter_a_habit"
+        android:background="@null"
+        android:textColorHint="@color/darkFirstColor"
+        android:textCursorDrawable="@color/firstColor"
+        android:textAppearance="@style/text_28px_darkBlue" />
+
+    <ImageView
+        android:id="@+id/task_mark"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:layout_gravity="center"
+        android:src="@drawable/task_mark" />
+
+</LinearLayout>

@@ -49,6 +49,12 @@
     <style name="text_28px_darkBlue">
         <item name="android:textSize">28px</item>
         <item name="android:textColor">#0F2032</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="text_24px_darkBlue">
+        <item name="android:textSize">24px</item>
+        <item name="android:textColor">#0F2032</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
