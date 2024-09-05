@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.StatusBarUtils
@@ -28,6 +29,7 @@ import com.munchbot.munchbot.databinding.Home1Binding
 import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
 import com.munchbot.munchbot.ui.main_view.auth.Login
 
+@GlideModule
 class Home1Fragment : MunchBotFragments() {
     private var _binding: Home1Binding? = null
     private val binding get() = _binding!!

@@ -5,12 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.munchbot.munchbot.data.model.Medications
 import com.munchbot.munchbot.data.model.Pet
 import com.munchbot.munchbot.data.model.User
 import com.munchbot.munchbot.data.model.Vet
+import com.munchbot.munchbot.data.repository.MedicationsRepository
 import com.munchbot.munchbot.data.repository.PetRepository
 import com.munchbot.munchbot.data.repository.UserRepository
 import com.munchbot.munchbot.data.repository.VetRepository
+import com.munchbot.munchbot.ui.adapters.MedicationsAdapter
 import com.munchbot.munchbot.ui.adapters.VetAdapter
 
 class SignUpSharedViewModel : ViewModel() {
@@ -171,4 +174,32 @@ class SignUpSharedViewModel : ViewModel() {
         vetRepository.saveVet(uid, vetId, vet)
         vetAdapter.addVet(vet)
     }
+
+    fun saveNewMedication(
+        uid: String,
+        name: String,
+        dosage: String,
+        amount: String,
+        duration: String,
+        notify: Boolean,
+        medicationAdapter: MedicationsAdapter
+    ) {
+        val medicationId = "${uid}medication${System.currentTimeMillis()}"
+
+        val medication = Medications(
+            name = name,
+            dosage = dosage,
+            amount = amount,
+            duration = duration,
+            notify = notify,
+            medicationId = medicationId
+        )
+
+        Log.d("Medication Object", medication.toString())
+
+        val medicationRepository = MedicationsRepository()
+        medicationRepository.saveMedication(uid, medicationId, medication)
+        medicationAdapter.addMedication(medication)
+    }
+
 }

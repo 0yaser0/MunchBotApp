@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -42,6 +43,7 @@ import java.util.UUID
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
+@GlideModule
 class VetFragment : MunchBotFragments() {
     private var _binding: FragmentVetBinding? = null
     private val binding get() = _binding!!

@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/medicationsFragment"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:layout_gravity="center"
+    tools:ignore="PxUsage">
+
+    <view
+        android:id="@+id/actionBarTop"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBarTop"
+        android:layout_above="@+id/actionBarBottom"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="30px">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="150px"
+                android:layout_height="150px"
+
+                android:layout_marginStart="30px"
+                android:src="@drawable/ic_medications_clicked" />
+
+            <TextView
+                android:id="@+id/MedicalRecords"
+                android:layout_width="450px"
+                android:layout_height="120px"
+                android:gravity="bottom"
+                android:layout_marginStart="30px"
+                android:text="Medications"
+                android:textAppearance="@style/title_44px_darkBlue" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="830px"
+            android:layout_margin="30px"
+            android:layout_marginBottom="50px"
+            android:background="@drawable/cadre_vet"
+            android:padding="30px">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/health4RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <view
+        android:id="@+id/actionBarBottom"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:id="@+id/add_round_broken_line"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30px"
+        android:layout_marginBottom="210px"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_add_round_broken_line" />
+</RelativeLayout>

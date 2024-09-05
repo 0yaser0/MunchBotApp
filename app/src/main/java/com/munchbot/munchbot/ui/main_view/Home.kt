@@ -1,6 +1,6 @@
 package com.munchbot.munchbot.ui.main_view
 
-import android.content.Intent
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -11,20 +11,26 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.BottomNavBar
 import com.munchbot.munchbot.Utils.SetupUI
 import com.munchbot.munchbot.Utils.StatusBarUtils
+import com.munchbot.munchbot.data.database.getPetId
+import com.munchbot.munchbot.data.database.getUserId
+import com.munchbot.munchbot.data.viewmodel.PetViewModel
+import com.munchbot.munchbot.data.viewmodel.UserViewModel
 import com.munchbot.munchbot.databinding.HomeBinding
 import com.munchbot.munchbot.ui.adapters.HomeAdapter
 import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
-import com.munchbot.munchbot.ui.main_view.auth.Login
 
 class Home : MunchBotActivity() {
     private lateinit var binding: HomeBinding
     lateinit var viewPager: ViewPager
     lateinit var adapter: HomeAdapter
+    private val userViewModel: UserViewModel by viewModels()
+    private val petViewModel: PetViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels {
         ViewModelProvider.AndroidViewModelFactory.getInstance(application)
     }
@@ -44,15 +50,30 @@ class Home : MunchBotActivity() {
         viewPager.adapter = adapter
 
         binding.actionBarSetting.setOnClickListener {
-            Log.d("Home", "clicked setting: ")
-            authViewModel.signOut()
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-            finish()
+
+        }
+
+        setupGetter()
+
+        userViewModel.userLiveData.observe(this) { user ->
+            user?.let {
+                val userImageView = binding.actionBarProfile
+                if (it.userProfileImage.isNotEmpty()) {
+                    Log.d("Home1Fragment", "Loading image URL: ${it.userProfileImage}")
+                    Glide.with(this)
+                        .load(it.userProfileImage)
+                        .error(R.drawable.ic_error)
+                        .into(userImageView)
+                }
+            }
         }
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 // No scroll
             }
 
@@ -74,6 +95,18 @@ class Home : MunchBotActivity() {
                     }
                 )
             }
+        }
+    }
+
+    private fun setupGetter() {
+        val userId = getUserId()
+        Log.d(TAG, "User ID $userId")
+
+        if (userId != null) {
+            val petId = getPetId(userId)
+            Log.d(TAG, "Pet ID $petId")
+            userViewModel.loadUser(userId)
+            petViewModel.loadPet(userId, petId)
         }
     }
 }

@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import com.munchbot.munchbot.MunchBotFragments
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.StatusBarUtils
-import com.munchbot.munchbot.databinding.HomeBinding
+import com.munchbot.munchbot.databinding.Home3Binding
 
 class Home3Fragment : MunchBotFragments() {
-    private var _binding: HomeBinding? = null
+    private var _binding: Home3Binding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = HomeBinding.inflate(inflater, container, false)
+        _binding = Home3Binding.inflate(inflater, container, false)
         return binding.root
     }
 

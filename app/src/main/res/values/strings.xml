@@ -73,4 +73,14 @@
     <string name="consultVet"><font color="@color/darkFirstColor">Consult a</font> <font color="#407BFF">Vet!</font></string>
     <string name="enter_a_habit">Enter a habit</string>
     <string name="undo">Undo . . .</string>
+    <string name="day">%1$s\n%2$s</string>
+    <string name="health_care"><font color="@color/darkFirstColor">Health</font> <font color="#407BFF">Care</font></string>
+    <string name="medications">Medications</string>
+    <string name="reports">Reports</string>
+    <string name="vet_visits">Vet Visits</string>
+    <string name="vaccinations">Vaccinations</string>
+    <string name="medical_records">Medical Records</string>
+    <string name="in_the_health_section_you_can_manage_your_pet_s_health_from_vet_reports_to_medications">In the Health section, you can manage your pet\'s health, from vet reports to medications.</string>
+    <string name="pet_age">Pet Age\n%1$s</string>
+    <string name="pet_birthday">Pet Birthday\n%1$s </string>
 </resources>

@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vaccinationsFragment"
+    android:layout_width="756px"
+    android:layout_height="1612px"
+    android:layout_gravity="center"
+    tools:ignore="PxUsage">
+
+    <view
+        android:id="@+id/actionBarTop"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentTop="true"
+        tools:ignore="PxUsage" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBarTop"
+        android:layout_above="@+id/actionBarBottom"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="30px">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:src="@drawable/ic_vaccinations_clicked" />
+
+            <TextView
+                android:id="@+id/MedicalRecords"
+                android:layout_width="450px"
+                android:layout_height="120px"
+                android:gravity="bottom"
+                android:layout_marginStart="30px"
+                android:text="Vaccinations"
+                android:textAppearance="@style/title_44px_darkBlue" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30px"
+            android:background="@drawable/cadre_vet"
+            android:padding="30px">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/health1RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/To_add_more_MunchBot_devices_simply_tap_btn_located_at_the_bottom_of_your_screen"
+        android:layout_width="460px"
+        android:layout_height="150px"
+        android:layout_alignBottom="@+id/actionBarBottom"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="150px"
+        android:layout_marginVertical="545px"
+        android:background="@drawable/add_more_device_text"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/add_round_broken_line"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30px"
+        android:layout_marginBottom="150px"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_add_round_broken_line" />
+
+    <view
+        android:id="@+id/actionBarBottom"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
