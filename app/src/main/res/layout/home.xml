@@ -9,6 +9,37 @@
     tools:context=".ui.main_view.Home"
     tools:ignore="PxUsage">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/actionbar_top"
+        android:visibility="visible"/>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true"
+        tools:context=".ui.main_view.Home"
+        tools:openDrawer="start">
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="600px"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white"
+            android:visibility="visible"
+            app:headerLayout="@layout/nav_header"
+            app:itemIconTint="@color/firstColor"
+            app:itemTextAppearance="@style/title_36px_darkBlue"
+            app:itemTextColor="@color/black"
+            app:menu="@menu/nav_menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
     <RelativeLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"

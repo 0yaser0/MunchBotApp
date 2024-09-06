@@ -3,6 +3,7 @@ agp = "8.5.2"
 animatedNavigationBar = "1.0.0"
 circleindicator = "2.1.6"
 compiler = "4.12.0"
+compilerVersion = "<version>"
 databindingRuntime = "8.5.2"
 datastorePreferences = "1.1.1"
 firebaseBom = "33.2.0"
@@ -39,6 +40,7 @@ uiDesktop = "1.6.8"
 firebaseStorageKtx = "21.0.0"
 identityJvm = "202408.1"
 coreAnimation = "1.0.0"
+runtimeSavedInstanceState = "1.0.0-alpha11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +50,7 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 animated-navigation-bar = { module = "com.exyte:animated-navigation-bar", version.ref = "animatedNavigationBar" }
 circleindicator = { module = "me.relex:circleindicator", version.ref = "circleindicator" }
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+compiler-vversion = { module = "com.github.bumptech.glide:compiler", version.ref = "compilerVersion" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -88,6 +91,7 @@ androidx-ui-desktop = { group = "androidx.compose.ui", name = "ui-desktop", vers
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 identity-jvm = { group = "com.android.identity", name = "identity-jvm", version.ref = "identityJvm" }
 androidx-core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
+androidx-runtime-saved-instance-state = { group = "androidx.compose.runtime", name = "runtime-saved-instance-state", version.ref = "runtimeSavedInstanceState" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,17 +1,29 @@
 package com.munchbot.munchbot.ui.main_view
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.graphics.Color
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.BottomNavBar
@@ -25,7 +37,7 @@ import com.munchbot.munchbot.databinding.HomeBinding
 import com.munchbot.munchbot.ui.adapters.HomeAdapter
 import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
 
-class Home : MunchBotActivity() {
+class Home : MunchBotActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: HomeBinding
     lateinit var viewPager: ViewPager
     lateinit var adapter: HomeAdapter
@@ -34,6 +46,7 @@ class Home : MunchBotActivity() {
     private val authViewModel: AuthViewModel by viewModels {
         ViewModelProvider.AndroidViewModelFactory.getInstance(application)
     }
+    private lateinit var drawerLayout: DrawerLayout
 
     private val selectedIndexState = mutableIntStateOf(0)
 
@@ -49,21 +62,48 @@ class Home : MunchBotActivity() {
         adapter = HomeAdapter(supportFragmentManager)
         viewPager.adapter = adapter
 
-        binding.actionBarSetting.setOnClickListener {
+        setupSideBar()
 
+        binding.actionBarSetting.setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.END)
+        }
+
+        binding.actionBarProfile.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.animator.slide_in_right, R.animator.slide_out_left)
         }
 
         setupGetter()
 
         userViewModel.userLiveData.observe(this) { user ->
             user?.let {
+                val auth = FirebaseAuth.getInstance()
+                val currentUser = auth.currentUser
+                val email = currentUser?.email
+
+                val nameOfUser = findViewById<TextView>(R.id.nameOfUser)
+                val emailOfUser = findViewById<TextView>(R.id.emailOfUser)
+                val userProfileMenu = findViewById<ImageView>(R.id.UserProfilMenu)
                 val userImageView = binding.actionBarProfile
+
+                nameOfUser?.text = getString(R.string.name_of_user, it.username)
+                emailOfUser?.text = getString(R.string.email_user, email ?: "No Email")
+
                 if (it.userProfileImage.isNotEmpty()) {
                     Log.d("Home1Fragment", "Loading image URL: ${it.userProfileImage}")
+
+                    Glide.with(this)
+                        .load(it.userProfileImage)
+                        .override(200, 200)
+                        .error(R.drawable.ic_error)
+                        .into(userImageView)
+
                     Glide.with(this)
                         .load(it.userProfileImage)
                         .error(R.drawable.ic_error)
-                        .into(userImageView)
+                        .into(userProfileMenu)
                 }
             }
         }
@@ -96,6 +136,51 @@ class Home : MunchBotActivity() {
                 )
             }
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> adapter.navigateToFragment(viewPager, 0)
+            R.id.nav_settings -> Toast.makeText(this, "Settings Coming Soon!", Toast.LENGTH_SHORT)
+                .show()
+
+            R.id.nav_about -> Toast.makeText(this, "About Us Coming Soon!", Toast.LENGTH_SHORT)
+                .show()
+
+            R.id.nav_logout -> authViewModel.signOut()
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the OnBackPressedDispatcher.")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun setupSideBar() {
+        drawerLayout = binding.drawerLayout
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+
+        val navigationView = binding.navView
+        navigationView.setNavigationItemSelectedListener(this)
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.open_nav,
+            R.string.close_nav
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
     }
 
     private fun setupGetter() {
@@ -133,4 +218,8 @@ fun BottomBarDemoTheme(
         colorScheme = LightColorScheme,
         content = content
     )
+}
+
+@GlideModule
+class MyAppGlideModule : AppGlideModule() {
 }

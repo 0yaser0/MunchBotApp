@@ -83,4 +83,13 @@
     <string name="in_the_health_section_you_can_manage_your_pet_s_health_from_vet_reports_to_medications">In the Health section, you can manage your pet\'s health, from vet reports to medications.</string>
     <string name="pet_age">Pet Age\n%1$s</string>
     <string name="pet_birthday">Pet Birthday\n%1$s </string>
+    <string name="pet_details"><font color="@color/darkFirstColor">Pet</font> <font color="#407BFF">Details</font></string>
+    <string name="owner_details"><font color="@color/darkFirstColor">Owner</font> <font color="#407BFF">Details</font></string>
+    <string name="settings">Settings</string>
+    <string name="about_us">About Us</string>
+    <string name="logout">Logout</string>
+    <string name="name_of_user">%1$s</string>
+    <string name="email_user">%1$s</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 </resources>

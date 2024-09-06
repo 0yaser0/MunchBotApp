@@ -32,7 +32,9 @@ class Splash : MunchBotActivity() {
 
         val splashMotion = findViewById<MotionLayout>(R.id.SplashMotion)
         splashMotion.addTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+            override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {
+
+            }
 
             override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
 

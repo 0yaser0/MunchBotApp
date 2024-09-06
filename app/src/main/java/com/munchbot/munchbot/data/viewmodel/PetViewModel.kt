@@ -14,4 +14,8 @@ class PetViewModel : ViewModel() {
             petLiveData.postValue(pet)
         }
     }
+
+    fun updatePet(userId: String, petId: String, pet: Pet) {
+        petRepository.updatePet(userId, petId, pet)
+    }
 }

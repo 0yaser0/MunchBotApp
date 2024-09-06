@@ -96,7 +96,7 @@ class HealthFragment : Fragment() {
         }
     }
 
-    private fun navigateToAnotherFragment(fragment: Fragment) {
+    fun navigateToAnotherFragment(fragment: Fragment) {
         Log.d("HealthFragment", "Navigating to fragment: ${fragment::class.java.simpleName}")
         parentFragmentManager.beginTransaction()
             .setReorderingAllowed(true)

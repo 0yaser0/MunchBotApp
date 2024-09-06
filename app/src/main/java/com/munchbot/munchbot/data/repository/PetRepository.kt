@@ -8,14 +8,18 @@ class PetRepository {
     private val database: DatabaseReference = FirebaseDatabase.getDatabaseReference()
 
     fun savePet(userId: String, petId: String, pet: Pet) {
-        database.child("users").child(userId).child("pets").child(petId).setValue(pet)
+        database.child("users").child(userId).child("pet").child(petId).setValue(pet)
     }
 
     fun getPet(userId: String, petId: String, callback: (Pet?) -> Unit) {
-        database.child("users").child(userId).child("pets").child(petId).get().addOnSuccessListener {
+        database.child("users").child(userId).child("pet").child(petId).get().addOnSuccessListener {
             callback(it.getValue(Pet::class.java))
         }.addOnFailureListener {
             callback(null)
         }
+    }
+
+    fun updatePet(userId: String, petId: String, pet: Pet) {
+        database.child("users").child(userId).child("pet").child(petId).setValue(pet)
     }
 }

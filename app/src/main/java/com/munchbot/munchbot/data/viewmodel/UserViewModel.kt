@@ -14,4 +14,8 @@ class UserViewModel : ViewModel() {
             userLiveData.postValue(user)
         }
     }
+
+    fun updateUser(userId: String, user: User) {
+        userRepository.updateUser(userId, user)
+    }
 }

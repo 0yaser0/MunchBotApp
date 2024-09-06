@@ -67,8 +67,16 @@ class Health4Fragment : MunchBotFragments() {
         binding.addRoundBrokenLine.setOnClickListener {
             showAddMedicationDialog()
         }
+
+        binding.icBack.setOnClickListener {
+            previousFragment()
+        }
     }
 
+    fun previousFragment() {
+        Log.d("HealthFragment", "Going back to previous fragment")
+        parentFragmentManager.popBackStack()
+    }
 
     private fun setupViewModel() {
         sharedViewModel = ViewModelProvider(requireActivity())[SignUpSharedViewModel::class.java]

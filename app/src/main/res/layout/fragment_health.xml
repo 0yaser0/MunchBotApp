@@ -4,6 +4,7 @@
     android:layout_width="756px"
     android:layout_height="1612px"
     android:layout_gravity="center"
+    android:id="@+id/HealthFragment"
     tools:ignore="PxUsage">
 
     <androidx.viewpager2.widget.ViewPager2

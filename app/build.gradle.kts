@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.fragment.ktx)
+    annotationProcessor (libs.compiler.vversion)
 
     implementation(libs.androidx.datastore.preferences.core.jvm)
     implementation (libs.androidx.datastore.preferences)
@@ -101,6 +102,7 @@ dependencies {
     implementation(libs.firebase.storage.ktx)
     implementation(libs.identity.jvm)
     implementation(libs.androidx.core.animation)
+    implementation(libs.androidx.runtime.saved.instance.state)
     annotationProcessor (libs.compiler)
 
     implementation (libs.androidx.databinding.runtime)

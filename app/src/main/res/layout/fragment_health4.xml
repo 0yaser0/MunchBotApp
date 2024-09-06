@@ -65,15 +65,6 @@
 
     </LinearLayout>
 
-
-
-    <view
-        android:id="@+id/actionBarBottom"
-        class="android.widget.LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:layout_alignParentBottom="true" />
-
     <ImageView
         android:id="@+id/add_round_broken_line"
         android:layout_width="100px"
@@ -84,4 +75,22 @@
         android:layout_marginBottom="210px"
         android:foregroundGravity="center"
         android:src="@drawable/ic_add_round_broken_line" />
+
+    <view
+        android:id="@+id/actionBarBottom"
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:id="@+id/ic_back"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="210px"
+        android:layout_marginStart="30px"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_back" />
 </RelativeLayout>

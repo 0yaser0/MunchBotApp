@@ -2,13 +2,15 @@
 <LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="400px"
     android:gravity="bottom"
     android:padding="16dp"
     android:background="@drawable/actionbar_top"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="PxUsage, ContentDescription">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -54,15 +56,16 @@
            android:id="@+id/nameOfUser"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="name Of user"
+           android:text="@string/name_of_user"
            android:textColor="@color/white"
            android:textAppearance="@style/btn_36px_white"
            android:textStyle="bold"/>
 
        <TextView
+           android:id="@+id/emailOfUser"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="yaseryjjou@gmail.com"
+           android:text="@string/email_user"
            android:textColor="@color/white"
            android:textAppearance="@style/btn_36px_white"
            android:textSize="14sp"
