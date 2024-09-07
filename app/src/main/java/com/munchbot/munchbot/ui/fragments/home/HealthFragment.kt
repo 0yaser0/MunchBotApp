@@ -20,9 +20,6 @@ import com.munchbot.munchbot.data.database.getUserId
 import com.munchbot.munchbot.data.viewmodel.PetViewModel
 import com.munchbot.munchbot.data.viewmodel.UserViewModel
 import com.munchbot.munchbot.databinding.FragmentHealthBinding
-import com.munchbot.munchbot.ui.fragments.home.health.Health1Fragment
-import com.munchbot.munchbot.ui.fragments.home.health.Health2Fragment
-import com.munchbot.munchbot.ui.fragments.home.health.Health3Fragment
 import com.munchbot.munchbot.ui.fragments.home.health.Health4Fragment
 
 @Suppress("DEPRECATION")
@@ -59,7 +56,7 @@ class HealthFragment : Fragment() {
                 R.drawable.ic_vaccinations_clicked,
                 R.drawable.ic_vaccinations
             )
-            navigateToAnotherFragment(Health1Fragment())
+           // navigateToAnotherFragment(Health1Fragment())
         }
 
         binding.vetVisits.setOnClickListener {
@@ -70,7 +67,7 @@ class HealthFragment : Fragment() {
                 R.drawable.ic_vet_visits_clicked,
                 R.drawable.ic_vet_visits
             )
-            navigateToAnotherFragment(Health2Fragment())
+           // navigateToAnotherFragment(Health2Fragment())
         }
 
         binding.reports.setOnClickListener {
@@ -81,7 +78,7 @@ class HealthFragment : Fragment() {
                 R.drawable.ic_reports_clilcked,
                 R.drawable.ic_reports
             )
-            navigateToAnotherFragment(Health3Fragment())
+           // navigateToAnotherFragment(Health3Fragment())
         }
 
         binding.medications.setOnClickListener {

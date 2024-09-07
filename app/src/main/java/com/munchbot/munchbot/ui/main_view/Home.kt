@@ -64,8 +64,16 @@ class Home : MunchBotActivity(), NavigationView.OnNavigationItemSelectedListener
 
         setupSideBar()
 
+        var isOpen = 0
+
         binding.actionBarSetting.setOnClickListener {
-            drawerLayout.closeDrawer(GravityCompat.END)
+            if (isOpen == 0) {
+                drawerLayout.openDrawer(GravityCompat.START)
+                isOpen = 1
+            } else {
+                drawerLayout.closeDrawer(GravityCompat.START)
+                isOpen = 0
+            }
         }
 
         binding.actionBarProfile.setOnClickListener {

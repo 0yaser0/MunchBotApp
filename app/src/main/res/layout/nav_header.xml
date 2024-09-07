@@ -4,72 +4,85 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="400px"
+    android:layout_height="500px"
     android:gravity="bottom"
     android:padding="16dp"
     android:background="@drawable/actionbar_top"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:ignore="PxUsage, ContentDescription">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10px"
-        app:cardCornerRadius="250px">
+    <view
+        class="android.widget.LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50px"
+        tools:ignore="PxUsage" />
 
-        <RelativeLayout
-            android:layout_width="200px"
-            android:layout_height="200px"
-            android:layout_gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/UserProfilMenu"
-                android:layout_width="180px"
-                android:layout_height="180px"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:foregroundGravity="center"
-                android:scaleType="centerCrop" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10px"
+            app:cardCornerRadius="250px">
 
-            <ImageView
-                android:id="@+id/cadre_pic"
+            <RelativeLayout
                 android:layout_width="200px"
                 android:layout_height="200px"
-                android:layout_centerInParent="true"
-                android:src="@drawable/circular_border" />
+                android:layout_gravity="center">
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/UserProfilMenu"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:foregroundGravity="center"
+                    android:scaleType="centerCrop" />
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical"
-       android:gravity="center_vertical"
-       android:layout_marginStart="30px">
+                <ImageView
+                    android:id="@+id/cadre_pic"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/circular_border" />
 
-       <TextView
-           android:id="@+id/nameOfUser"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/name_of_user"
-           android:textColor="@color/white"
-           android:textAppearance="@style/btn_36px_white"
-           android:textStyle="bold"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-       <TextView
-           android:id="@+id/emailOfUser"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/email_user"
-           android:textColor="@color/white"
-           android:textAppearance="@style/btn_36px_white"
-           android:textSize="14sp"
-           android:layout_marginBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginStart="30px">
 
-   </LinearLayout>
+            <TextView
+                android:id="@+id/nameOfUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_of_user"
+                android:textColor="@color/white"
+                android:textAppearance="@style/btn_36px_white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/emailOfUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email_user"
+                android:textColor="@color/white"
+                android:textAppearance="@style/btn_36px_white"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>
