@@ -26,7 +26,6 @@
         android:layout_gravity="center" />
 
 
-
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"

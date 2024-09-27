@@ -400,11 +400,11 @@ class Profile : MunchBotActivity() {
                 R.string.pet_birthday,
                 pet.petDateOfBirth
             )
-        binding.petAge.text =
-            getString(
-                R.string.pet_age,
-                petAge(pet.petDateOfBirth)
-            )
+//        binding.petAge.text =
+//            getString(
+//                R.string.pet_age,
+//                petAge(pet.petDateOfBirth)
+//            )
     }
 
     private fun petAge(birthday: String): String {

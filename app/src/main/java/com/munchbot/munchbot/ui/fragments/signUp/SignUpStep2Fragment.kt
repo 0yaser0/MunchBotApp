@@ -89,9 +89,6 @@ class SignUpStep2Fragment : MunchBotFragments() {
         } else if (!bio.matches(lettersRequiredPattern.toRegex())) {
             binding.textAreaBio.error = "Bio must contain at least one letter"
             callback(false)
-        } else if (sharedViewModel.getUserImageProfile() == null) {
-            Toast.makeText(requireContext(), "Please select a picture.", Toast.LENGTH_LONG).show()
-            callback(false)
         } else {
             Log.d("SignUpStep2Fragment", "Saving Username: $username")
             Log.d("SignUpStep2Fragment", "Saving Status: $status")

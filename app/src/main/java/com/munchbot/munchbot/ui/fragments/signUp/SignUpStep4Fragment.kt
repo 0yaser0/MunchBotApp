@@ -102,9 +102,6 @@ class SignUpStep4Fragment : MunchBotFragments() {
         } else if (petHeight.isEmpty()) {
             binding.heightEditText.error = "Height cannot be empty"
             callback(false)
-        } else if (sharedViewModel.getPetImageProfile() == null) {
-            Toast.makeText(requireContext(), "Please select a picture.", Toast.LENGTH_LONG).show()
-            callback(false)
         } else {
             showLoader()
             Log.d("PetProfileFragment", "Saving Name: $petName")

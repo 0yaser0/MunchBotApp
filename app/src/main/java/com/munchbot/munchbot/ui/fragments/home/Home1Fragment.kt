@@ -1,6 +1,5 @@
 package com.munchbot.munchbot.ui.fragments.home
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -109,11 +108,11 @@ class Home1Fragment : MunchBotFragments() {
 
     private fun setupGetter() {
         val userId = getUserId()
-        Log.d(TAG, "User ID $userId")
+        Log.d("Home1Fragment", "User ID $userId")
 
         if (userId != null) {
             val petId = getPetId(userId)
-            Log.d(TAG, "Pet ID $petId")
+            Log.d("Home1Fragment", "Pet ID $petId")
             userViewModel.loadUser(userId)
             petViewModel.loadPet(userId, petId)
         }
