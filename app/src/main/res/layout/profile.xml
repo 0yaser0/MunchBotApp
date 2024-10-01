@@ -108,7 +108,7 @@
                     android:layout_height="100px"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Manage Lilly’s personal details!"
-                    android:textAppearance="@style/title_36px_darkBlue" />
+                    android:textAppearance="@style/title_25sp_darkBlue" />
 
                 <TextView
                     android:id="@+id/add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape"
@@ -200,7 +200,7 @@
                     android:layout_height="50px"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/pet_details"
-                    android:textAppearance="@style/title_36px_darkBlue" />
+                    android:textAppearance="@style/title_25sp_darkBlue" />
 
                 <ImageButton
                     android:id="@+id/edit_pet_details"
@@ -440,7 +440,7 @@
                     android:layout_height="50px"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/owner_details"
-                    android:textAppearance="@style/title_36px_darkBlue" />
+                    android:textAppearance="@style/title_25sp_darkBlue" />
 
                 <ImageButton
                     android:id="@+id/edit_owner_details"

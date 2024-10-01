@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:text="@string/please_wait"
         android:fontFamily="@font/roboto"
-        android:textAppearance="@style/title_48px_blue" />
+        android:textAppearance="@style/title_30sp_blue" />
 
 </LinearLayout>

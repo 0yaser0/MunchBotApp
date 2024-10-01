@@ -16,14 +16,14 @@
             android:layout_width="150px"
             android:layout_height="wrap_content"
             android:text="Name :"
-            android:textAppearance="@style/title_36px_darkBlue" />
+            android:textAppearance="@style/title_25sp_darkBlue" />
         <TextView
             android:id="@+id/medicine_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10px"
             android:text="Medication Name"
-            android:textAppearance="@style/title_36px_darkBlue" />
+            android:textAppearance="@style/title_25sp_darkBlue" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,14 +35,14 @@
             android:layout_width="150px"
             android:layout_height="wrap_content"
             android:text="Dosage :"
-            android:textAppearance="@style/text_28px_darkBlue" />
+            android:textAppearance="@style/text_16sp_darkBlue" />
         <TextView
             android:id="@+id/dosage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10px"
             android:text="Dosage"
-            android:textAppearance="@style/text_28px_darkBlue" />
+            android:textAppearance="@style/text_16sp_darkBlue" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,14 +54,14 @@
             android:layout_width="150px"
             android:layout_height="wrap_content"
             android:text="Amount :"
-            android:textAppearance="@style/text_28px_darkBlue" />
+            android:textAppearance="@style/text_16sp_darkBlue" />
         <TextView
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10px"
             android:text="Amount"
-            android:textAppearance="@style/text_28px_darkBlue" />
+            android:textAppearance="@style/text_16sp_darkBlue" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,14 +72,14 @@
             android:layout_width="150px"
             android:layout_height="wrap_content"
             android:text="Duration :"
-            android:textAppearance="@style/text_28px_darkBlue" />
+            android:textAppearance="@style/text_16sp_darkBlue" />
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10px"
             android:text="Duration"
-            android:textAppearance="@style/text_28px_darkBlue" />
+            android:textAppearance="@style/text_16sp_darkBlue" />
     </LinearLayout>
 
 </LinearLayout>

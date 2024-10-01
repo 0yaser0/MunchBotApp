@@ -68,7 +68,7 @@
                         android:drawableStart="@drawable/ic_device_munchbot"
                         android:drawablePadding="30px"
                         android:inputType="text"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +109,7 @@
         android:layout_marginBottom="200px"
         android:foregroundGravity="center"
         android:text="@string/save_meel"
-        android:textAppearance="@style/btn_36px_white"
+        android:textAppearance="@style/btn_30sp_white"
         android:background="@drawable/ic_btn_getstarted"
         android:src="@drawable/ic_add_round_broken_line"
         android:visibility="visible" />

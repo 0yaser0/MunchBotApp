@@ -91,7 +91,7 @@
                 android:layout_marginStart="30px"
                 android:layout_marginTop="20px"
                 android:text="@string/other"
-                android:textAppearance="@style/input_32px_gray" />
+                android:textAppearance="@style/input_15sp_gray" />
 
             <Spinner
                 android:id="@+id/spinner"

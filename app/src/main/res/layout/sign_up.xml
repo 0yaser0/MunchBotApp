@@ -44,7 +44,7 @@
             android:background="@drawable/ic_btn_getstarted"
             android:gravity="center"
             android:text="@string/txtContinue"
-            android:textAppearance="@style/btn_36px_white"
+            android:textAppearance="@style/btn_30sp_white"
             tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
         <TextView
@@ -101,7 +101,7 @@
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
                     android:text="@string/_1"
-                    android:textAppearance="@style/btn_36px_white"
+                    android:textAppearance="@style/btn_30sp_white"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -153,7 +153,7 @@
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
                     android:text="2"
-                    android:textAppearance="@style/btn_36px_white"
+                    android:textAppearance="@style/btn_30sp_white"
                     android:textColor="#C8EAFF"
                     tools:ignore="HardcodedText" />
 
@@ -206,7 +206,7 @@
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
                     android:text="3"
-                    android:textAppearance="@style/btn_36px_white"
+                    android:textAppearance="@style/btn_30sp_white"
                     android:textColor="#C8EAFF"
                     tools:ignore="HardcodedText" />
 

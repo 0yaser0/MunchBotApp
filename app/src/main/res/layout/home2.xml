@@ -47,7 +47,7 @@
                     android:paddingStart="80px"
                     android:paddingEnd="0px"
                     android:text="@string/MunchBot_1"
-                    android:textAppearance="@style/btn_36px_white" />
+                    android:textAppearance="@style/btn_30sp_white" />
 
                 <ImageView
                     android:id="@+id/state"

@@ -48,8 +48,8 @@ fun BottomNavBar(
                 modifier = Modifier.height(75.dp),
                 selectedIndex = selectedIndex,
                 cornerRadius = shapeCornerRadius(30.dp, 30.dp, 0.dp, 0.dp),
-                ballAnimation = Parabolic(tween(400), 60.dp),
-                indentAnimation = Height(tween(500), 50.dp, 10.dp),
+                ballAnimation = Parabolic(tween(500), 60.dp),
+                indentAnimation = Height(tween(800), 50.dp, 10.dp),
                 barColor = MaterialTheme.colorScheme.onBackground,
                 ballColor = MaterialTheme.colorScheme.onBackground
             ) {

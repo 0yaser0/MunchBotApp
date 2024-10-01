@@ -17,7 +17,7 @@
     <string name="waves">waves</string>
     <string name="login_dog">login_dog</string>
     <string name="speech_munchbot_login">Speech_munchbot_login</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome"><font color="#0F2032">Welcome</font> <font color="#407BFF">Back!</font></string>
     <string name="back">Back!</string>
     <string name="continue_yo">Continue your MunchBot journey with us</string>
     <string name="email">Email</string>

@@ -83,9 +83,6 @@ class PlannerFragment : MunchBotFragments() {
 
         val currentDate = Calendar.getInstance()
 
-        val day3 = currentDate.clone() as Calendar
-        day3.add(Calendar.DAY_OF_MONTH, -3)
-
         val day2 = currentDate.clone() as Calendar
         day2.add(Calendar.DAY_OF_MONTH, -2)
 
@@ -98,14 +95,6 @@ class PlannerFragment : MunchBotFragments() {
         val dayPlus2 = currentDate.clone() as Calendar
         dayPlus2.add(Calendar.DAY_OF_MONTH, 2)
 
-        val dayPlus3 = currentDate.clone() as Calendar
-        dayPlus3.add(Calendar.DAY_OF_MONTH, 3)
-
-        binding.day3Text.text =
-            getString(R.string.day,
-            dayFormat.format(day3.time),
-            monthFormat.format(day3.time)
-        )
 
         binding.day2Text.text = getString(
             R.string.day,
@@ -137,11 +126,6 @@ class PlannerFragment : MunchBotFragments() {
             monthFormat.format(dayPlus2.time)
         )
 
-        binding.dayPlus3Text.text = getString(
-            R.string.day,
-            dayFormat.format(dayPlus3.time),
-            monthFormat.format(dayPlus3.time)
-        )
 
     }
 

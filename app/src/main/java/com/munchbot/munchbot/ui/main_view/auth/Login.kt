@@ -1,14 +1,15 @@
 package com.munchbot.munchbot.ui.main_view.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.view.MotionEvent
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.textfield.TextInputEditText
 import com.munchbot.munchbot.MunchBotActivity
 import com.munchbot.munchbot.R
 import com.munchbot.munchbot.Utils.SetupUI
@@ -30,7 +31,7 @@ class Login : MunchBotActivity() {
         StatusBarUtils.setStatusBarColor(window, R.color.secondColor)
 
         SetupUI.setupUI(binding.root)
-        passwordVisibility(binding.passwordEditText, binding.passwordToggle)
+        passwordVisibility(binding.passwordEditText)
 
         binding.logIn.setOnClickListener {
             val email = binding.emailEditText.text.toString()
@@ -76,18 +77,27 @@ class Login : MunchBotActivity() {
         }
     }
 
-    private fun passwordVisibility(passwordEditText: EditText, passwordToggle: ImageView) {
-        passwordToggle.setOnClickListener {
-            if (passwordEditText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                passwordEditText.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                passwordToggle.setImageResource(R.drawable.ic_dog_eyes_close)
-            } else {
-                passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                passwordToggle.setImageResource(R.drawable.ic_dog_eyes_open)
+    @SuppressLint("ClickableViewAccessibility")
+    private fun passwordVisibility(passwordEditText: TextInputEditText) {
+        passwordEditText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawableEnd = passwordEditText.compoundDrawablesRelative[2]
+                if (drawableEnd != null && event.rawX >= (passwordEditText.right - drawableEnd.bounds.width())) {
+                    if (passwordEditText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                        passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_icon_password, 0, R.drawable.ic_dog_eyes_close, 0)
+                    } else {
+                        passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_icon_password, 0, R.drawable.ic_dog_eyes_open, 0)
+                    }
+                    passwordEditText.setSelection(passwordEditText.text?.length ?: 0)
+                    return@setOnTouchListener true
+                }
             }
-            passwordEditText.setSelection(passwordEditText.text?.length ?: 0)
+            false
         }
     }
+
+
 }
 

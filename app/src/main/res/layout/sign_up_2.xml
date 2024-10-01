@@ -110,7 +110,7 @@
                         android:drawableStart="@drawable/ic_username"
                         android:drawablePadding="30px"
                         android:inputType="text"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,7 +129,7 @@
                         android:drawableStart="@drawable/ic_status"
                         android:drawablePadding="30px"
                         android:inputType="text"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,7 +151,7 @@
             android:minLines="5"
             android:padding="10dp"
             android:scrollbars="vertical"
-            android:textAppearance="@style/input_32px_gray"
+            android:textAppearance="@style/input_15sp_gray"
             android:textColor="#000000" />
     </LinearLayout>
 

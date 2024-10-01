@@ -116,7 +116,7 @@
                         android:drawableEnd="@drawable/autograph"
                         android:drawablePadding="30px"
                         android:inputType="textEmailAddress"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +137,7 @@
                         android:drawableEnd="@drawable/gender"
                         android:drawablePadding="30px"
                         android:inputType="text"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -157,7 +157,7 @@
                         android:drawableEnd="@drawable/weight"
                         android:drawablePadding="30px"
                         android:inputType="number"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,7 +186,7 @@
                         android:drawableEnd="@drawable/breed"
                         android:drawablePadding="30px"
                         android:inputType="textEmailAddress"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,7 +206,7 @@
                         android:drawableEnd="@drawable/calendar"
                         android:drawablePadding="30px"
                         android:inputType="date"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -224,7 +224,7 @@
                         android:drawableEnd="@drawable/type"
                         android:drawablePadding="30px"
                         android:inputType="number"
-                        android:textAppearance="@style/input_32px_gray"
+                        android:textAppearance="@style/input_15sp_gray"
                         tools:ignore="PxUsage,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 

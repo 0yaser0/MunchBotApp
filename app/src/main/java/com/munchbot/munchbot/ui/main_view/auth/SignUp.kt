@@ -109,14 +109,14 @@ class SignUp : MunchBotActivity() {
             when (progress) {
                 50 -> {
                     updateStepImage(R.id.stepsignupblur1, R.drawable.ic_stepsignupclean)
-                    showckeckedImage(R.id.checkImage1, R.id.txt1, R.id.txt2, R.style.btn_36px_white, R.id.profile, R.style.txt_24px_blue)
+                    showckeckedImage(R.id.checkImage1, R.id.txt1, R.id.txt2, R.style.btn_30sp_white, R.id.profile, R.style.txt_24px_blue)
                 }
                 80 -> {
                     updateStepImage(R.id.stepsignupblur2, R.drawable.ic_stepsignupclean)
-                    showckeckedImage(R.id.checkImage2, R.id.txt2, R.id.txt3, R.style.btn_36px_white, R.id.questionare, R.style.txt_24px_blue)
+                    showckeckedImage(R.id.checkImage2, R.id.txt2, R.id.txt3, R.style.btn_30sp_white, R.id.questionare, R.style.txt_24px_blue)
                 }
                 100 -> {
-                    showckeckedImage(R.id.checkImage3, R.id.txt3, R.id.txt3, R.style.btn_36px_white, R.id.questionare, R.style.txt_24px_blue)
+                    showckeckedImage(R.id.checkImage3, R.id.txt3, R.id.txt3, R.style.btn_30sp_white, R.id.questionare, R.style.txt_24px_blue)
                 }
             }
         }, 2000)

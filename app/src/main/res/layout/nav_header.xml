@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="500px"
+    android:layout_height="250dp"
     android:gravity="bottom"
     android:padding="16dp"
     android:background="@drawable/actionbar_top"
@@ -15,7 +15,7 @@
     <view
         class="android.widget.LinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="50px"
+        android:layout_height="160px"
         tools:ignore="PxUsage" />
 
     <LinearLayout
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name_of_user"
                 android:textColor="@color/white"
-                android:textAppearance="@style/btn_36px_white"
+                android:textAppearance="@style/btn_30sp_white"
                 android:textStyle="bold"/>
 
             <TextView
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/email_user"
                 android:textColor="@color/white"
-                android:textAppearance="@style/btn_36px_white"
+                android:textAppearance="@style/btn_30sp_white"
                 android:textSize="14sp"
                 android:layout_marginBottom="16dp"/>
 

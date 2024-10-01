@@ -36,6 +36,7 @@ import com.munchbot.munchbot.data.viewmodel.UserViewModel
 import com.munchbot.munchbot.databinding.HomeBinding
 import com.munchbot.munchbot.ui.adapters.HomeAdapter
 import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
+import com.munchbot.munchbot.ui.main_view.auth.Login
 
 class Home : MunchBotActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: HomeBinding
@@ -155,7 +156,13 @@ class Home : MunchBotActivity(), NavigationView.OnNavigationItemSelectedListener
             R.id.nav_about -> Toast.makeText(this, "About Us Coming Soon!", Toast.LENGTH_SHORT)
                 .show()
 
-            R.id.nav_logout -> authViewModel.signOut()
+            R.id.nav_logout -> {
+                authViewModel.signOut()
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+                finish()
+
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

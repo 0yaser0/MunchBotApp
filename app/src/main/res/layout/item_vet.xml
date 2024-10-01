@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vet Name"
-                android:textAppearance="@style/title_36px_darkBlue"/>
+                android:textAppearance="@style/title_25sp_darkBlue"/>
 
             <TextView
                 android:id="@+id/category"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="Category"
                 android:textStyle="bold"
-                android:textAppearance="@style/text_28px_darkBlue"/>
+                android:textAppearance="@style/text_16sp_darkBlue"/>
 
         </LinearLayout>
 
@@ -61,14 +61,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone: 123456789"
-            android:textAppearance="@style/text_28px_darkBlue"/>
+            android:textAppearance="@style/text_16sp_darkBlue"/>
 
         <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email: example@example.com"
-            android:textAppearance="@style/text_28px_darkBlue"/>
+            android:textAppearance="@style/text_16sp_darkBlue"/>
     </LinearLayout>
 
 </LinearLayout>

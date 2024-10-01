@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.munchbot.munchbot.R
@@ -121,7 +120,7 @@ class PlannerAdapter(
                 val newHabit = Planner(id = plannerViewModel.getHabitId(), task = "")
                 habitList.add(newHabit)
                 notifyItemInserted(habitList.size - 1)
-                updateGuidVisibility()
+//                updateGuidVisibility()
 
                 val userId = getUserId()!!
                 plannerViewModel.addHabit(userId, newHabit.id, newHabit)
@@ -148,12 +147,12 @@ class PlannerAdapter(
         }
     }
 
-    fun updateGuidVisibility() {
-        val guidTextView = recyclerView.rootView.findViewById<TextView>(R.id.Guid)
-        if (habitList.isEmpty()) {
-            guidTextView.visibility = View.VISIBLE
-        } else {
-            guidTextView.visibility = View.GONE
-        }
-    }
+//    fun updateGuidVisibility() {
+//        val guidTextView = recyclerView.rootView.findViewById<TextView>(R.id.Guid)
+//        if (habitList.isEmpty()) {
+//            guidTextView.visibility = View.VISIBLE
+//        } else {
+//            guidTextView.visibility = View.GONE
+//        }
+//    }
 }

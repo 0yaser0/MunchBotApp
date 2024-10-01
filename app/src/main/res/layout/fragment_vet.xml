@@ -1,163 +1,174 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="756px"
-    android:layout_height="1612px"
-    android:layout_gravity="center"
-    tools:ignore="PxUsage">
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
-    <view
-        android:id="@+id/topNavBar"
-        class="android.widget.LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:layout_alignParentTop="true"
-        tools:ignore="PxUsage" />
+    <TextView
+        android:id="@+id/This_is_Pet_s_Diary"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="5dp"
+        android:autoSizeMaxTextSize="1000dp"
+        android:autoSizeMinTextSize="1dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="start"
+        android:text="@string/consultVet"
+        android:textAppearance="@style/title_30sp_darkblue"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H20"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_H70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H15" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/view"
-        android:layout_below="@+id/topNavBar"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="no"
-        android:orientation="vertical"
-        tools:ignore="PxUsage,UselessParent,ContentDescription">
+    <TextView
+        android:id="@+id/Take_a_look_at_how_pet_s_day_was_planned"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="5dp"
+        android:autoSizeMaxTextSize="1000dp"
+        android:autoSizeMinTextSize="1dp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape"
+        android:textAppearance="@style/CreateANewTextStyle"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H25"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_H70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H20" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200px"
-            android:layout_margin="30px"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="450px"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H25"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_H70"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H15">
 
-                <TextView
-                    android:id="@+id/consultVet"
-                    android:layout_width="450px"
-                    android:layout_height="100px"
-                    android:text="@string/consultVet"
-                    android:textAppearance="@style/title_48px_darkblue" />
-
-                <TextView
-                    android:id="@+id/add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape"
-                    android:layout_width="450px"
-                    android:layout_height="100px"
-                    android:text="@string/add_a_vet_and_ensure_your_pet_s_health_stays_in_top_shape"
-                    android:textAppearance="@style/CreateANewTextStyle" />
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10px"
-                app:cardCornerRadius="250px">
-
-                <RelativeLayout
-                    android:layout_width="200px"
-                    android:layout_height="200px"
-                    android:layout_gravity="center">
-
-                    <ImageView
-                        android:id="@+id/petImageVet"
-                        android:layout_width="180px"
-                        android:layout_height="180px"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:foregroundGravity="center"
-                        android:scaleType="centerCrop" />
-
-                    <ImageView
-                        android:id="@+id/cadre_pic"
-                        android:layout_width="200px"
-                        android:layout_height="200px"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/circular_border" />
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100px">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="500px"
-                android:layout_height="100px"
-                android:hint="@string/search"
-                app:hintAnimationEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/searchEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="80px"
-                    android:layout_marginHorizontal="30px"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="30px"
-                    android:inputType="text"
-                    android:textAppearance="@style/input_32px_gray"
-                    tools:ignore="PxUsage,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:id="@+id/passwordToggle"
-                android:layout_width="70px"
-                android:layout_height="70px"
-                android:layout_marginStart="-100px"
-                android:layout_marginTop="25px"
-                android:src="@drawable/ic_filter" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/addVetButton"
-                    android:layout_width="180px"
-                    android:layout_height="100px"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="30px"
-                    android:layout_marginEnd="30px"
-                    android:background="@drawable/btn_add_vet" />
-
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="30px"
-            android:background="@drawable/cadre_vet"
-            android:padding="30px">
+            android:layout_gravity="center">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/vetRecyclerView"
+            <ImageView
+                android:id="@+id/petImageVet"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:foregroundGravity="center"
+                android:scaleType="centerCrop" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/cadre_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/circular_border" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-    <view
-        android:id="@+id/view"
-        class="android.widget.LinearLayout"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/search"
+        app:hintAnimationEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H35"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_H70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H25">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:drawableStart="@drawable/ic_search"
+            android:drawableEnd="@drawable/ic_filter"
+            android:drawablePadding="16dp"
+            android:inputType="textPassword"
+            android:textAppearance="@style/input_15sp_gray"
+            tools:ignore="TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/addVetButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        app:layout_constraintDimensionRatio="4:2"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_add_vet"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H35"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_H70"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H25" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:layout_alignParentBottom="true"
-        tools:ignore="PxUsage" />
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/cadre_vet"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H35">
 
-</RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vetRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
