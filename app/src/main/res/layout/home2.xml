@@ -1,125 +1,309 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="756px"
-    android:layout_height="1612px"
-    android:layout_gravity="center"
-    tools:ignore="PxUsage">
+    android:id="@+id/home2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <view
-        android:id="@+id/topNavBar"
-        class="android.widget.LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:layout_alignParentTop="true"
-        tools:ignore="PxUsage" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/actionbar_top"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/view"
-        android:layout_below="@+id/topNavBar"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:importantForAccessibility="no"
-        android:orientation="vertical"
-        tools:ignore="PxUsage,UselessParent,ContentDescription">
+        <TextView
+            android:id="@+id/ic_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="35dp"
+            android:autoSizeMaxTextSize="1000dp"
+            android:autoSizeMinTextSize="1dp"
+            android:autoSizeTextType="uniform"
+            android:text="@string/back"
+            android:textAppearance="@style/munchbotTitleActionBar"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toStartOf="@+id/munchbot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="756px"
-            android:layout_height="1612px"
-            android:layout_gravity="center">
+        <TextView
+            android:id="@+id/munchbot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            android:autoSizeMaxTextSize="1000dp"
+            android:autoSizeMinTextSize="1dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textAppearance="@style/munchbotTitleActionBar"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            app:cardCornerRadius="250px"
+            app:cardElevation="50px"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintTop_toTopOf="@+id/guideline">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1612px"
-                tools:ignore="PxUsage">
-
-                <TextView
-                    android:id="@+id/BluetoothText"
-                    android:layout_width="600px"
-                    android:layout_height="120px"
-                    android:layout_marginStart="70px"
-                    android:layout_marginTop="70px"
-                    android:background="@drawable/ic_btn_getstarted"
-                    android:gravity="center_vertical"
-                    android:paddingStart="80px"
-                    android:paddingEnd="0px"
-                    android:text="@string/MunchBot_1"
-                    android:textAppearance="@style/btn_30sp_white" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
                 <ImageView
-                    android:id="@+id/state"
-                    android:layout_width="50px"
-                    android:layout_height="50px"
-                    android:layout_alignBottom="@+id/BluetoothText"
-                    android:layout_marginEnd="30px"
-                    android:layout_marginBottom="40px"
-                    android:layout_toStartOf="@+id/editFood"
-                    android:src="@drawable/ic_state" />
+                    android:id="@+id/action_bar_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:foregroundGravity="center"
+                    android:scaleType="centerCrop" />
 
                 <ImageView
-                    android:id="@+id/editFood"
-                    android:layout_width="50px"
-                    android:layout_height="50px"
-                    android:layout_toStartOf="@+id/deleteDevice"
-                    android:layout_alignBottom="@+id/BluetoothText"
-                    android:layout_marginEnd="30px"
-                    android:layout_marginBottom="40px"
-                    android:src="@drawable/ic_edit_food" />
-
-
-                <ImageView
-                    android:id="@+id/deleteDevice"
-                    android:layout_width="50px"
-                    android:layout_height="50px"
-                    android:layout_alignEnd="@+id/BluetoothText"
-                    android:layout_alignBottom="@+id/BluetoothText"
-                    android:layout_marginEnd="30px"
-                    android:layout_marginBottom="40px"
-                    android:src="@drawable/ic_delete_device" />
-
-
-
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/circular_border" />
 
             </RelativeLayout>
-        </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/action_bar_notifications"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_notifications"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintDimensionRatio="5:3"
+            app:layout_constraintEnd_toStartOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <view
-        android:id="@+id/view"
-        class="android.widget.LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="170px"
-        android:layout_alignParentBottom="true"
-        tools:ignore="PxUsage" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/To_add_more_MunchBot_devices_simply_tap_btn_located_at_the_bottom_of_your_screen"
-        android:layout_width="460px"
-        android:layout_height="150px"
-        android:layout_below="@+id/topNavBar"
-        android:layout_alignBottom="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginHorizontal="150px"
-        android:layout_marginVertical="545px"
-        android:background="@drawable/add_more_device_text"
-        android:visibility="visible" />
+        android:id="@+id/BluetoothText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:autoSizeMaxTextSize="1000dp"
+        android:autoSizeMinTextSize="1dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/ic_btn_getstarted"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:text="@string/MunchBot_1"
+        android:textAppearance="@style/btn_40px_white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_H25"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV90"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV10"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H15"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/state"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_state_off"
+        app:layout_constraintBottom_toBottomOf="@+id/BluetoothText"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/editFood"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV60"
+        app:layout_constraintTop_toTopOf="@+id/BluetoothText" />
+
+    <ImageView
+        android:id="@+id/editFood"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_edit_food"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/BluetoothText"
+        app:layout_constraintEnd_toStartOf="@+id/deleteDevice"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV70"
+        app:layout_constraintTop_toTopOf="@+id/BluetoothText" />
+
+    <ImageView
+        android:id="@+id/deleteDevice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_delete_device"
+        app:layout_constraintBottom_toBottomOf="@+id/BluetoothText"
+        app:layout_constraintEnd_toEndOf="@+id/BluetoothText"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV80"
+        app:layout_constraintTop_toTopOf="@+id/BluetoothText" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/To_add_more_MunchBot_devices_simply_tap_btn_located_at_the_bottom_of_your_screen"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@drawable/add_more_device_text"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintDimensionRatio="4:1.5"-->
+<!--            android:layout_margin="50dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/guideline_H75"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guidelineV90"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/guidelineV10"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline_H25" />-->
 
     <ImageView
         android:id="@+id/add_round_broken_line"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="30px"
-        android:layout_marginBottom="200px"
-        android:foregroundGravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
         android:src="@drawable/ic_add_round_broken_line"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV80"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H85" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/paw_send"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:src="@drawable/pet_paw"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_H85"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV80"
+        app:layout_constraintTop_toTopOf="@+id/guideline_H75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.78" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.58" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_H75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

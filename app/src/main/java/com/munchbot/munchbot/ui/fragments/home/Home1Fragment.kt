@@ -1,8 +1,8 @@
 package com.munchbot.munchbot.ui.fragments.home
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -12,6 +12,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -25,8 +27,8 @@ import com.munchbot.munchbot.data.viewmodel.PetViewModel
 import com.munchbot.munchbot.data.viewmodel.SignUpSharedViewModel
 import com.munchbot.munchbot.data.viewmodel.UserViewModel
 import com.munchbot.munchbot.databinding.Home1Binding
+import com.munchbot.munchbot.ui.fragments.home.home.Home2Fragment
 import com.munchbot.munchbot.ui.main_view.auth.AuthViewModel
-import com.munchbot.munchbot.ui.main_view.auth.Login
 
 @GlideModule
 class Home1Fragment : MunchBotFragments() {
@@ -49,6 +51,7 @@ class Home1Fragment : MunchBotFragments() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -56,11 +59,7 @@ class Home1Fragment : MunchBotFragments() {
         StatusBarUtils.setStatusBarColor(requireActivity().window, R.color.black)
 
         binding.bluetooth.setOnClickListener {
-            Log.d("Home1Fragment", "clicked button Bluetooth ")
-            authViewModel.signOut()
-            val intent = Intent(requireContext(), Login::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+            navigateToAnotherFragment(Home2Fragment())
         }
 
         setupGetter()
@@ -104,6 +103,21 @@ class Home1Fragment : MunchBotFragments() {
                 }
             }
         }
+    }
+
+    fun navigateToAnotherFragment(fragment: Fragment) {
+        Log.d("HealthFragment", "Navigating to fragment: ${fragment::class.java.simpleName}")
+        parentFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .setCustomAnimations(
+                R.animator.slide_in_right,
+                R.animator.slide_out_left,
+                R.animator.slide_in_left,
+                R.animator.slide_out_right
+            )
+            .replace(R.id.fragment_container_home, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setupGetter() {
